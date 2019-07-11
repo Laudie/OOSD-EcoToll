@@ -1,16 +1,18 @@
 package application;
-	
-import javafx.application.Application;
+
+import javafx.application.*;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/login/Login.fxml"));
+			//Parent root=FXMLLoader.load(getClass().getResource("C:\\Users\\marco\\Documents\\Eclipse\\Login\\bin\\LoginPkg\\Login.fxml"));
+			Parent root=FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="861.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PercorsoController">
+   <children>
+      <Label fx:id="lblClasseV" layoutX="71.0" layoutY="302.0" text="Classe veicolo" textFill="#2dda16">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="lblComboDa" layoutX="240.0" layoutY="300.0" prefHeight="20.0" prefWidth="180.0" text="Partenza Da" textFill="#2dda16">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblComboA" layoutX="453.0" layoutY="300.0" prefHeight="20.0" prefWidth="180.0" text="Arrivo A" textFill="#2dda16">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPedaggioIT" layoutX="70.0" layoutY="350.0" prefHeight="36.0" prefWidth="658.0" promptText="Scriviacmoci qualcosa" />
+      <Separator layoutX="70.0" layoutY="260.0" prefHeight="10.0" prefWidth="658.0" />
+      <ComboBox fx:id="comboDa" layoutX="205.0" layoutY="154.0" onAction="#getCombodataDa" prefHeight="25.0" prefWidth="250.0" promptText="Da" />
+      <ComboBox fx:id="comboA" layoutX="474.0" layoutY="154.0" onAction="#getCombodataA" prefHeight="25.0" prefWidth="250.0" promptText="A" />
+      <TextField alignment="CENTER" editable="false" layoutX="204.0" layoutY="100.0" onDragDetected="#getCombodataDa" prefHeight="40.0" prefWidth="520.0" promptText="Scegli data ed i caselli di partenza ed arrivo" text="Casello di partenza ed arrivo">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <HBox alignment="TOP_RIGHT" layoutX="593.0" layoutY="14.0" prefHeight="37.0" prefWidth="260.0">
+         <children>
+            <Label fx:id="lblUser" prefHeight="37.0" prefWidth="191.0" text="user" textFill="#1334d7" />
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#logOut" prefHeight="36.0" prefWidth="74.0" text="LogOut" />
+         </children>
+      </HBox>
+      <VBox layoutX="54.0" layoutY="120.0" prefHeight="120.0" prefWidth="150.0" spacing="7.0">
+         <children>
+            <RadioButton fx:id="rbv1" mnemonicParsing="false" onAction="#radioSelectVeicolo" text="Classe A">
+               <toggleGroup>
+                  <ToggleGroup fx:id="classeVeicolo" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="rbv2" mnemonicParsing="false" onAction="#radioSelectVeicolo" text="Classe B" toggleGroup="$classeVeicolo" />
+            <RadioButton fx:id="rbv3" mnemonicParsing="false" onAction="#radioSelectVeicolo" text="Classe 3" toggleGroup="$classeVeicolo" />
+            <RadioButton fx:id="rbv4" mnemonicParsing="false" onAction="#radioSelectVeicolo" text="Classe 4" toggleGroup="$classeVeicolo" />
+            <RadioButton fx:id="rbv5" mnemonicParsing="false" onAction="#radioSelectVeicolo" text="Classe 5" toggleGroup="$classeVeicolo" />
+         </children>
+      </VBox>
+      <Button fx:id="btnPdaggioIT" layoutX="638.0" layoutY="292.0" mnemonicParsing="false" onAction="#calcolaPedaggioIT" text="Pedaggio" textFill="#2dda16">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="698.0" layoutY="461.0" mnemonicParsing="false" onAction="#pedaggioEU" text="Pedaggio Europeo" textFill="#092fee">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+     
+   </children>
+</AnchorPane>

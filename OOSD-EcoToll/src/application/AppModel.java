@@ -1,101 +1,112 @@
-package login;
+package application;
+
 import java.sql.*;
 
-import application.MySqlConnection;
-
-public class LoginModel {
-	Connection connection;
-	
-	public LoginModel () {
-		connection = MySqlConnection.Connector();
-		if(connection == null) {System.exit(1);}
+public class AppModel {
+	public static Connection conection;
+	public AppModel() {
+		conection = mysqlConnection.Connector();
+		//per gestire il null nella classe mysqlConnection in caso di errore (catch return null)
+		//faccio un if sulla connessione, in caso di errore exit
+		if (conection == null) System.exit(1);
 	}
-
-	public boolean IsConnected() {
+//metodo per verificare la connessione al database
+	public boolean isDbConnected() {
 		try {
-			return !connection.isClosed();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
+			return !conection.isClosed();
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return false;
 		}
 	}
 	
+/*
+ *  Metodo per verificare user e password **
+ *
+*/
+
 	public boolean isLogin(String user, String pass) throws SQLException {
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		String query = "select * from utente where username = ? and password = ?";
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, user);
-			preparedStatement.setString(2, pass);
-			
-			resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}catch(Exception e) {
-			return false;
-		}
-		finally {
-			preparedStatement.close();
-			resultSet.close();
-		}
-		
-	}
-	
-	public boolean UtenteReg(String username) {
 		PreparedStatement pst = null;
 		ResultSet rst = null;
-		String query = "select count(*) from utente where username = ?";
-		
+		String qry="select * from utente where username=? and password=?";
 		try {
-			pst = connection.prepareStatement(query);
-			pst.setString(1, username);
+			pst = conection.prepareStatement(qry);
+			pst.setString(1, user); //primo argomento del metodo che va nel ? di username
+			pst.setString(2, pass); //secondo argomento del metodo che va nel ? di username
 			rst = pst.executeQuery();
-			if (rst.getFetchSize()>0) {
+			if (rst.next()) {
 				return true;
-			} else {
+			}else {
+				return false;
+			}			
+			} catch (Exception e) {
+			e.printStackTrace();
 			return false;
-			}
-			}catch(Exception e) {return false;}
-	}
-	
-	public boolean isRegistered(String nome, String cognome, String username, String password ) throws SQLException {
-		if(UtenteReg(username)) {
-			System.out.println("Utente già presente");
-			return true;
-		}
-				PreparedStatement pst = null;
-				ResultSet rst = null;
-				String query2 = "insert into EcoToll.utente (nome, cognome, username, password) values (?,?,?,?);";
-				try {
-						pst = connection.prepareStatement(query2);
-						pst.setString(1, nome);
-						pst.setString(2, cognome);
-						pst.setString(3, username);
-						pst.setString(4, password);
-								
-								
-						rst = pst.executeQuery();
-						
-						if (pst.executeUpdate()==1) {
-							
-							return true;
-						}
-						else {
-							return false;
-						}
-				}catch(Exception e) {
-					return false;
-				}
-		
-		finally {
+		} finally {//viene eseguito sempre - chiude le connessioni al db
 			pst.close();
 			rst.close();
 		}
+	}
+	
+	public boolean isUserName(String username) {
+		PreparedStatement pst = null;
+		ResultSet rst = null;
+		int tot=0;
+		String query = "select username from utente where username=?;";	
+		try {
+			pst = conection.prepareStatement(query);
+			pst.setString(1, username);
+			rst = pst.executeQuery();			
+			while (rst.next()) {
+				   tot+=1;				         
+			   }
+			System.out.println("righe tot: " + tot);			
+			if (tot>0) { //username presente
+				return true;
+			} else {
+				return false;
+			}			  
+			}catch(Exception e) {return false;}		
+		
+		   	 
+	}
+	
+	public boolean isRegistered(String nome, String cognome, String username, String password) throws SQLException {		
+		
+		PreparedStatement pst = null;		
+		String qry="insert into EcoToll.utente (nome, cognome, username, password) value (?,?,?,?);";
+		try {
+			pst=conection.prepareStatement(qry);
+			pst.setString(1, nome);
+			pst.setString(2, cognome);
+			pst.setString(3, username);
+			pst.setString(4, password);	
+			
+			int count=pst.executeUpdate();
+			System.out.println("update: " + count);	
+			if (count==1)
+				return true;
+			else
+				return false;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}finally { //viene eseguito sempre - chiude le connessioni al db
+			pst.close();			
+		}		
+		
+	}
+	
+	public boolean isTarga(String targa) {
+		
+		/*
+		 * simulazione 
+		 * Inserisce nel DB le targhe delle auto che sono transitate
+		 *
+		 * */
+		return true;
+		
 	}
 }
