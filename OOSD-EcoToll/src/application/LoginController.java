@@ -51,21 +51,17 @@ public class LoginController implements Initializable  {
 					if (loginModel.amministratore(txtUsername.getText())) {
 						
 						try {
-							System.out.println("txtUsername.getText(): " + txtUsername.getText());
-							LblConnected.setText("User: " + txtUsername.getText() + " login ok!");				
+							System.out.println("Sono qui");
 							((Node)evt.getSource()).getScene().getWindow().hide(); 
 							Stage primaryStage = new Stage();
 							FXMLLoader loader = new FXMLLoader();
 							Pane root=loader.load(getClass().getResource("/application/Amministratore.fxml").openStream());
-		//Dichiaro la classe PercorsoController e la istanzio facendo cast con loader per passare l'utente registrato
-							AmministratoreController amministratoreCtrl = (AmministratoreController)loader.getController();
-							amministratoreCtrl.getUserdata(txtUsername.getText());
 							Scene scene = new Scene(root);
-							//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+							scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 							primaryStage.setScene(scene);
 							primaryStage.show();	
 						}catch(Exception e){
-							
+							e.printStackTrace();
 						}
 						
 					}

@@ -11,9 +11,14 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class AmministratoreController implements Initializable {
 
@@ -45,7 +50,7 @@ public class AmministratoreController implements Initializable {
 	}
 	
 	public void getUserdata (String user) {	
-	lblUser.setText("Ciao " + user);
+	lblUser.setText("Benvenuto Amministratore " + user);
 	}	
 	
 	
@@ -69,4 +74,19 @@ public class AmministratoreController implements Initializable {
 		}
 		return lista;		
 	}
+	
+	
+	public void logOut (ActionEvent evt){
+		try {
+			((Node)evt.getSource()).getScene().getWindow().hide(); 
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root=loader.load(getClass().getResource("/application/Login.fxml").openStream());
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();		
+		}catch(Exception e){
+			}
+		}
 }
