@@ -113,4 +113,50 @@ public class AppModel {
 		return true;
 		
 	}
+	
+	public boolean eliminaCasello(String casello) throws SQLException {
+		PreparedStatement pst = null;		
+		String qry="delete from EcoToll.casello where(casello = ?)";
+		try {
+			pst=conection.prepareStatement(qry);
+			pst.setString(1, casello);
+			
+			
+			int count=pst.executeUpdate();
+			return true;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+
+		}finally { //viene eseguito sempre - chiude le connessioni al db
+			pst.close();			
+		}		
+		
+	}
+	
+	public boolean amministratore(String username) {
+		PreparedStatement pst = null;
+		ResultSet rst = null;
+		String query = "select ruolo from utente where username=?;";	
+		try {
+			pst = conection.prepareStatement(query);
+			pst.setString(1, username);
+			rst = pst.executeQuery();			
+			if (rst.next()) {
+				System.out.println(rst.getInt("ruolo"));
+				if (rst.getInt("ruolo")==1) {
+					
+					return true;
+				}
+				return false;
+			}
+			
+			}catch(Exception e) {return false;}		
+		return true;
+	}
+	
+	
+	
 }

@@ -46,6 +46,31 @@ public class LoginController implements Initializable  {
 				
 				if ( (loginModel.isLogin(txtUsername.getText(), txtPassword.getText())) && (txtUsername.getText()!=null) && (!txtUsername.getText().isEmpty()))
 				{
+				
+					
+					if (loginModel.amministratore(txtUsername.getText())) {
+						
+						try {
+							System.out.println("txtUsername.getText(): " + txtUsername.getText());
+							LblConnected.setText("User: " + txtUsername.getText() + " login ok!");				
+							((Node)evt.getSource()).getScene().getWindow().hide(); 
+							Stage primaryStage = new Stage();
+							FXMLLoader loader = new FXMLLoader();
+							Pane root=loader.load(getClass().getResource("/application/Amministratore.fxml").openStream());
+		//Dichiaro la classe PercorsoController e la istanzio facendo cast con loader per passare l'utente registrato
+							AmministratoreController amministratoreCtrl = (AmministratoreController)loader.getController();
+							amministratoreCtrl.getUserdata(txtUsername.getText());
+							Scene scene = new Scene(root);
+							//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+							primaryStage.setScene(scene);
+							primaryStage.show();	
+						}catch(Exception e){
+							
+						}
+						
+					}
+				
+					else {
 					System.out.println("txtUsername.getText(): " + txtUsername.getText());
 					LblConnected.setText("User: " + txtUsername.getText() + " login ok!");				
 					((Node)evt.getSource()).getScene().getWindow().hide(); 
@@ -59,6 +84,7 @@ public class LoginController implements Initializable  {
 					scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 					primaryStage.setScene(scene);
 					primaryStage.show();
+					}
 					
 				} else {
 					LblConnected.setText("utente o password errati");
@@ -85,6 +111,9 @@ public class LoginController implements Initializable  {
 				primaryStage.show();		
 			}catch(Exception e){
 				}
-		}		 
+		}
+ 		
+ 		
+ 		
 
 }
