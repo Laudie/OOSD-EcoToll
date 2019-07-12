@@ -11,7 +11,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			//Parent root=FXMLLoader.load(getClass().getResource("C:\\Users\\marco\\Documents\\Eclipse\\Login\\bin\\LoginPkg\\Login.fxml"));
+			
 			Parent root=FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

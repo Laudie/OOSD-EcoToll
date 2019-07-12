@@ -2,6 +2,8 @@ package application;
 
 import java.sql.*;
 
+import javax.swing.JOptionPane;
+
 public class AppModel {
 	public static Connection conection;
 	public AppModel() {
@@ -83,11 +85,13 @@ public class AppModel {
 			pst.setString(4, password);	
 			
 			int count=pst.executeUpdate();
+		
 			System.out.println("update: " + count);	
 			if (count==1)
 				return true;
 			else
 				return false;
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

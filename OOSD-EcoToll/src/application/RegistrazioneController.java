@@ -1,8 +1,11 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,13 +39,26 @@ public class RegistrazioneController implements Initializable{
 		System.out.print(esiste);
 		if  (regModel.isUserName(txtUserName.getText())) {
 			System.out.println(" esiste");
-			lblStatus.setText("Utente presete");				
+			lblStatus.setText("Utente presente");				
 		}else{
 			lblStatus.setText("Utente non presente");
 			System.out.println(" NON esiste");
 			boolean aggiungi=regModel.isRegistered(txtUserName.getText(), txtCognome.getText(), txtUserName.getText(), txtPassword.getText());
 			if (aggiungi)
 				lblStatus.setText("Utente aggiunto");
+			    JOptionPane.showMessageDialog(null, "Benvenuto! Registrazione effettuata");
+		}
+		try {
+			((Node)event.getSource()).getScene().getWindow().hide(); 
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root=loader.load(getClass().getResource("/application/Login.fxml").openStream());
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();		
+		}catch(Exception e){
+			
 		}
 	}	
 

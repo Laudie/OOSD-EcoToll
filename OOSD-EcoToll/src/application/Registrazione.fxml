@@ -54,7 +54,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnAnnulla" layoutX="406.0" layoutY="268.0" mnemonicParsing="false" onAction="#annulla" text="Login">
+      <Button fx:id="btnAnnulla" layoutX="406.0" layoutY="268.0" mnemonicParsing="false" onAction="#annulla" text="Annulla">
          <font>
             <Font size="18.0" />
          </font>
