@@ -34,7 +34,7 @@ public class LoginController implements Initializable  {
 		@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if(loginModel.isDbConnected()) {
-			LblConnected.setText("Connessiiio");
+			LblConnected.setText("Connesso");
 		}else {
 			LblConnected.setText("Non Connesso");
 		}

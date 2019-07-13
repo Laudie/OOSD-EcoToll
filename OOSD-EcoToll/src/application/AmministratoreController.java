@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,9 +45,12 @@ public class AmministratoreController implements Initializable {
 		String casello=ScegliC.getValue();
 		if(caselloModel.eliminaCasello(casello)) {
 			lblsuccesso.setText("Casello eliminato con successo");
+			 JOptionPane.showMessageDialog(null, "Casello eliminato con successo");
 		}
 		else {
 		lblsuccesso.setText("Impossibile eliminare il casello");
+		 JOptionPane.showMessageDialog(null, "Impossibile eliminare il casello");
+			
 		}
 	}
 	
@@ -57,7 +62,7 @@ public class AmministratoreController implements Initializable {
 	public List<String> fillComboCasello() throws SQLException {		
 		PreparedStatement pst =null;
 		ResultSet rst =null;		
-		String qry="select casello from EcoToll.casello limit 15;";		
+		String qry="select casello from EcoToll.casello;";		
 		List<String> lista = new ArrayList<String>();
 		try {
 			pst =AppModel.conection.prepareStatement(qry);
@@ -89,4 +94,18 @@ public class AmministratoreController implements Initializable {
 		}catch(Exception e){
 			}
 		}
+	
+	public void aggiungiCasello(ActionEvent event) {
+		try {
+			((Node)event.getSource()).getScene().getWindow().hide(); 
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root=loader.load(getClass().getResource("/application/AggCasello.fxml").openStream());
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();		
+		}catch(Exception e){
+			}
+	}
 }

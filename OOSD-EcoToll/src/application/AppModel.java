@@ -136,6 +136,49 @@ public class AppModel {
 		
 	}
 	
+	public boolean caselloPresente(String casello) {
+		PreparedStatement pst = null;
+		ResultSet rst = null;
+		String query = "select casello from casello where casello=?;";	
+		try {
+			pst = conection.prepareStatement(query);
+			pst.setString(1, casello);
+			rst = pst.executeQuery();			
+			if (rst.next()) {
+				System.out.println("Casello già presente");
+					return true;}
+				else {return false;}
+			}catch(Exception e) {return false;}		
+	}
+	
+public boolean aggiungiCas(String codice, String nome, String altezza, String codautostrada) throws SQLException {		
+		
+		PreparedStatement pst = null;		
+		String qry="insert into EcoToll.casello (codcasello, casello, altezza, idautostrada) value (?,?,?,?);";
+		try {
+			pst=conection.prepareStatement(qry);
+			pst.setString(1, codice);
+			pst.setString(2, nome);
+			pst.setString(3, altezza);
+			pst.setString(4, codautostrada);	
+			
+			int count = pst.executeUpdate();
+			if (count==1)
+				return true;
+			else
+				return false;
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}finally { //viene eseguito sempre - chiude le connessioni al db
+			pst.close();			
+		}		
+		
+	}
+
 	public boolean amministratore(String username) {
 		PreparedStatement pst = null;
 		ResultSet rst = null;
