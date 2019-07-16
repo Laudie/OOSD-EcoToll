@@ -258,5 +258,115 @@ public boolean aggiungiCas(String codice, String nome, String altezza, String co
 	}
 	
 	
+	public double pedaggioTotale(String Da, String A) {
+		
+		double tariffa1=0.0,tariffa2=0.0;
+		int km1=0,km2=0;
+		String ingresso=null,uscita=null;
+		int altezzaIn=0, altezzaOut=0;
+		PreparedStatement pst = null;
+		ResultSet rst = null;
+		String query = "select * from tariffa where casello=?;";	
+		
+		
+		PreparedStatement pst1 = null;
+		ResultSet rst1 = null;
+		String query1 = "select * from tariffa where casello=?;";	
+		
+		try {
+			pst = connessione.prepareStatement(query);
+			pst.setString(1, Da);
+			rst = pst.executeQuery();
+			
+			
+			pst1 = connessione.prepareStatement(query);
+			pst1.setString(1, A);
+			rst1 = pst1.executeQuery();
+			if(rst.next() && rst1.next()) {
+			
+			//Stampo idautostrada in ingresso
+			
+			 altezzaIn = rst.getInt("altezza");
+			 ingresso = rst.getString("autostrada");
+			 tariffa1= rst.getDouble("tariffaKm");
+			 System.out.println(altezzaIn + " " + ingresso + " " + tariffa1 );
+			//Stampo idautostrada del casello in uscita
+			
+			 altezzaOut = rst1.getInt("altezza");
+			 uscita = rst1.getString("autostrada");
+			 tariffa2= rst.getDouble("tariffaKm");
+			 System.out.println(altezzaOut + " " + uscita + " " + tariffa2);
+			}
+
+
+			
+				
+	}catch(Exception e) {System.out.print(e);}
+		
+		if(codiceautostrada(ingresso,uscita)) {
+			// Stessa autostrada faccio la differenza tra le altezza con valore assoluto
+			int distanzaunica = abs(altezzaIn-altezzaOut);
+			return distanzaunica*tariffa1;
+		}
+		else {
+			
+			//autostrade diverse. Calcoliamo lo svincolo
+			//Km dello svincolo da autostradaIn ad autostradaOut
+			PreparedStatement pst2 = null;
+			ResultSet rst2 = null;
+			String query2 = "select km from svincolo where autostradaIn=? and autostradaOut=?;";	
+			
+			//Km da AutostradaOut a autostradaIn
+			PreparedStatement pst3 = null;
+			ResultSet rst3 = null;
+			String query3 = "select km from svincolo where autostradaIn=? and autostradaOut=?;";	
+			
+			try {
+				pst2 = connessione.prepareStatement(query);
+				pst2.setString(1, ingresso);
+				pst2.setString(2, uscita);
+				rst2 = pst2.executeQuery();
+				
+				
+				pst3 = connessione.prepareStatement(query);
+				pst3.setString(1, uscita);
+				pst2.setString(2, ingresso);
+				rst3 = pst3.executeQuery();
+				
+			
+				
+					km1 = rst2.getInt("km");
+					System.out.print(km1);
+					km2 = rst3.getInt("km");
+					System.out.print(km1);
+					
+				
+				}catch(Exception e) {System.out.println(e);}
+			
+			int distanzain = abs(altezzaIn-km1);
+
+			int distanzaout = abs(altezzaOut-km2);
+			System.out.println("altezza e km 1" + altezzaIn + " "+ km1 + " alt e km2 " + altezzaOut + " " + km2);
+			
+			System.out.println("Distanza in" + distanzain + " Out " + distanzaout);
+			System.out.println("tariffa1 in" + tariffa1 + " tariffa2 " + tariffa2);
+			return (distanzain*tariffa1)+(distanzaout*tariffa2);
+			
+		}
 	
+	
+	}
+	
+	private int abs(int i) {
+		if ( i<0) {return -i;}
+		else {return i;}
+	}
+	
+	public boolean codiceautostrada(String ingresso, String uscita) {
+		if(ingresso.equals(uscita)) {
+			return true;
+		}
+		else return false;
+		
+	}
 }

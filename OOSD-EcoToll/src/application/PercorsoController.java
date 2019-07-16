@@ -47,6 +47,9 @@ public class PercorsoController implements Initializable, Pedaggio{
 	
 	@FXML private ToggleGroup classeVeicolo;
 	
+	
+	public AppModel PercorsoModel = new AppModel();
+	
 //metodo per inizializzare i componenti
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -154,6 +157,8 @@ public class PercorsoController implements Initializable, Pedaggio{
 		if (classeV.isEmpty()||caselloDA.isEmpty()||caselloA.isEmpty()){
 			AppModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Errore di compilazione");
 		}else{
+			
+			double totale = PercorsoModel.pedaggioTotale(caselloDA,caselloA);
 		/*chiama il DB: 
 			1) se i caselli sono nella stessa autostrada
 			 	calcola la distanza e la moliplica per la tariffa autostradale
@@ -166,7 +171,7 @@ public class PercorsoController implements Initializable, Pedaggio{
 				ped2=dist2*tariffa2
 				return pedaggio=ped1+ped2				
 		*/
-			String txtPedaggio="il costo per andare da " + caselloDA + " a " + caselloA + " con un veicolo di " + classeV + " è di 20€";		
+			String txtPedaggio="il costo per andare da " + caselloDA + " a " + caselloA + " con un veicolo di " + classeV + " è di" + totale ;		
 			this.getTxtPedaggio().setText(txtPedaggio);
 		}	
 	}
