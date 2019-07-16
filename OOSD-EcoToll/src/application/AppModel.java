@@ -2,22 +2,23 @@ package application;
 
 import java.sql.*;
 
-import javax.swing.JOptionPane;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class AppModel {
-	public static Connection connessione;
 	
+	public static Connection connessione;
+	// Formato dataOra
 	private static final String DATE_FORMATTER= "yyyy-MM-dd HH:mm:ss";
 	
+
 	public AppModel() {
 		connessione = mysqlConnection.Connector();
 		//per gestire il null nella classe mysqlConnection in caso di errore (catch return null)
 		//faccio un if sulla connessione, in caso di errore exit
 		if (connessione == null) System.exit(1);
 	}
+	
 //metodo per verificare la connessione al database
 	public boolean isDbConnected() {
 		try {
@@ -27,12 +28,7 @@ public class AppModel {
 		return false;
 		}
 	}
-	
-/*
- *  Metodo per verificare user e password **
- *
-*/
-
+// Metodo per verificare user e password **
 	public boolean isLogin(String user, String pass) throws SQLException {
 		PreparedStatement pst = null;
 		ResultSet rst = null;
@@ -56,6 +52,7 @@ public class AppModel {
 		}
 	}
 	
+//metodo per verificare che l'utente esiste 
 	public boolean isUserName(String username) {
 		PreparedStatement pst = null;
 		ResultSet rst = null;
@@ -74,11 +71,9 @@ public class AppModel {
 			} else {
 				return false;
 			}			  
-			}catch(Exception e) {return false;}		
-		
-		   	 
+			}catch(Exception e) {return false;}
 	}
-	
+//metodo per registrare un nuovo utente
 	public boolean isRegistered(String nome, String cognome, String username, String password) throws SQLException {		
 		
 		PreparedStatement pst = null;		
@@ -96,35 +91,30 @@ public class AppModel {
 			if (count==1)
 				return true;
 			else
-				return false;
-			
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+				return false;			
+		} catch (Exception e) {			
 			e.printStackTrace();
 			return false;
 		}finally { //viene eseguito sempre - chiude le connessioni al db
 			pst.close();			
 		}		
-		
 	}
-	
+
+//InfoBox
 	public static void infoBox(String infoMessage, String titleBar, String headerMessage)
     {
-        Alert alert = new Alert(AlertType.INFORMATION);
+		String msgType="WARNING";
+        Alert alert = new Alert(AlertType.valueOf(msgType));
         alert.setTitle(titleBar);
         alert.setHeaderText(headerMessage);
         alert.setContentText(infoMessage);
         alert.showAndWait();
     }
 
-public boolean isTarga(String targa) throws SQLException {
-	
-	/*
-	 * simulazione lettura targa (esempio telepass)
-	 * Legge la targa dal DB e prende le info del veicolo per il calcolo del pedaggio
-	 *
-	 * */
+/* Metodo per simulare lettura targa (esempio telepass)
+ * Legge la targa dal DB e prende le info del veicolo per il calcolo del pedaggio */
+
+public boolean isTarga(String targa) throws SQLException {	
 	PreparedStatement pst = null;
 	ResultSet rst = null;
 	String qry="select * from veicolo where targa=? ";
@@ -145,46 +135,42 @@ public boolean isTarga(String targa) throws SQLException {
 		rst.close();
 	}		
 }
-
+//  Salva sul DB il transito del veicolo con tutte le info
 public boolean isTargaRegistered(String targa, String da, String a, String dataoraIn, String dataoraOut, double pedaggio) throws SQLException {
 	
-	/*
-	 * Salva sul DB il transito del veicolo con tutte le info
-	 *
-	 * */
-PreparedStatement pst = null;		
-String qry="insert into EcoToll.storico (targa, da, a, dataoraIn, dataoraOut, pedaggio) value (?,?,?,?,?,?);";
-System.out.println("qry targa: " + qry);
-try {
-	pst=connessione.prepareStatement(qry);
-	pst.setString(1, targa);
-	pst.setString(2, da);
-	pst.setString(3, a);
-	pst.setString(4, dataoraIn);
-	pst.setString(5, dataoraOut);
-	pst.setDouble(6, pedaggio);
-	System.out.println("bohh: " + qry);
-	int count=pst.executeUpdate();
-	System.out.println("update: " + count);	
-	if (count==1)
-		return true;
-	else
+	PreparedStatement pst = null;		
+	String qry="insert into EcoToll.storico (targa, da, a, dataoraIn, dataoraOut, pedaggio) value (?,?,?,?,?,?);";
+	System.out.println("qry targa: " + qry);
+	try {
+		pst=connessione.prepareStatement(qry);
+		pst.setString(1, targa);
+		pst.setString(2, da);
+		pst.setString(3, a);
+		pst.setString(4, dataoraIn);
+		pst.setString(5, dataoraOut);
+		pst.setDouble(6, pedaggio);
+		System.out.println("bohh: " + qry);
+		int count=pst.executeUpdate();
+		System.out.println("update: " + count);	
+		if (count==1)
+			return true;
+		else
+			return false;		
+	} catch (Exception e) {
+		e.printStackTrace();
 		return false;
-	
-} catch (Exception e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-	return false;
-}finally { //viene eseguito sempre - chiude le connessioni al db
-	pst.close();			
-}		
+	}finally { //viene eseguito sempre - chiude le connessioni al db
+		pst.close();			
+	}		
 
 }
+
 
 public static String getDateFormatter() {
 	return DATE_FORMATTER;
 }
 	
+//Metodo per eliminare un casello (solo admin)
 	public boolean eliminaCasello(String casello) throws SQLException {
 		PreparedStatement pst = null;		
 		String qry="delete from EcoToll.casello where(casello = ?)";
@@ -206,7 +192,7 @@ public static String getDateFormatter() {
 		}		
 		
 	}
-	
+//Metodo per verificare la preseza di un casello (solo admin)
 	public boolean caselloPresente(String casello) {
 		PreparedStatement pst = null;
 		ResultSet rst = null;
@@ -221,7 +207,8 @@ public static String getDateFormatter() {
 				else {return false;}
 			}catch(Exception e) {return false;}		
 	}
-	
+
+//Metodo per aggiungere un casello (solo admin)
 public boolean aggiungiCas(String codice, String nome, String altezza, String codautostrada) throws SQLException {		
 		
 		PreparedStatement pst = null;		
@@ -231,15 +218,13 @@ public boolean aggiungiCas(String codice, String nome, String altezza, String co
 			pst.setString(1, codice);
 			pst.setString(2, nome);
 			pst.setString(3, altezza);
-			pst.setString(4, codautostrada);	
+			pst.setString(4, codautostrada);
 			
 			int count = pst.executeUpdate();
 			if (count==1)
 				return true;
 			else
-				return false;
-			
-			
+				return false;			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -250,6 +235,7 @@ public boolean aggiungiCas(String codice, String nome, String altezza, String co
 		
 	}
 
+//Metodo per vedere se l'utente è amministratore
 	public boolean amministratore(String username) {
 		PreparedStatement pst = null;
 		ResultSet rst = null;

@@ -154,8 +154,20 @@ public class PercorsoController implements Initializable, Pedaggio{
 		if (classeV.isEmpty()||caselloDA.isEmpty()||caselloA.isEmpty()){
 			AppModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Errore di compilazione");
 		}else{
-			String pedaggio="il costo per andare da " + caselloDA + " a " + caselloA + " con un veicolo di " + classeV + " è di 20€";		
-			this.getTxtPedaggio().setText(pedaggio);
+		/*chiama il DB: 
+			1) se i caselli sono nella stessa autostrada
+			 	calcola la distanza e la moliplica per la tariffa autostradale
+				ritorna il pedaggio=dist*tariffa
+				
+			2) se i caselli sono in autostrada diverse, simula la distanza minima
+				calcola la distanza (dist1) tra l'autostrada in ingresso (autIn) e lo svincolo con l'autostrada in uscita (autOut)
+				ped1=dist1*tariffa1
+				calcola la distanza tra lo svincolo aut1 con l'autostrada in uscita (autOut)
+				ped2=dist2*tariffa2
+				return pedaggio=ped1+ped2				
+		*/
+			String txtPedaggio="il costo per andare da " + caselloDA + " a " + caselloA + " con un veicolo di " + classeV + " è di 20€";		
+			this.getTxtPedaggio().setText(txtPedaggio);
 		}	
 	}
 	

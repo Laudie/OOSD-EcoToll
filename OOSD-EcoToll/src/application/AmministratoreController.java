@@ -41,8 +41,7 @@ public class AmministratoreController implements Initializable {
 
 	}
 	
-	public void eliminaCasello(ActionEvent event) throws SQLException {
-		
+	public void eliminaCasello(ActionEvent event) throws SQLException {	
 		
 		String casello=ScegliC.getValue();
 		if(caselloModel.eliminaCasello(casello)) {
@@ -58,7 +57,7 @@ public class AmministratoreController implements Initializable {
 	}
 	
 	public void getUserdata (String user) {	
-	lblUser.setText("Benvenuto Amministratore " + user);
+	lblUser.setText(user);
 	}	
 	
 	
