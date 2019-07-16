@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +28,7 @@ public class AmministratoreController implements Initializable {
 	@FXML private ComboBox<String> ScegliC;
 	@FXML private Label lblUser;
 	@FXML private Label lblsuccesso;
+	
 	public AppModel caselloModel = new AppModel();
 	
 	@Override
@@ -46,6 +48,7 @@ public class AmministratoreController implements Initializable {
 		if(caselloModel.eliminaCasello(casello)) {
 			lblsuccesso.setText("Casello eliminato con successo");
 			 JOptionPane.showMessageDialog(null, "Casello eliminato con successo");
+			 
 		}
 		else {
 		lblsuccesso.setText("Impossibile eliminare il casello");
@@ -107,5 +110,18 @@ public class AmministratoreController implements Initializable {
 			primaryStage.show();		
 		}catch(Exception e){
 			}
+	}
+	public void percorso(ActionEvent evt) throws IOException {
+	((Node)evt.getSource()).getScene().getWindow().hide(); 
+	Stage primaryStage = new Stage();
+	FXMLLoader loader = new FXMLLoader();
+	Pane root=loader.load(getClass().getResource("/application/Percorso.fxml").openStream());
+//Dichiaro la classe PercorsoController e la istanzio facendo cast con loader per passare l'utente registrato
+	PercorsoController percorsoCtrl = (PercorsoController)loader.getController();
+	percorsoCtrl.getUserdata(lblUser.getText());
+	Scene scene = new Scene(root);
+	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	primaryStage.setScene(scene);
+	primaryStage.show();
 	}
 }

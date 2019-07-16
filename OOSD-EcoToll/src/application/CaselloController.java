@@ -37,6 +37,7 @@ public class CaselloController {
 			 JOptionPane.showMessageDialog(null, "Impossibile aggiungere casello! Casello già presente");			
 		}else{
 			boolean aggiungi=aggiungiCaselloModel.aggiungiCas(txtCodiceCasello.getText(), txtNomeCasello.getText(),  txtAltezza.getText(), txtCodAutostrada.getText());
+			
 			if (aggiungi)
 				
 			    JOptionPane.showMessageDialog(null, "Casello aggiunto!");

@@ -56,6 +56,8 @@ public class LoginController implements Initializable  {
 							Stage primaryStage = new Stage();
 							FXMLLoader loader = new FXMLLoader();
 							Pane root=loader.load(getClass().getResource("/application/Amministratore.fxml").openStream());
+							AmministratoreController ammCtrl = (AmministratoreController)loader.getController();
+							ammCtrl.getUserdata(txtUsername.getText());
 							Scene scene = new Scene(root);
 							scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 							primaryStage.setScene(scene);
