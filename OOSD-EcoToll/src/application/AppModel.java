@@ -190,12 +190,12 @@ public static String getDateFormatter() {
 		String qry="delete from EcoToll.casello where(casello = ?)";
 		try {
 			pst=connessione.prepareStatement(qry);
-			pst.setString(1, casello);
-			
-			
+			pst.setString(1, casello);				
 			int count=pst.executeUpdate();
-			return true;
-			
+			if (count==1)
+				return true;
+			else
+				return false;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
