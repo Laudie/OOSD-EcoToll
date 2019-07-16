@@ -65,7 +65,7 @@ public class AmministratoreController implements Initializable {
 		String qry="select casello from EcoToll.casello;";		
 		List<String> lista = new ArrayList<String>();
 		try {
-			pst =AppModel.conection.prepareStatement(qry);
+			pst =AppModel.connessione.prepareStatement(qry);
 			rst = pst.executeQuery();
 			while (rst.next()) {
 				lista.add(rst.getString("casello"));						

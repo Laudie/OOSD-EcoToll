@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
-//import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,16 +22,15 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-public class PercorsoController implements Initializable {
+import javafx.scene.control.ToggleGroup;
+
+public class PercorsoController implements Initializable, Pedaggio{
 	
 	@FXML private Label lblUser;
-	@FXML private Label lblUserEU;
 	@FXML private Label lblComboDa;
 	@FXML private Label lblComboA;
 	@FXML private Label lblClasseV;
-	@FXML private Label lblTipoV;
-	@FXML private Label lblFasciaO;
-	
+
 	@FXML private ComboBox<String> comboDa;
 	@FXML private ComboBox<String> comboA;
 	@FXML private ComboBox<String> comboTipoV;
@@ -42,46 +40,29 @@ public class PercorsoController implements Initializable {
 	@FXML private RadioButton rbv3;
 	@FXML private RadioButton rbv4;
 	@FXML private RadioButton rbv5;
-	
-	@FXML private RadioButton rbfo1;
-	@FXML private RadioButton rbfo2;
-	@FXML private RadioButton rbfo3;
-	
-	@FXML private TextField txtPedaggioEU;
-	@FXML private TextField txtPedaggioIT;
+
+	@FXML private TextField txtPedaggio;
 	
 	@FXML private Button btnPedaggioIT;
-	@FXML private Button btnPedaggioEU;
 	
+	@FXML private ToggleGroup classeVeicolo;
 	
-	
-	
-	//ObservableList<String> listaDaA= FXCollections.observableArrayList(fillCombo());
-//metodo per inizializzare i componenti		
+//metodo per inizializzare i componenti
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
 			comboDa.setItems(FXCollections.observableArrayList(fillComboCasello()));
-			comboA.setItems(FXCollections.observableArrayList(fillComboCasello()));
+			comboA.setItems(FXCollections.observableArrayList(fillComboCasello()));		
 		} catch (SQLException e) {			
 			e.printStackTrace();
 		}
+	}
+	
 
-		//comboA.setItems(listaDaA);
-	}
-	
-	
 	public void getUserdata (String user) {	
-	lblUser.setText("Ciao " + user);
-		
+	lblUser.setText(user);
 	}
-	
-	 public void setUser (String user) {
-		lblUser.setText(user);
-		System.out.println("utente: " + user);
-		
-		}	
-	
+
 	public void logOut (ActionEvent evt){
 	try {
 		((Node)evt.getSource()).getScene().getWindow().hide(); 
@@ -96,47 +77,30 @@ public class PercorsoController implements Initializable {
 		}
 	}
 	
-	public void pedaggioEU (ActionEvent evt){
-		String userloggedIn= lblUser.getText();
-		System.out.println("stringa da label user: " + userloggedIn);
+	public void pedaggioEU (ActionEvent evt){		
 		try {
+			System.out.println("Pedaggio EU fxml");
 			((Node)evt.getSource()).getScene().getWindow().hide(); 
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
-			Pane root=loader.load(getClass().getResource("/application/PercorsoEU.fxml").openStream());			
+			Pane root=loader.load(getClass().getResource("/application/PercorsoEU.fxml").openStream());
+			//Dichiaro la classe PercorsoController e la istanzio facendo cast con loader per passare l'utente registrato
+			PercorsoEUController percorsoEUCtrl = (PercorsoEUController)loader.getController();
+			percorsoEUCtrl.getUserdata(lblUser.getText());
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();			
-		}catch(Exception e){}	
-		;			
-		setUser(userloggedIn); //NON FUNZIONA!!!!!!
+		}catch(Exception e){};		
 	}
-	
-	public void pedaggioIT (ActionEvent evt){
-		String aaa= lblUser.getText();
-		System.out.println("mlmlml: " + aaa);
-		try {
-			((Node)evt.getSource()).getScene().getWindow().hide(); 
-			Stage primaryStage = new Stage();
-			FXMLLoader loader = new FXMLLoader();
-			Pane root=loader.load(getClass().getResource("/application/Percorso.fxml").openStream());	
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();	
-			setUser(aaa);
-		}catch(Exception e){
-			}
-		}
-	
+
 	public List<String> fillComboCasello() throws SQLException {		
 		PreparedStatement pst =null;
 		ResultSet rst =null;		
-		String qry="select casello from EcoToll.casello limit 15;";		
+		String qry="select casello from EcoToll.casello;";		
 		List<String> lista = new ArrayList<String>();
 		try {
-			pst =AppModel.conection.prepareStatement(qry);
+			pst =AppModel.connessione.prepareStatement(qry);
 			rst = pst.executeQuery();
 			while (rst.next()) {
 				//System.out.println(rst.getString(1));
@@ -157,15 +121,15 @@ public class PercorsoController implements Initializable {
 	public void getCombodataDa(ActionEvent event) {
 		System.out.println(comboDa.getValue());
 		String da=comboDa.getValue();		
-		lblComboDa.setText(da);
+		getLblComboDa().setText(da);
 	}
 	
 	public void getCombodataA(ActionEvent event) {
 		System.out.println(comboA.getValue());
 		String a=comboA.getValue();		
-		lblComboA.setText(a);
+		getLblComboA().setText(a);
 	}
-	
+
 	public void radioSelectVeicolo(ActionEvent event) {
 		String msg="";
 		if (rbv1.isSelected())
@@ -181,37 +145,50 @@ public class PercorsoController implements Initializable {
 		lblClasseV.setText(msg);		
 	}
 	
-	public void radioSelectFasciaO(ActionEvent event) {
-		String msg="";
-		if (rbfo1.isSelected())
-			msg+=rbfo1.getText() + "\n";
-		if (rbfo2.isSelected())
-			msg+=rbfo2.getText() + "\n";
-		if (rbfo3.isSelected())
-			msg+=rbfo3.getText() + "\n";		
-		lblFasciaO.setText(msg);		
+
+	@Override
+	public void calcolaPedaggio() {
+		String classeV=this.lblClasseV.getText();
+		String caselloDA=this.getLblComboDa().getText();
+		String caselloA=this.getLblComboA().getText();
+		if (classeV.isEmpty()||caselloDA.isEmpty()||caselloA.isEmpty()){
+			AppModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Errore di compilazione");
+		}else{
+			String pedaggio="il costo per andare da " + caselloDA + " a " + caselloA + " con un veicolo di " + classeV + " è di 20€";		
+			this.getTxtPedaggio().setText(pedaggio);
+		}	
 	}
 	
-	public void calcolaPedaggioEU() {
-		String classev=this.lblClasseV.getText();
-		String caselloDA=this.lblComboDa.getText();
-		String caselloA=this.lblComboA.getText();
-		String fasciaO=this.lblFasciaO.getText();
-		
-		String pedaggioEU="il costo per andare da " + caselloDA + " a " + caselloA + " con un veicolo di " + classev + " nella fascia oraria " + fasciaO + " è di 10€";
-		
-		this.txtPedaggioEU.setText(pedaggioEU);		
-		
+	public Label getLblClasseV() {
+		return lblClasseV;
+	}
+
+	public void setLblClasseV(Label lblClasseV) {
+		this.lblClasseV = lblClasseV;
 	}
 	
-	public void calcolaPedaggioIT() {
-		String classev=this.lblClasseV.getText();
-		String caselloDA=this.lblComboDa.getText();
-		String caselloA=this.lblComboA.getText();		
-		
-		String pedaggioIT="il costo per andare da " + caselloDA + " a " + caselloA + " con un veicolo di " + classev +  " è di 20€";
-		
-		this.txtPedaggioIT.setText(pedaggioIT);		
-		
+	public Label getLblComboDa() {
+		return lblComboDa;
 	}
+
+	public void setLblComboDa(Label lblComboDa) {
+		this.lblComboDa = lblComboDa;
+	}
+
+	public Label getLblComboA() {
+		return lblComboA;
+	}
+
+	public void setLblComboA(Label lblComboA) {
+		this.lblComboA = lblComboA;
+	}
+
+	public TextField getTxtPedaggio() {
+		return txtPedaggio;
+	}
+
+	public void setTxtPedaggio(TextField txtPedaggio) {
+		this.txtPedaggio = txtPedaggio;
+	}
+
 }
