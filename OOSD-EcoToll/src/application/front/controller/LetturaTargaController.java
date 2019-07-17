@@ -46,14 +46,14 @@ public class LetturaTargaController implements Initializable, Pedaggio {
 
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PercorsoModel.getDateFormatter());
 	    String formatDateTimeIn = dataIn.format(formatter);
-	    System.out.println("Formatted Time :" +formatDateTimeIn);
+	    System.out.println("Dataora in :" +formatDateTimeIn);
 	    lblDataOraIn.setText(formatDateTimeIn);
 	    
 	    LocalDateTime dataOut =  LocalDateTime.now().plusHours(2);
 		System.out.println("Current Time " + dataOut);
 
 	    String formatDateTimeOut = dataOut.format(formatter);
-	    System.out.println("Formatted Time :" +formatDateTimeOut);
+	    System.out.println("Dataora out :" +formatDateTimeOut);
 	    lblDataOraOut.setText(formatDateTimeOut);
 		
 	    String targa="AQ120788";

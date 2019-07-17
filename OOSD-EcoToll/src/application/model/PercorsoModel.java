@@ -74,17 +74,37 @@ public class PercorsoModel {
 	
 	}
 
-	public double pedaggioTotale(String Da, String A) {
+	public double pedaggioTotale(String Da, String A, String classeV) {
 		
-		double tariffa1=0.0,tariffa2=0.0;
-		int km1=0,km2=0;
-		String ingresso=null,uscita=null;
-		int altezzaIn=0, altezzaOut=0;
+		double tariffa1=0.0,tariffa2=0.0,classePercento=0.0;		
+		int km1=0,km2=0,altezzaIn=0, altezzaOut=0;		
+		String ingresso=null,uscita=null; 
+		
+		switch (classeV) {
+			case "A":
+				classePercento=1;
+				break;
+			case "B":
+				classePercento=1.04;
+				break;
+			case "3":
+				classePercento=1.1;
+				break;
+			case "4":
+				classePercento=1.5;
+				break;
+			case "5":
+				classePercento=2;
+				break;			
+			default:
+		}
+		
 		PreparedStatement pst = null;
 		ResultSet rst = null;
 		
 		PreparedStatement pst1 = null;
 		ResultSet rst1 = null;		
+		
 		
 		try {
 			pst = connessione.prepareStatement(DATI_CASELLO);
@@ -115,9 +135,8 @@ public class PercorsoModel {
 		if(codiceautostrada(ingresso,uscita)) {
 			// Stessa autostrada faccio la differenza tra le altezza con valore assoluto
 			int distanzaunica = abs(altezzaIn-altezzaOut);
-			return distanzaunica*tariffa1;
-		}
-		else {			
+			return distanzaunica*tariffa1*classePercento;
+		}else{			
 			//autostrade diverse. Simulo la distanza minima supponendo esista un solo svincolo tra le due autostrade
 			//Calcolo i Km fatti nelle due autostrade
 			PreparedStatement pst2 = null;
@@ -137,31 +156,152 @@ public class PercorsoModel {
 				pst3.setString(2, ingresso);
 				rst3 = pst3.executeQuery();
 				
-				if (rst3.next()&&rst2.next()){
-				km1 = rst2.getInt("km");
-				System.out.print(km1);
-				km2 = rst3.getInt("km");
-				System.out.print(km2);	
+				if (rst3.next() && rst2.next()){
+					km1 = rst2.getInt("km");
+					System.out.print(km1);
+					km2 = rst3.getInt("km");
+					System.out.print(km2);	
 				}
 				}catch(Exception e) {
-					System.out.println("caazz! "+ e);
-				}		
-			
+					System.out.println("cazz! "+ e);
+				}					
 			int distanzain = abs(altezzaIn-km1);
 			int distanzaout = abs(altezzaOut-km2);
-			return (distanzain*tariffa1)+(distanzaout*tariffa2);
-			
-			/*
-			System.out.println("altezza e km 1" + altezzaIn + " "+ km1 + " alt e km2 " + altezzaOut + " " + km2);
-			
-			System.out.println("Distanza in" + distanzain + " Out " + distanzaout);
-			System.out.println("tariffa1 in" + tariffa1 + " tariffa2 " + tariffa2);
-			*/
-			
+			return (distanzain*tariffa1*classePercento)+(distanzaout*tariffa2*classePercento);					
 		}
 	
 	}
 
+	public double pedaggioTotale(String Da, String A, String classeV, String fasciaO, String tipoV) {
+		
+		double tariffa1=0.0,tariffa2=0.0;
+		double classePercento=1.0, fasciaOpercento=1.0,  tipoVpercento=1.0;	
+
+		int km1=0,km2=0,altezzaIn=0, altezzaOut=0;		
+		String ingresso=null,uscita=null; 
+		
+		switch (classeV) {
+			case "A":
+				classePercento=1;
+				break;
+			case "B":
+				classePercento=1.04;
+				break;
+			case "3":
+				classePercento=1.1;
+				break;
+			case "4":
+				classePercento=1.5;
+				break;
+			case "5":
+				classePercento=2;
+				break;			
+			default:
+				classePercento=1;
+		}
+		
+		switch (fasciaO) {
+			case "1":
+				fasciaOpercento=1.1;
+				break;
+			case "2":
+				fasciaOpercento=1.0;
+				break;
+			case "3":
+				fasciaOpercento=0.9;
+				break;
+			default:
+				fasciaOpercento=1.0;
+		}
+		
+		switch (tipoV) {
+			case "metano":
+				tipoVpercento=0.95;
+				break;
+			case "elettrica":
+				tipoVpercento=0.8;
+				break;
+			case "ibrida":
+				tipoVpercento=0.9;
+				break;
+			default:
+				tipoVpercento=1.0;
+	}
+		
+		
+		PreparedStatement pst = null;
+		ResultSet rst = null;
+		
+		PreparedStatement pst1 = null;
+		ResultSet rst1 = null;		
+		
+		
+		try {
+			pst = connessione.prepareStatement(DATI_CASELLO);
+			pst.setString(1, Da);
+			rst = pst.executeQuery();
+			
+			
+			pst1 = connessione.prepareStatement(DATI_CASELLO);
+			pst1.setString(1, A);
+			rst1 = pst1.executeQuery();
+			if(rst.next() && rst1.next()) {
+			
+			//Stampo idautostrada in ingresso			
+			 altezzaIn = rst.getInt("altezza");
+			 ingresso = rst.getString("autostrada");
+			 tariffa1= rst.getDouble("tariffaKm");
+			 System.out.println(altezzaIn + " " + ingresso + " " + tariffa1 );
+			 
+			//Stampo idautostrada del casello in uscita			
+			 altezzaOut = rst1.getInt("altezza");
+			 uscita = rst1.getString("autostrada");
+			 tariffa2= rst1.getDouble("tariffaKm");
+			 System.out.println(altezzaOut + " " + uscita + " " + tariffa2);
+			}
+	
+	}catch(Exception e) {System.out.print(e);}
+		
+		if(codiceautostrada(ingresso,uscita)) {
+			// Stessa autostrada faccio la differenza tra le altezza con valore assoluto
+			int distanzaunica = abs(altezzaIn-altezzaOut);
+			return distanzaunica*tariffa1*classePercento*fasciaOpercento*tipoVpercento;
+		}else{			
+			//autostrade diverse. Simulo la distanza minima supponendo esista un solo svincolo tra le due autostrade
+			//Calcolo i Km fatti nelle due autostrade
+			PreparedStatement pst2 = null;
+			ResultSet rst2 = null;
+			
+			PreparedStatement pst3 = null;
+			ResultSet rst3 = null;			
+			
+			try {				
+				pst2 = connessione.prepareStatement(DATI_SVINCOLO);
+				pst2.setString(1, ingresso);
+				pst2.setString(2, uscita);
+				rst2 = pst2.executeQuery();
+				
+				pst3 = connessione.prepareStatement(DATI_SVINCOLO);
+				pst3.setString(1, uscita);
+				pst3.setString(2, ingresso);
+				rst3 = pst3.executeQuery();
+				
+				if (rst3.next() && rst2.next()){
+					km1 = rst2.getInt("km");
+					System.out.print(km1);
+					km2 = rst3.getInt("km");
+					System.out.print(km2);	
+				}
+				}catch(Exception e) {
+					System.out.println("cazz! "+ e);
+				}					
+			int distanzain = abs(altezzaIn-km1);
+			int distanzaout = abs(altezzaOut-km2);
+			return (distanzain*tariffa1*classePercento*fasciaOpercento*tipoVpercento)+(distanzaout*tariffa2*classePercento*fasciaOpercento*tipoVpercento);					
+		}
+	
+	}
+	
 	public boolean codiceautostrada(String ingresso, String uscita) {
 		if(ingresso.equals(uscita)) {
 			return true;

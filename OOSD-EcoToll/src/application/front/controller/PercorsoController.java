@@ -169,7 +169,7 @@ public class PercorsoController implements Initializable, Pedaggio{
 				ped2=dist2*tariffa2
 				return pedaggio=ped1+ped2				
 		*/
-			double totale = perModel.pedaggioTotale(caselloDA,caselloA);
+			double totale = perModel.pedaggioTotale(caselloDA,caselloA, lblClasseV.getText());
 			
 			String txtPedaggio="il costo per andare da " + caselloDA + " a " + caselloA + " con un veicolo di " + classeV + " è di " + totale +" euro" ;		
 			this.getTxtPedaggio().setText(txtPedaggio);
