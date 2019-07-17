@@ -100,6 +100,7 @@ public class PercorsoModel {
 				classePercento=1.0;
 		}
 		
+		System.out.println("Classe: " + classeV + "valore: " + classePercento);
 		PreparedStatement pst = null;
 		ResultSet rst = null;
 		
@@ -183,7 +184,7 @@ public class PercorsoModel {
 		
 		switch (classeV) {
 			case "A":
-				classePercento=1;
+				classePercento=1.0;
 				break;
 			case "B":
 				classePercento=1.04;
@@ -202,13 +203,13 @@ public class PercorsoModel {
 		}
 		
 		switch (fasciaO) {
-			case "1":
+			case "06":
 				fasciaOpercento=1.1;
 				break;
-			case "2":
+			case "14":
 				fasciaOpercento=1.0;
 				break;
-			case "3":
+			case "22":
 				fasciaOpercento=0.9;
 				break;
 			default:
@@ -216,20 +217,21 @@ public class PercorsoModel {
 		}
 		
 		switch (tipoV) {
-			case "metano":
+			case "Metano":
 				tipoVpercento=0.95;
 				break;
-			case "elettrica":
+			case "Elettrica":
 				tipoVpercento=0.8;
 				break;
-			case "ibrida":
+			case "Ibrida":
 				tipoVpercento=0.9;
 				break;
 			default:
 				tipoVpercento=1.0;
 	}
 		
-		
+		System.out.println("Classe: " + classeV + " - TipoV: " + tipoV + " - Fascia Oraria: " + fasciaO);
+		System.out.println("Classe: " + classePercento + " - TipoV:" + tipoVpercento + " - Fascia Oraria: " + fasciaOpercento);
 		PreparedStatement pst = null;
 		ResultSet rst = null;
 		
