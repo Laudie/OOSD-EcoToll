@@ -153,7 +153,7 @@ public class PercorsoController implements Initializable, Pedaggio{
 		String caselloDA=this.getLblComboDa().getText();
 		String caselloA=this.getLblComboA().getText();
 		if (classeV.isEmpty()||caselloDA.isEmpty()||caselloA.isEmpty()){
-			PercorsoModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Errore di compilazione");
+			PercorsoModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Errore di compilazione", "WARNING");
 		}else{
 			
 			

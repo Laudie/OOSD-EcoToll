@@ -30,6 +30,7 @@ public class LetturaTargaController implements Initializable, Pedaggio {
 	@FXML TextField txtPedaggio;
 	@FXML Button btnPedaggio;
 	
+	
 	public PercorsoModel targaModel = new PercorsoModel();
 	public PercorsoController perModel = new PercorsoController();
 	
@@ -37,7 +38,7 @@ public class LetturaTargaController implements Initializable, Pedaggio {
 	//metodi per inserire la targa (su AppModel)
 	//Calcolare il pedaggio sia IT che EU
 	
-	
+
 @Override
 	public void calcolaPedaggio() {
 	
@@ -58,12 +59,15 @@ public class LetturaTargaController implements Initializable, Pedaggio {
 		
 	    String targa="AQ120788";
 	    String da="AQ Ovest";
-	    String a="AQ Est";
-	    double pedaggio=18.70;
+	    String a="Roma Est";
+	    double pedaggio=11.70;
 	    txtTarga.setText(targa);
 	    
 	    try {
-			targaModel.isTargaRegistered(targa, da, a, formatDateTimeIn, formatDateTimeOut, pedaggio);
+			if (targaModel.isTargaRegistered(targa, da, a, formatDateTimeIn, formatDateTimeOut, pedaggio)) {
+				txtPedaggio.setText("Dati salvati correttamente");
+			}
+				
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

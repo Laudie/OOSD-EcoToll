@@ -94,9 +94,10 @@ public class PercorsoModel {
 				classePercento=1.5;
 				break;
 			case "5":
-				classePercento=2;
+				classePercento=2.0;
 				break;			
 			default:
+				classePercento=1.0;
 		}
 		
 		PreparedStatement pst = null;
@@ -197,7 +198,7 @@ public class PercorsoModel {
 				classePercento=2;
 				break;			
 			default:
-				classePercento=1;
+				classePercento=1.0;
 		}
 		
 		switch (fasciaO) {
@@ -321,10 +322,9 @@ public class PercorsoModel {
 		}
 
 			//InfoBox
-			public static void infoBox(String infoMessage, String titleBar, String headerMessage)
+			public static void infoBox(String infoMessage, String titleBar, String headerMessage, String msgType)
 		    {
-				String msgType="WARNING";
-		        Alert alert = new Alert(AlertType.valueOf(msgType));
+				Alert alert = new Alert(AlertType.valueOf(msgType));
 		        alert.setTitle(titleBar);
 		        alert.setHeaderText(headerMessage);
 		        alert.setContentText(infoMessage);

@@ -77,7 +77,7 @@ public class PercorsoEUController extends PercorsoController {
 		String fasciaO=this.lblFasciaO.getText();
 		String tipoV=this.lblTipoV.getText();
 		if (classeV.isEmpty()||caselloDA.isEmpty()||caselloA.isEmpty()||tipoV.isEmpty()){
-			PercorsoModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Impossibile calcolare il pedaggio");
+			PercorsoModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Impossibile calcolare il pedaggio", "WARNING");
 		}else{
 			String pedaggio="il costo per andare da " + caselloDA + " a " + caselloA + " con un veicolo di " + classeV + " nella fascia oraria " + fasciaO + " con un veicolo a " + tipoV + " è di 10€";		
 			this.getTxtPedaggio().setText(pedaggio);
