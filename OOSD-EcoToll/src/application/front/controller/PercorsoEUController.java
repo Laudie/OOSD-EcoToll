@@ -79,7 +79,8 @@ public class PercorsoEUController extends PercorsoController {
 		if (classeV.isEmpty()||caselloDA.isEmpty()||caselloA.isEmpty()||tipoV.isEmpty()){
 			PercorsoModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Impossibile calcolare il pedaggio", "WARNING");
 		}else{
-			String pedaggio="il costo per andare da " + caselloDA + " a " + caselloA + " con un veicolo di " + classeV + " nella fascia oraria " + fasciaO + " con un veicolo a " + tipoV + " è di 10€";		
+			double totale = perModel.pedaggioTotale(caselloDA,caselloA, getLblClasseV().getText(), lblFasciaO.getText(), lblTipoV.getText());
+			String pedaggio="il costo per andare da " + caselloDA + " a " + caselloA + " con un veicolo di " + classeV + " nella fascia oraria " + fasciaO + " con un veicolo a " + tipoV + " è di " + totale +" euro";		
 			this.getTxtPedaggio().setText(pedaggio);
 		}
 		
