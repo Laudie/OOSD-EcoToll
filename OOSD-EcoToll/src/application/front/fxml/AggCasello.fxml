@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="223.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CaselloController">
+<AnchorPane prefHeight="223.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CaselloController">
 	<children>
 		<Text fill="#c82c2c" layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CODICE CASELLO" wrappingWidth="104.13672828674316" />
 		<Text fill="#c82c2c" layoutX="163.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOME CASELLO" wrappingWidth="118.13672637939453" />

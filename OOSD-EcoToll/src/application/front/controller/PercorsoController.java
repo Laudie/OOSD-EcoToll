@@ -1,4 +1,4 @@
-package application;
+package application.front.controller;
 
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import application.model.PercorsoModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,15 +21,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.scene.control.ToggleGroup;
 
-public abstract class AbstractPercorso implements Initializable, Pedaggio{
-
-	public AbstractPercorso() {
-		// TODO Auto-generated constructor stub
-	}
+public class PercorsoController implements Initializable, Pedaggio{
+	
 	@FXML private Label lblUser;
 	@FXML private Label lblComboDa;
 	@FXML private Label lblComboA;
@@ -50,6 +48,9 @@ public abstract class AbstractPercorso implements Initializable, Pedaggio{
 	
 	@FXML private ToggleGroup classeVeicolo;
 	
+	
+	public PercorsoModel perModel = new PercorsoModel();
+	
 //metodo per inizializzare i componenti
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -60,6 +61,7 @@ public abstract class AbstractPercorso implements Initializable, Pedaggio{
 			e.printStackTrace();
 		}
 	}
+	
 
 	public void getUserdata (String user) {	
 	lblUser.setText(user);
@@ -70,16 +72,31 @@ public abstract class AbstractPercorso implements Initializable, Pedaggio{
 		((Node)evt.getSource()).getScene().getWindow().hide(); 
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root=loader.load(getClass().getResource("/application/Login.fxml").openStream());
+		Pane root=loader.load(getClass().getResource("/application/front/fxml/Login.fxml").openStream());
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();		
 	}catch(Exception e){
 		}
 	}
 	
-	public abstract void formPercorsoITEU (ActionEvent evt);
+	public void pedaggioEU (ActionEvent evt){		
+		try {
+			System.out.println("Pedaggio EU fxml");
+			((Node)evt.getSource()).getScene().getWindow().hide(); 
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root=loader.load(getClass().getResource("/application/front/fxml/PercorsoEU.fxml").openStream());
+			//Dichiaro la classe PercorsoController e la istanzio facendo cast con loader per passare l'utente registrato
+			PercorsoEUController percorsoEUCtrl = (PercorsoEUController)loader.getController();
+			percorsoEUCtrl.getUserdata(lblUser.getText());
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();			
+		}catch(Exception e){};		
+	}
 
 	public List<String> fillComboCasello() throws SQLException {		
 		PreparedStatement pst =null;
@@ -87,7 +104,7 @@ public abstract class AbstractPercorso implements Initializable, Pedaggio{
 		String qry="select casello from EcoToll.casello;";		
 		List<String> lista = new ArrayList<String>();
 		try {
-			pst =AppModel.connessione.prepareStatement(qry);
+			pst =PercorsoModel.connessione.prepareStatement(qry);
 			rst = pst.executeQuery();
 			while (rst.next()) {
 				lista.add(rst.getString("casello"));						
@@ -102,18 +119,18 @@ public abstract class AbstractPercorso implements Initializable, Pedaggio{
 		return lista;		
 	}
 	
-	public void getComboDa(ActionEvent event) {
+	public void getCombodataDa(ActionEvent event) {
 		System.out.println(comboDa.getValue());
-		String casello=comboDa.getValue();		
-		getLblComboDa().setText(casello);
+		String da=comboDa.getValue();		
+		getLblComboDa().setText(da);
 	}
 	
-	public void getComboA(ActionEvent event) {
+	public void getCombodataA(ActionEvent event) {
 		System.out.println(comboA.getValue());
-		String casello=comboA.getValue();		
-		getLblComboA().setText(casello);
+		String a=comboA.getValue();		
+		getLblComboA().setText(a);
 	}
-	
+
 	public void radioSelectVeicolo(ActionEvent event) {
 		String msg="";
 		if (rbv1.isSelected())
@@ -127,8 +144,38 @@ public abstract class AbstractPercorso implements Initializable, Pedaggio{
 		if (rbv5.isSelected())
 			msg+=rbv5.getText() + "\n";		
 		lblClasseV.setText(msg);		
-	}	
+	}
+	
 
+	@Override
+	public void calcolaPedaggio() {
+		String classeV=this.lblClasseV.getText();
+		String caselloDA=this.getLblComboDa().getText();
+		String caselloA=this.getLblComboA().getText();
+		if (classeV.isEmpty()||caselloDA.isEmpty()||caselloA.isEmpty()){
+			PercorsoModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Errore di compilazione");
+		}else{
+			
+			
+		/*chiama il DB: 
+			1) se i caselli sono nella stessa autostrada
+			 	calcola la distanza e la moliplica per la tariffa autostradale
+				ritorna il pedaggio=dist*tariffa
+				
+			2) se i caselli sono in autostrada diverse, simula la distanza minima
+				calcola la distanza (dist1) tra l'autostrada in ingresso (autIn) e lo svincolo con l'autostrada in uscita (autOut)
+				ped1=dist1*tariffa1
+				calcola la distanza tra lo svincolo aut1 con l'autostrada in uscita (autOut)
+				ped2=dist2*tariffa2
+				return pedaggio=ped1+ped2				
+		*/
+			double totale = perModel.pedaggioTotale(caselloDA,caselloA);
+			
+			String txtPedaggio="il costo per andare da " + caselloDA + " a " + caselloA + " con un veicolo di " + classeV + " è di " + totale +" euro" ;		
+			this.getTxtPedaggio().setText(txtPedaggio);
+		}	
+	}
+	
 	public Label getLblClasseV() {
 		return lblClasseV;
 	}

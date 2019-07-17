@@ -1,4 +1,4 @@
-package application;
+package application.controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import application.front.controller.PercorsoController;
+import application.model.AppModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +27,7 @@ import javafx.stage.Stage;
 
 public class AmministratoreController implements Initializable {
 
-	@FXML private ComboBox<String> ScegliC;
+	@FXML private ComboBox<String> comboCasello;
 	@FXML private Label lblUser;
 	@FXML private Label lblsuccesso;
 	
@@ -34,31 +36,42 @@ public class AmministratoreController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
-			ScegliC.setItems(FXCollections.observableArrayList(fillComboCasello()));
+			comboCasello.setItems(FXCollections.observableArrayList(fillComboCasello()));
 		} catch (SQLException e) {			
 			e.printStackTrace();
 		}
 
 	}
 	
-	public void eliminaCasello(ActionEvent event) throws SQLException {	
-		
-		String casello=ScegliC.getValue();
-		if(caselloModel.eliminaCasello(casello)) {
-			lblsuccesso.setText("Casello eliminato con successo");
-			 JOptionPane.showMessageDialog(null, "Casello eliminato con successo");
-			 
-		}
-		else {
-		lblsuccesso.setText("Impossibile eliminare il casello");
-		 JOptionPane.showMessageDialog(null, "Impossibile eliminare il casello");
-			
-		}
+	public void aggiungiCasello(ActionEvent event) {
+		try {
+			((Node)event.getSource()).getScene().getWindow().hide(); 
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root=loader.load(getClass().getResource("/application/front/fxml/AggCasello.fxml").openStream());
+			Scene scene = new Scene(root);
+			//scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();		
+		}catch(Exception e){
+			}
 	}
 	
-	public void getUserdata (String user) {	
-	lblUser.setText(user);
-	}	
+	public void eliminaCasello(ActionEvent event) throws SQLException {		
+		String casello=comboCasello.getValue();
+		if(caselloModel.eliminaCasello(casello)) {
+			lblsuccesso.setText("Casello eliminato con successo");
+			try {
+				comboCasello.setItems(FXCollections.observableArrayList(fillComboCasello()));
+			} catch (SQLException e) {			
+				e.printStackTrace();
+			}
+			 JOptionPane.showMessageDialog(null, "Casello eliminato con successo");			 
+		} else {
+		lblsuccesso.setText("Impossibile eliminare il casello");
+		 JOptionPane.showMessageDialog(null, "Impossibile eliminare il casello");			
+		}
+	}
 	
 	
 	public List<String> fillComboCasello() throws SQLException {		
@@ -82,44 +95,34 @@ public class AmministratoreController implements Initializable {
 		return lista;		
 	}
 	
+	public void getUserdata (String user) {	
+		lblUser.setText(user);
+		}	
 	
 	public void logOut (ActionEvent evt){
 		try {
 			((Node)evt.getSource()).getScene().getWindow().hide(); 
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
-			Pane root=loader.load(getClass().getResource("/application/Login.fxml").openStream());
+			Pane root=loader.load(getClass().getResource("/application/front/fxml/Login.fxml").openStream());
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();		
 		}catch(Exception e){
 			}
 		}
-	
-	public void aggiungiCasello(ActionEvent event) {
-		try {
-			((Node)event.getSource()).getScene().getWindow().hide(); 
-			Stage primaryStage = new Stage();
-			FXMLLoader loader = new FXMLLoader();
-			Pane root=loader.load(getClass().getResource("/application/AggCasello.fxml").openStream());
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();		
-		}catch(Exception e){
-			}
-	}
+		
 	public void percorso(ActionEvent evt) throws IOException {
 	((Node)evt.getSource()).getScene().getWindow().hide(); 
 	Stage primaryStage = new Stage();
 	FXMLLoader loader = new FXMLLoader();
-	Pane root=loader.load(getClass().getResource("/application/Percorso.fxml").openStream());
+	Pane root=loader.load(getClass().getResource("/application/front/fxml/Percorso.fxml").openStream());
 //Dichiaro la classe PercorsoController e la istanzio facendo cast con loader per passare l'utente registrato
 	PercorsoController percorsoCtrl = (PercorsoController)loader.getController();
 	percorsoCtrl.getUserdata(lblUser.getText());
 	Scene scene = new Scene(root);
-	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	//scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 	primaryStage.setScene(scene);
 	primaryStage.show();
 	}

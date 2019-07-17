@@ -1,4 +1,4 @@
-package application;
+package application.front.controller;
 
 public interface Pedaggio{
 
