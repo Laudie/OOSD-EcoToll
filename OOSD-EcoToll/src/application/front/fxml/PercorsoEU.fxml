@@ -11,8 +11,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="1010.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.PercorsoEUController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="1010.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.PercorsoEUController">
    <children>
       <HBox layoutX="70.0" layoutY="300.0" prefHeight="25.0" prefWidth="785.0" spacing="5.0">
          <children>
@@ -43,25 +44,34 @@
             </Label>
          </children>
       </HBox>
-      <TextField fx:id="txtPedaggio" layoutX="70.0" layoutY="350.0" onAction="#calcolaPedaggio" prefHeight="36.0" prefWidth="754.0" promptText="Scriviacmoci qualcosa" />
+      <TextField fx:id="txtPedaggio" layoutX="51.0" layoutY="340.0" onAction="#calcolaPedaggio" prefHeight="68.0" prefWidth="763.0" promptText="Il pedaggio verrà calcolato qui" />
       <TextField alignment="CENTER" editable="false" layoutX="205.0" layoutY="114.0" prefHeight="40.0" prefWidth="550.0" promptText="Scegli data ed i caselli di partenza ed arrivo" text="Casello di partenza ed arrivo e tipo veicolo">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
       <Separator layoutX="54.0" layoutY="281.0" prefHeight="17.0" prefWidth="800.0" />
-      <HBox layoutX="205.0" layoutY="154.0">
+      <HBox layoutX="205.0" layoutY="177.0">
          <children>
             <ComboBox fx:id="comboDa" onAction="#getCombodataDa" prefHeight="25.0" prefWidth="200.0" promptText="Da" />
             <ComboBox fx:id="comboA" onAction="#getCombodataA" prefHeight="25.0" prefWidth="200.0" promptText="A" />
             <ComboBox fx:id="comboTipoV" onAction="#getComboTipoV" onShowing="#fillComboTipoV" prefWidth="150.0" promptText="tipo Veicolo" />
          </children>
       </HBox>
-      <HBox alignment="TOP_RIGHT" layoutX="669.0" layoutY="14.0" prefHeight="37.0" prefWidth="333.0">
+      <HBox alignment="TOP_RIGHT" layoutX="662.0" layoutY="29.0" prefHeight="37.0" prefWidth="333.0">
          <children>
-            <Label prefHeight="37.0" prefWidth="68.0" text="Benvenuto" />
-            <Label fx:id="lblUser" prefHeight="34.0" prefWidth="107.0" text="user" textFill="#1334d7" />
-            <Button cancelButton="true" mnemonicParsing="false" onAction="#logOut" prefHeight="36.0" prefWidth="74.0" text="LogOut" />
+            <Label prefHeight="37.0" prefWidth="81.0" text="Benvenuto" textFill="#d01414">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label fx:id="lblUser" prefHeight="40.0" prefWidth="107.0" text="user" textFill="#d01414">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#logOut" prefHeight="36.0" prefWidth="74.0" text="LogOut" textFill="#d01414">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
          </children>
       </HBox>
       <VBox layoutX="54.0" layoutY="120.0" prefHeight="120.0" prefWidth="150.0" spacing="7.0">
@@ -82,14 +92,14 @@
             <RadioButton fx:id="rbv5" mnemonicParsing="false" onAction="#radioSelectVeicolo" text="Classe 5" toggleGroup="$classeVeicolo" />
          </children>
       </VBox>
-      <Button fx:id="btnPedaggioEU" layoutX="855.0" layoutY="350.0" mnemonicParsing="false" onAction="#calcolaPedaggio" text="Pedaggio" textFill="#2dda16">
+      <Button fx:id="btnPedaggioEU" layoutX="854.0" layoutY="355.0" mnemonicParsing="false" onAction="#calcolaPedaggio" text="Pedaggio" textFill="#32a720">
          <font>
-            <Font size="16.0" />
+            <Font size="17.0" />
          </font>
       </Button>
-      <Button layoutX="838.0" layoutY="463.0" mnemonicParsing="false" onAction="#percorsoIT" text="Pedaggio Italiano" textFill="#092fee">
+      <Button layoutX="836.0" layoutY="437.0" mnemonicParsing="false" onAction="#percorsoIT" text="Pedaggio Italiano" textFill="#d01414">
          <font>
-            <Font size="14.0" />
+            <Font size="16.0" />
          </font>
       </Button>
       <VBox fillWidth="false" layoutX="771.0" layoutY="118.0" prefHeight="113.0" prefWidth="86.0" spacing="5.0">
@@ -99,16 +109,33 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <RadioButton fx:id="rbfo1" mnemonicParsing="false" onAction="#radioSelectFasciaO" prefHeight="25.0" prefWidth="100.0" text="06-14" textFill="#eb0e9e">
+            <RadioButton fx:id="rbfo1" mnemonicParsing="false" onAction="#radioSelectFasciaO" prefHeight="25.0" prefWidth="100.0" text="06-14" textFill="#d01414">
                <toggleGroup>
                   <ToggleGroup fx:id="fasciaOraria" />
                </toggleGroup>
+               <font>
+                  <Font size="13.0" />
+               </font>
             </RadioButton>
-            <RadioButton fx:id="rbfo2" mnemonicParsing="false" onAction="#radioSelectFasciaO" prefHeight="25.0" prefWidth="100.0" text="14-22" textFill="#eb0e9e" toggleGroup="$fasciaOraria" />
-            <RadioButton fx:id="rbfo3" mnemonicParsing="false" onAction="#radioSelectFasciaO" prefHeight="25.0" prefWidth="100.0" text="22-06" textFill="#eb0e9e" toggleGroup="$fasciaOraria" />
+            <RadioButton fx:id="rbfo2" mnemonicParsing="false" onAction="#radioSelectFasciaO" prefHeight="25.0" prefWidth="100.0" text="14-22" textFill="#d01414" toggleGroup="$fasciaOraria">
+               <font>
+                  <Font size="13.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rbfo3" mnemonicParsing="false" onAction="#radioSelectFasciaO" prefHeight="25.0" prefWidth="100.0" text="22-06" textFill="#d01414" toggleGroup="$fasciaOraria">
+               <font>
+                  <Font size="13.0" />
+               </font></RadioButton>
          </children>
       </VBox>
-      <Button layoutX="70.0" layoutY="438.0" mnemonicParsing="false" onAction="#testTarga" prefHeight="36.0" prefWidth="89.0" text="Test Targa" />
+      <Button layoutX="54.0" layoutY="438.0" mnemonicParsing="false" onAction="#testTarga" prefHeight="36.0" prefWidth="89.0" text="Test Targa" textFill="#d01414">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Text fill="#32a720" fontSmoothingType="LCD" layoutX="54.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calcola Pedaggio Autostradale Europeo 2021" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
      
    </children>
 </AnchorPane>

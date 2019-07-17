@@ -8,8 +8,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.RegistrazioneController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.RegistrazioneController">
    <children>
       <VBox layoutX="191.0" layoutY="54.0" prefHeight="165.0" prefWidth="300.0" spacing="10.0">
          <children>
@@ -44,12 +45,12 @@
             </PasswordField>
          </children>
       </VBox>
-      <Label fx:id="lblStatus" layoutX="14.0" layoutY="27.0" prefHeight="27.0" prefWidth="200.0" text="Status" textFill="#1823d9">
+      <Label fx:id="lblStatus" layoutX="14.0" layoutY="27.0" prefHeight="27.0" prefWidth="200.0" text="Status" textFill="#d01414">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnRegistrati" layoutX="198.0" layoutY="268.0" mnemonicParsing="false" onAction="#registrazioneUtente" text="Registra" textFill="#0f0fe4">
+      <Button fx:id="btnRegistrati" layoutX="198.0" layoutY="268.0" mnemonicParsing="false" onAction="#registrazioneUtente" text="Registra" textFill="#d01414">
          <font>
             <Font size="18.0" />
          </font>
@@ -59,6 +60,11 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Text fill="#32a720" fontSmoothingType="LCD" layoutX="233.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedaggio Autostradale" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

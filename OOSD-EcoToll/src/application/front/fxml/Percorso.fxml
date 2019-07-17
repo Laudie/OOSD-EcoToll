@@ -11,8 +11,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="861.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.PercorsoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="861.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.PercorsoController">
    <children>
       <Label fx:id="lblClasseV" layoutX="71.0" layoutY="302.0" textFill="#2dda16">
          <font>
@@ -28,7 +29,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtPedaggio" layoutX="70.0" layoutY="350.0" prefHeight="36.0" prefWidth="658.0" promptText="Scriviacmoci qualcosa" />
+      <TextField fx:id="txtPedaggio" layoutX="70.0" layoutY="350.0" prefHeight="63.0" prefWidth="658.0" promptText="Il pedaggio verrà calcolato qui" />
       <Separator layoutX="70.0" layoutY="260.0" prefHeight="10.0" prefWidth="658.0" />
       <ComboBox fx:id="comboDa" layoutX="205.0" layoutY="154.0" onAction="#getCombodataDa" prefHeight="25.0" prefWidth="250.0" promptText="Da" />
       <ComboBox fx:id="comboA" layoutX="474.0" layoutY="154.0" onAction="#getCombodataA" prefHeight="25.0" prefWidth="250.0" promptText="A" />
@@ -37,10 +38,16 @@
             <Font size="16.0" />
          </font>
       </TextField>
-      <HBox alignment="TOP_RIGHT" layoutX="593.0" layoutY="14.0" prefHeight="37.0" prefWidth="260.0">
+      <HBox alignment="TOP_RIGHT" layoutX="497.0" layoutY="27.0" prefHeight="37.0" prefWidth="350.0">
          <children>
-            <Label prefHeight="37.0" prefWidth="66.0" text="Benvenuto" />
-            <Label fx:id="lblUser" prefHeight="37.0" prefWidth="97.0" text="user" textFill="#1334d7" />
+            <Label prefHeight="37.0" prefWidth="85.0" text="Benvenuto" textFill="#d01414">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label fx:id="lblUser" prefHeight="37.0" prefWidth="107.0" text="user" textFill="#d01414">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
             <Button cancelButton="true" mnemonicParsing="false" onAction="#logOut" prefHeight="36.0" prefWidth="74.0" text="LogOut" />
          </children>
       </HBox>
@@ -62,16 +69,21 @@
             <RadioButton fx:id="rbv5" mnemonicParsing="false" onAction="#radioSelectVeicolo" text="Classe 5" toggleGroup="$classeVeicolo" />
          </children>
       </VBox>
-      <Button fx:id="btnPedaggioIT" layoutX="638.0" layoutY="292.0" mnemonicParsing="false" onAction="#calcolaPedaggio" text="Pedaggio" textFill="#2dda16">
+      <Button fx:id="btnPedaggioIT" layoutX="638.0" layoutY="292.0" mnemonicParsing="false" onAction="#calcolaPedaggio" text="Pedaggio" textFill="#32a720">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button layoutX="698.0" layoutY="461.0" mnemonicParsing="false" onAction="#pedaggioEU" text="Pedaggio Europeo" textFill="#092fee">
+      <Button layoutX="683.0" layoutY="459.0" mnemonicParsing="false" onAction="#pedaggioEU" text="Pedaggio Europeo" textFill="#d01414">
          <font>
-            <Font size="14.0" />
+            <Font size="18.0" />
          </font>
       </Button>
+      <Text fill="#32a720" fontSmoothingType="LCD" layoutX="54.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calcola Pedaggio Autostradale Italiano 2019" textAlignment="CENTER" wrappingWidth="436.28118896484375">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
      
    </children>
 </AnchorPane>

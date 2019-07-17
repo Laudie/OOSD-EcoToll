@@ -5,19 +5,32 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="385.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AmministratoreController">
    <children>
-      <Button cancelButton="true" layoutX="609.0" layoutY="15.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="74.0" text="LogOut" />
+      <Button cancelButton="true" layoutX="609.0" layoutY="15.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="74.0" text="LogOut" textFill="#d01414">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
       <ComboBox id="comboCasello" fx:id="comboCasello" layoutX="72.0" layoutY="103.0" onShowing="#fillComboCasello" prefHeight="26.0" prefWidth="199.0" promptText="Scegli il casello da eliminare" />
       <Button id="Elimina" layoutX="337.0" layoutY="103.0" mnemonicParsing="false" onAction="#eliminaCasello" text="Elimina" />
       <Button id="Aggiungi" layoutX="72.0" layoutY="218.0" mnemonicParsing="false" onAction="#aggiungiCasello" prefHeight="25.0" prefWidth="199.0" text="Aggiungi un casello" />
       <Label fx:id="lblsuccesso" layoutX="70.0" layoutY="142.0" prefHeight="26.0" prefWidth="228.0" textFill="#0facea" />
-      <Button layoutX="587.0" layoutY="309.0" mnemonicParsing="false" onAction="#percorso" prefHeight="38.0" prefWidth="113.0" text="Calcola Pedaggio" />
-      <HBox layoutX="58.0" layoutY="19.0" prefHeight="38.0" prefWidth="372.0">
+      <Button alignment="CENTER" layoutX="567.0" layoutY="309.0" mnemonicParsing="false" onAction="#percorso" prefHeight="38.0" prefWidth="133.0" text="Calcola Pedaggio" textFill="#0d782d">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <HBox layoutX="58.0" layoutY="19.0" prefHeight="38.0" prefWidth="371.0">
          <children>
-            <Label prefHeight="37.0" prefWidth="190.0" text="Benvenuto Amministratore" textFill="#1334d7" />
-            <Label fx:id="lblUser" lineSpacing="5.0" prefHeight="38.0" prefWidth="239.0" text="user" textFill="#1334d7" />
+            <Label prefHeight="37.0" prefWidth="246.0" text="Benvenuto Amministratore" textFill="#d01414">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <Label fx:id="lblUser" lineSpacing="5.0" prefHeight="38.0" prefWidth="85.0" text="user" textFill="#d01414">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
          </children>
       </HBox>
    </children>
