@@ -11,7 +11,7 @@ import business.model.*;
 public interface EcoTollDAO {
 
 	/** Recupera tutti gli oggetti Casello dal DB. */
-	public List<String> getAllCasello();
+	public List<Casello> getAllCasello();
 	
 	/** Recupera un oggetto Casello esistente a partire dall'id. */
 	public Casello getCasello(int id);
