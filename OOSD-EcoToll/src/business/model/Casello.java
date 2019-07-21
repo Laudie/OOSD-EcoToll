@@ -1,10 +1,14 @@
 package business.model;
 
+import java.util.List;
+
 import business.model.Autostrada;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /*
  * package propertydemo;
@@ -33,7 +37,16 @@ public class Casello {
 	private IntegerProperty idcasello =new SimpleIntegerProperty();	
 	private IntegerProperty altezza = new SimpleIntegerProperty();
 	private StringProperty nomecasello = new SimpleStringProperty();
-	private Autostrada autostrada =new Autostrada();
+	private Autostrada autostrada;
+	private final ObservableList<Casello> caselli;
+	
+	public Casello() {
+		idcasello=new SimpleIntegerProperty();
+		altezza=new SimpleIntegerProperty();
+		nomecasello=new SimpleStringProperty();
+		autostrada = new Autostrada();
+		caselli=FXCollections.observableArrayList();
+	}
 	
 	
 // Define a getter for the property's value
@@ -51,9 +64,24 @@ public class Casello {
     public IntegerProperty altezzaProperty() {return altezza;}
     public StringProperty nomecaselloProperty() {return nomecasello;}
  	
-	
-	public Autostrada geAutostrada() {
+	public Autostrada getAutostrada() {
 		return this.autostrada;
+	}
+	
+	public void setAutostrada(Autostrada autostrada) {
+		this.autostrada = autostrada;
+	}	
+    
+    public List<Casello> getElencoCaselli() {
+		return this.caselli;
+	}
+	
+	public void setElencoCaselli(List<Casello> caselli) {
+		this.caselli.setAll(caselli);
+	}
+	
+	public ObservableList<Casello> caselliObsList() {
+		return this.caselli;
 	}
 	
 	
