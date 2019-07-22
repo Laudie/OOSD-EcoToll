@@ -2,16 +2,17 @@ package business.model;
 
 public class Veicolo {
 
+
 	private String targa;
-	private String modello;
+	private int idclasse;
+	private int idtipo;
+	private int altezza;
+	private String modello;	
 	private String marca;
 	private int anno;
 	private int assi;
-	// peso in KG, altezza in cm
 	private int peso;
-	private int altezza;
-	private String classeTariffaria;
-	private int classeEU;
+	private String classeEU;
 	
 	public String getTarga() {
 		return targa;
@@ -19,6 +20,30 @@ public class Veicolo {
 
 	public void setTarga(String targa) {
 		this.targa = targa;
+	}
+
+	public int getIdclasse() {
+		return idclasse;
+	}
+
+	public void setIdclasse(int idclasse) {
+		this.idclasse = idclasse;
+	}
+
+	public int getIdtipo() {
+		return idtipo;
+	}
+
+	public void setIdtipo(int idtipo) {
+		this.idtipo = idtipo;
+	}
+
+	public int getAltezza() {
+		return altezza;
+	}
+
+	public void setAltezza(int altezza) {
+		this.altezza = altezza;
 	}
 
 	public String getModello() {
@@ -29,11 +54,11 @@ public class Veicolo {
 		this.modello = modello;
 	}
 
-	public String getMarca() {
+	public String getMara() {
 		return marca;
 	}
 
-	public void setMarca(String marca) {
+	public void setMara(String mara) {
 		this.marca = marca;
 	}
 
@@ -61,32 +86,13 @@ public class Veicolo {
 		this.peso = peso;
 	}
 
-	public int getAltezza() {
-		return altezza;
-	}
-
-	public void setAltezza(int altezza) {
-		this.altezza = altezza;
-	}
-
-	public String getClasseTariffaria() {
-		return classeTariffaria;
-	}
-
-	public void setClasseTariffaria(String classeTariffaria) {
-		this.classeTariffaria = classeTariffaria;
-	}
-
-	public int getClasseEU() {
+	public String getClasseEU() {
 		return classeEU;
 	}
 
-	public void setClasseEU(int classeEU) {
+	public void setClasseEU(String classeEU) {
 		this.classeEU = classeEU;
 	}
-
-	public Veicolo() {
-		// TODO Auto-generated constructor stub
-	}
+	
 
 }

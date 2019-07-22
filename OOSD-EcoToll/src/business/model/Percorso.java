@@ -58,17 +58,6 @@ public class Percorso {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((caselloIn == null) ? 0 : caselloIn.hashCode());
-		result = prime * result + ((caselloOut == null) ? 0 : caselloOut.hashCode());
-		result = prime * result + ((dataoraIn == null) ? 0 : dataoraIn.hashCode());
-		result = prime * result + ((dataoraOut == null) ? 0 : dataoraOut.hashCode());
-		return result;
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -113,12 +102,33 @@ public class Percorso {
 			return 50;			
 }
 
+	public void chekcAutostradaUnica(Casello caselloIn, Casello caselloOut) {
+		
+		if (caselloIn.getAutostrada().getIdautostrada().equals(caselloOut.getAutostrada().getIdautostrada())){
+			int distanza=abs(caselloOut.getAltezza()-caselloIn.getAltezza());
+			double tariffa=caselloOut.getAutostrada().getTariffa();
+			
+		}else {
+			distanza1= Svincolo(caselloIn.getAutostrada(), caselloOut.getAutostrada()).
+			
+			}
+		
+	}
 	
-	public Pedaggio calcolaPedaggio(Veicolo veicolo, Casello caselloIn, Casello caselloOut, NormaVigente norma) {
+	
+	public Pedaggio calcolaPedaggio(Veicolo veicolo, Casello caselloIn, Casello caselloOut , NormaVigente norma) {
 		
 		Pedaggio pedaggio=new Pedaggio();
 		
-		double a=20.0;
+		if (caselloIn.getAutostrada().getIdautostrada().equals(caselloOut.getAutostrada().getIdautostrada())){
+			int distanza=abs(caselloOut.getAltezza()-caselloIn.getAltezza());
+			double tariffa=caselloOut.getAutostrada().getTariffa();			
+		}else {
+			
+			}
+		
+		double a=calcolaDistanza();
+		
 		if (norma.getNorma().equals("IT")) {
 			//calcola tariffa con dati Italiani, senza moltiplicatori
 			

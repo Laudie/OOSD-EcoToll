@@ -3,6 +3,12 @@ package business.model;
 public class NormaVigente {
 	
 
+	public NormaVigente(String norma, int idnorma) {
+		super();
+		this.norma = norma;
+		this.idnorma = idnorma;
+	}
+
 	private String norma;
 	private int idnorma;
 	
@@ -18,14 +24,7 @@ public class NormaVigente {
 	public void setIdnorma(int idnorma) {
 		this.idnorma = idnorma;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + idnorma;
-		result = prime * result + ((norma == null) ? 0 : norma.hashCode());
-		return result;
-	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

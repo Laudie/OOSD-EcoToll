@@ -9,11 +9,12 @@ public class MySQLDAOFactory extends DAOFactory{
 	/** la classe driver */
     public static final String DRIVER = "com.mysql.jdbc.Driver";
     /** L'url al database */
-    public static final String DBURL = "jdbc:mysql://localhost:3306/prime";
+    public static final String DBURL_SSH = "jdbc:mysql://127.0.0.1:3306/EcoToll?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    public static final String DBURL_WWW = "jdbc:mysql://127.0.0.1:3306/EcoToll?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     /** Lo username per le operazioni sul DB  */
-    public static final String USER = "prime";
+    public static final String USER = "objsw";
     /** La password per le operazioni sul DB */
-    public static final String PASS = "prime";
+    public static final String PASS = "$obj!sw$";
     
     /**
      * Metodo per creare una connessione sul DB MySQL
@@ -24,7 +25,7 @@ public class MySQLDAOFactory extends DAOFactory{
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(DBURL, USER, PASS);
+            conn = DriverManager.getConnection(DBURL_SSH, USER, PASS);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

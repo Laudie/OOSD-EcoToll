@@ -10,7 +10,27 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+/*
+ * package propertydemo;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+ 
+class Bill {
+ 
+    // Define a variable to store the property
+    private DoubleProperty amountDue = new SimpleDoubleProperty();
+ 
+    // Define a getter for the property's value
+    public final double getAmountDue(){return amountDue.get();}
+ 
+    // Define a setter for the property's value
+    public final void setAmountDue(double value){amountDue.set(value);}
+ 
+     // Define a getter for the property itself
+    public DoubleProperty amountDueProperty() {return amountDue;}
+ 
+}*/
 public class Autostrada {
 
 	private StringProperty idautostrada =new SimpleStringProperty();	
@@ -66,21 +86,6 @@ public class Autostrada {
 	
 	public ObservableList<Autostrada> autostradaObsList() {
 		return this.autostrade;
-	}
-	
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((a == null) ? 0 : a.hashCode());
-		result = prime * result + ((autostrade == null) ? 0 : autostrade.hashCode());
-		result = prime * result + ((da == null) ? 0 : da.hashCode());
-		result = prime * result + ((idautostrada == null) ? 0 : idautostrada.hashCode());
-		result = prime * result + ((lunghezza == null) ? 0 : lunghezza.hashCode());
-		result = prime * result + ((nomeautostrada == null) ? 0 : nomeautostrada.hashCode());
-		result = prime * result + ((tariffa == null) ? 0 : tariffa.hashCode());
-		return result;
 	}
 
 	@Override

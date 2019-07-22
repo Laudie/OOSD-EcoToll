@@ -16,6 +16,9 @@ public interface EcoTollDAO {
 	/** Recupera un oggetto Casello esistente a partire dall'id. */
 	public Casello getCasello(int id);
 	
+	/** Recupera un oggetto Casello esistente a partire dall'id. */
+	public Casello getCasello(String id);
+	
 	/** Crea un oggetto Casello */
 	public void createCasello(String codAutostrada, String nomeCasello, int Altezza);
 		
@@ -25,16 +28,19 @@ public interface EcoTollDAO {
 	/** Recupera un oggetto Autostrada esistente a partire dall'id. */	
 	public Autostrada getAutostrada(String codAutostrada);
 	
+	/** Recupera idutostrada Autostrada . */	
+	public String getIdAutostrada(String codAutostrada);
+	
 	/** Recupera un oggetto Svincolo esistente */
-	public Svincolo getSvincoloIn(String autostradaIn, String autostradaOut);
+	public Svincolo getSvincolo(String autostradaIn, String autostradaOut);
+	
+	/** Recupera aletzza dello Svincolo tra autoIn e autoout */
+	public int getAltezzaSvincolo(String autostradaIn, String autostradaOut);
 	
 	/** Recupera un oggetto veicolo dalla targa */
 	public Veicolo getVeicolo(String veicolo);
 	
 	/** Salva su DB il pedaggio */
 	public void SetPedaggio (String caselloIn, String caselloOut, String targa);
-	
-	
-	
 	
 }
