@@ -6,27 +6,30 @@ import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
 
 import business.model.Autostrada;
 import business.model.Casello;
+import business.model.Login;
 import business.model.Svincolo;
 import business.model.Veicolo;
 
-import ecotoll.dao.*;
 
 public class MySQLEcoTollDAOImpl implements EcoTollDAO {
 
 	//QUERY
-	private static final String DATE_FORMATTER = "yyyy-MM-dd HH:mm:ss";
+	//private static final String DATE_FORMATTER = "yyyy-MM-dd HH:mm:ss";
 	private static final String DATI_VEICOLO = "select * from veicolo where targa=?;";
 	private static final String DATI_SVINCOLO = "select km from svincolo where autostradaIn=? and autostradaOut=?;";
 	private static final String DATI_CASELLO_ID = "select * from casello where idcasello=?;";
 	private static final String DATI_CASELLO_NOME = "select * from casello where casello=?;";
 	private static final String DATI_AUTOSTRADA= "select * from autostrada where idautostrada=?;";
+	private static final String DATI_LOGIN= "select * from utente where username=? and password=?;";
 	
-	private static final String PASSAGGIO_VEICOLO = "insert into EcoToll.storico (targa, da, a, dataoraIn, dataoraOut, pedaggio) value (?,?,?,?,?,?);";
+	private static final String INSERT_CASELLO="insert into EcoToll.casello (casello, altezza, idautostrada) value (?,?,?);";
+	
+	private static final String DELETE_CASELLO="delete from EcoToll.casello where casello=?);";
+//	private static final String PASSAGGIO_VEICOLO = "insert into EcoToll.storico (targa, da, a, dataoraIn, dataoraOut, pedaggio) value (?,?,?,?,?,?);";
 	
 	//private static final String DATI_CASELLO_TARIFFA_ID = "select * from tariffa where idcasello=?;";
 	//private static final String DATI_CASELLO_TARIFFA_NOME = "select * from tariffa where casello=?;";
@@ -132,9 +135,24 @@ public class MySQLEcoTollDAOImpl implements EcoTollDAO {
 	}
 
 	@Override
-	public boolean deleteCasello(int idcasello) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteCasello(String nomecasello) {
+		Connection conn=null;
+		PreparedStatement pst=null;
+				
+		conn = MySQLDAOFactory.createConnection();
+		try {
+		pst = conn.prepareStatement(DELETE_CASELLO);
+		pst.setString(1, nomecasello);
+		int i = pst.executeUpdate();
+		if (i==1) return true;
+		else return false;
+		}catch (SQLException e)	{
+			e.printStackTrace();
+			return false;
+		}finally {
+			 if (pst != null) try { pst.close(); } catch (SQLException ignore) {}
+			 if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+		}
 	}
 
 	@Override
@@ -252,10 +270,85 @@ public class MySQLEcoTollDAOImpl implements EcoTollDAO {
 	}
 
 	@Override
+	public Login getUserPwd(String user, String pwd) {
+		Login login= new Login();
+			
+		Connection conn=null;
+		PreparedStatement pst=null;
+		ResultSet rst=null;		
+		conn = MySQLDAOFactory.createConnection();
+		try {
+			pst=conn.prepareStatement(DATI_LOGIN);
+			pst.setString(1, user);
+			pst.setString(1, pwd);
+			rst=pst.executeQuery();
+			while (rst.next()){
+				login.setPassword(rst.getString("password"));
+				login.setUsername(rst.getString("username"));
+				login.setRuolo(rst.getInt("ruolo"));					
+			}
+		}catch (SQLException e)	{
+				e.printStackTrace();
+		}finally {
+			 if (rst != null) try { rst.close(); } catch (SQLException ignore) {}
+			 if (pst != null) try { pst.close(); } catch (SQLException ignore) {}
+			 if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+				}
+		return login;
+	}
+
+	public boolean isLogin(String user, String pwd) {
+		Connection conn=null;
+		PreparedStatement pst=null;
+		ResultSet rst=null;		
+		conn = MySQLDAOFactory.createConnection();
+		try {
+			pst=conn.prepareStatement(DATI_LOGIN);
+			pst.setString(1, user);
+			pst.setString(2, pwd);
+			rst=pst.executeQuery();
+			
+			if (rst.next()) return true;
+		}catch (SQLException e)	{
+			e.printStackTrace();
+	}finally {
+		 if (rst != null) try { rst.close(); } catch (SQLException ignore) {}
+		 if (pst != null) try { pst.close(); } catch (SQLException ignore) {}
+		 if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+			}
+	return false;
+	}
+	
+	@Override
 	public void SetPedaggio(String caselloIn, String caselloOut, String targa) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean addCasello(Casello casello) {
+		Connection conn=null;
+		PreparedStatement pst=null;
+		conn = MySQLDAOFactory.createConnection();
+		
+		try {
+			pst = conn.prepareStatement(INSERT_CASELLO);
+			pst.setString(1, casello.getNomecasello());
+			pst.setInt(2, casello.getAltezza());
+			pst.setString(3, casello.getAutostrada().getIdautostrada());			
+			int i = pst.executeUpdate();
+			if (i==1) {return true;}
+			else return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			 if (pst != null) try { pst.close(); } catch (SQLException ignore) {}
+			 if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+				}
+		
+	}
+
 
 	
 

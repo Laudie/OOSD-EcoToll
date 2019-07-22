@@ -1,4 +1,4 @@
-package application.controller;
+package application.front.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import application.model.AppModel;
+import business.manager.CaselloManager;
+import business.model.Casello;
 import javafx.event.ActionEvent;
 
 public class CaselloController {
@@ -25,19 +27,25 @@ public class CaselloController {
 	@FXML
 	private TextField txtNomeCasello;
 
-	public AppModel aggiungiCaselloModel = new AppModel();
-	
+	//public AppModel aggiungiCaselloModel = new AppModel();
+	public CaselloManager aggiungiCaselloModel = new CaselloManager();
 	// Event Listener on Button.onAction
 	@FXML
 	public void aggiungiCasello(ActionEvent event) throws SQLException {
 		
-		boolean esiste=aggiungiCaselloModel.caselloPresente(txtNomeCasello.getText());
-		
+		//boolean esiste=aggiungiCaselloModel.caselloPresente(txtNomeCasello.getText());
+		boolean esiste=false;;
 		if  (esiste) {
 			
 			 JOptionPane.showMessageDialog(null, "Impossibile aggiungere casello! Casello già presente");			
 		}else{
-			boolean aggiungi=aggiungiCaselloModel.aggiungiCas(txtCodiceCasello.getText(), txtNomeCasello.getText(),  txtAltezza.getText(), txtCodAutostrada.getText());
+			Casello c= new Casello();
+			//(txtCodiceCasello.getText(), txtNomeCasello.getText(),  txtAltezza.getText(), txtCodAutostrada.getText());
+			c.setNomecasello(txtNomeCasello.getText());
+			c.setAltezza(Integer.parseInt(txtAltezza.getText()));
+			//c.setAutostrada(txtCodAutostrada.getText());
+			
+			boolean aggiungi=aggiungiCaselloModel.aggiungi(c);
 			
 			if (aggiungi)
 				

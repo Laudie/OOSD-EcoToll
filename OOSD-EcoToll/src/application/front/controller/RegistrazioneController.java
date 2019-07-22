@@ -1,4 +1,4 @@
-package application.controller;
+package application.front.controller;
 
 import java.net.URL;
 import java.sql.SQLException;

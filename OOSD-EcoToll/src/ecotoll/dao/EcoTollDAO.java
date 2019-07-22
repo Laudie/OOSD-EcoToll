@@ -21,9 +21,12 @@ public interface EcoTollDAO {
 	
 	/** Crea un oggetto Casello */
 	public void createCasello(String codAutostrada, String nomeCasello, int Altezza);
+	
+	/** Crea un oggetto Casello */
+	public boolean addCasello(Casello casello);
 		
 	/** Cancella un casello esistente. */
-	public boolean deleteCasello(int idcasello);
+	public boolean deleteCasello(String nome);
 	
 	/** Recupera un oggetto Autostrada esistente a partire dall'id. */	
 	public Autostrada getAutostrada(String codAutostrada);
@@ -40,6 +43,9 @@ public interface EcoTollDAO {
 	/** Recupera un oggetto veicolo dalla targa */
 	public Veicolo getVeicolo(String veicolo);
 	
+	public Login getUserPwd(String user, String pwd);
+	public boolean isLogin(String user, String pwd);
+		
 	/** Salva su DB il pedaggio */
 	public void SetPedaggio (String caselloIn, String caselloOut, String targa);
 	

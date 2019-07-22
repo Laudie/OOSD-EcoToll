@@ -109,7 +109,7 @@ public class Percorso {
 			double tariffa=caselloOut.getAutostrada().getTariffa();
 			
 		}else {
-			distanza1= Svincolo(caselloIn.getAutostrada(), caselloOut.getAutostrada()).
+					//distanza1= Svincolo(caselloIn.getAutostrada(), caselloOut.getAutostrada()).
 			
 			}
 		
@@ -119,12 +119,35 @@ public class Percorso {
 	public Pedaggio calcolaPedaggio(Veicolo veicolo, Casello caselloIn, Casello caselloOut , NormaVigente norma) {
 		
 		Pedaggio pedaggio=new Pedaggio();
+		double classePercento=0, costo=0.0;
 		
 		if (caselloIn.getAutostrada().getIdautostrada().equals(caselloOut.getAutostrada().getIdautostrada())){
 			int distanza=abs(caselloOut.getAltezza()-caselloIn.getAltezza());
-			double tariffa=caselloOut.getAutostrada().getTariffa();			
+			double tariffa=caselloOut.getAutostrada().getTariffa();
+			int classe=veicolo.getIdclasse();
+			switch (classe) {
+			case 1:
+				classePercento=1;
+				break;
+			case 2:
+				classePercento=1.04;
+				break;
+			case 3:
+				classePercento=1.1;
+				break;
+			case 4:
+				classePercento=1.5;
+				break;
+			case 5:
+				classePercento=2.0;
+				break;			
+			default:
+				classePercento=1.0;
+		}
+			costo=distanza*tariffa*classePercento;
 		}else {
-			
+			//SVINCOLO	SE CI RIUSCIAMO
+			//ALLARME
 			}
 		
 		double a=calcolaDistanza();
@@ -132,16 +155,16 @@ public class Percorso {
 		if (norma.getNorma().equals("IT")) {
 			//calcola tariffa con dati Italiani, senza moltiplicatori
 			
-			double tariffa= Math.round(a*100)/100f;
+			costo= Math.round(a*100)/100;
 			
-			pedaggio.setPedaggio(tariffa);
+			pedaggio.setPedaggio(costo);
 			pedaggio.setCaselloIn(caselloIn);
 			pedaggio.setCaselloOut(caselloOut);
 			pedaggio.setVeicolo(veicolo);
 		}else {
 			//calcola tariffa con dati europei, con i moltiplicatori
-			double tariffa= Math.round(a*50)/100f;
-			pedaggio.setPedaggio(tariffa);
+			costo= Math.round(a*50)/100f;
+			pedaggio.setPedaggio(costo);
 			pedaggio.setCaselloIn(caselloIn);
 			pedaggio.setCaselloOut(caselloOut);
 			pedaggio.setVeicolo(veicolo);

@@ -1,4 +1,4 @@
-package application.controller;
+package application.front.controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
-import application.front.controller.PercorsoController;
 import application.model.AppModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;

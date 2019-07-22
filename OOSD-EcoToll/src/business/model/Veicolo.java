@@ -58,7 +58,7 @@ public class Veicolo {
 		return marca;
 	}
 
-	public void setMara(String mara) {
+	public void setMara(String marca) {
 		this.marca = marca;
 	}
 

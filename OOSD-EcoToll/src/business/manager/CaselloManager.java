@@ -9,57 +9,30 @@ public class CaselloManager {
 	private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);//0 è MYSQL, 1 ORACLE
 	
 	
-	private CaselloManager() {}
+	public CaselloManager() {}
 	
 	public static CaselloManager getInstance() {
 		return new CaselloManager();
 	}
 	
-	
-	
-	// Cerca un casello nel db e lo ritorna
-	
+	// Cerca un casello nel db e lo ritorna	
 	public Casello get(int id) {
 		return DaoFactory.getEcoTollDAO().getCasello(id);
 	}
-	
-	
-	
-	// Data un'Autostrada ritorna tutti i caselli nel db
-	
+		
+	// Data un'Autostrada ritorna tutti i caselli nel db	
 	public List<Casello> getAll() {
 		return DaoFactory.getEcoTollDAO().getAllCasello();
 	}
-	
-	
-	
-	
-	// Dato un casello lo rimuove dal DB
-
-	
-		public boolean delete(int idcasello) {
-			return DaoFactory.getEcoTollDAO().deleteCasello(idcasello);
+		
+	// Dato un casello lo rimuove dal DB	
+		public boolean delete(String nome) {
+			return DaoFactory.getEcoTollDAO().deleteCasello(nome);
 		}
-	
-	
-	/*Dato un casello lo salva nel DB
-
-	
-	public void store(Casello c) {
-	return DaoFactory.getEcoTollDAO().AddCasello(c);
+		
+	/*Dato un casello lo salva nel DB*/
+	public boolean aggiungi(Casello c) {
+		return DaoFactory.getEcoTollDAO().addCasello(c);
 	}
 	
-	*/
-	
-
-	/*Dato un casello lo modifica nel DB
-
-	
-	public void modify(String nome, Casello c){
-	return DaoFactory.getEcoTollDAO().ModifyCasello(nome , c);
-	}
-	
-	*/
-	
-
 }

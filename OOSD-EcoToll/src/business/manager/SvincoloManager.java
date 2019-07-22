@@ -15,9 +15,9 @@ public class SvincoloManager {
 	public static SvincoloManager getInstance() {
 		return new SvincoloManager();
 	}
-	
+	/*
 	public Svincolo getSvincolo(Autostrada autostradaIn,Autostrada autostradaOut) {
 		return DaoFactory.getEcoTollDAO().getSvincoloIn(autostradaIn.getNomeautostrada(),autostradaOut.getNomeautostrada());
-	}
+	}*/
 
 }
