@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import application.model.PercorsoModel;
+import application.modelold.PercorsoModel;
 
 
-public class LetturaTargaController implements Initializable, Pedaggio {	
+public class LetturaTargaController implements Initializable {	
 	
 	@FXML ComboBox<String> comboDa;
 	@FXML ComboBox<String> comboA;
@@ -39,8 +39,7 @@ public class LetturaTargaController implements Initializable, Pedaggio {
 	//Calcolare il pedaggio sia IT che EU
 	
 
-@Override
-	public void calcolaPedaggio() {
+public void calcolaPedaggio() {
 	
 		LocalDateTime dataIn =  LocalDateTime.now();
 		System.out.println("Current Time " + dataIn);

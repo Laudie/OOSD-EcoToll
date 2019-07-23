@@ -7,15 +7,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="385.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.AmministratoreController">
+<AnchorPane prefHeight="385.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.AmministratoreController">
    <children>
       <Button cancelButton="true" layoutX="609.0" layoutY="15.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="74.0" text="LogOut" textFill="#d01414">
          <font>
             <Font size="15.0" />
          </font></Button>
       <ComboBox id="comboCasello" fx:id="comboCasello" layoutX="72.0" layoutY="103.0" onShowing="#fillComboCasello" prefHeight="26.0" prefWidth="199.0" promptText="Scegli il casello da eliminare" />
-      <Button id="Elimina" layoutX="337.0" layoutY="103.0" mnemonicParsing="false" onAction="#eliminaCasello" text="Elimina" />
-      <Button id="Aggiungi" layoutX="72.0" layoutY="218.0" mnemonicParsing="false" onAction="#aggiungiCasello" prefHeight="25.0" prefWidth="199.0" text="Aggiungi un casello" />
+      <Button id="Elimina" layoutX="287.0" layoutY="104.0" mnemonicParsing="false" onAction="#eliminaCasello" text="Elimina" />
+      <Button id="Aggiungi" layoutX="260.0" layoutY="218.0" mnemonicParsing="false" onAction="#aggiungiCasello" prefHeight="25.0" prefWidth="199.0" text="Aggiungi un casello">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
       <Label fx:id="lblsuccesso" layoutX="70.0" layoutY="142.0" prefHeight="26.0" prefWidth="228.0" textFill="#0facea" />
       <Button alignment="CENTER" layoutX="567.0" layoutY="309.0" mnemonicParsing="false" onAction="#percorso" prefHeight="38.0" prefWidth="133.0" text="Calcola Pedaggio" textFill="#0d782d">
          <font>
@@ -33,5 +36,11 @@
                </font></Label>
          </children>
       </HBox>
+      <ComboBox fx:id="comboNormativa" layoutX="476.0" layoutY="104.0" prefWidth="150.0" promptText="Norrmativa" />
+      <Label layoutX="476.0" layoutY="68.0" prefHeight="25.0" prefWidth="150.0" text="Normatva attuale" textFill="#1019b9">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

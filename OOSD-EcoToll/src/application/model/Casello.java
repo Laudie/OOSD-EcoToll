@@ -1,8 +1,8 @@
-package business.model;
+package application.model;
 
 import java.util.List;
 
-import business.model.Autostrada;
+import application.model.Autostrada;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;

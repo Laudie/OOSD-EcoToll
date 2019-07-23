@@ -1,7 +1,7 @@
-package business.manager;
+package application.controller;
 
-import business.model.Autostrada;
-import business.model.Svincolo;
+import application.model.Autostrada;
+import application.model.Svincolo;
 import ecotoll.dao.DAOFactory;
 
 

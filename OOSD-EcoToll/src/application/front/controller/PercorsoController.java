@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import application.model.PercorsoModel;
+import application.modelold.PercorsoModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +25,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.control.ToggleGroup;
 
-public class PercorsoController implements Initializable, Pedaggio{
+public class PercorsoController implements Initializable{
 	
 	@FXML private Label lblUser;
 	@FXML private Label lblComboDa;
@@ -147,7 +147,6 @@ public class PercorsoController implements Initializable, Pedaggio{
 	}
 	
 
-	@Override
 	public void calcolaPedaggio() {
 		String classeV=this.lblClasseV.getText();
 		String caselloDA=this.getLblComboDa().getText();

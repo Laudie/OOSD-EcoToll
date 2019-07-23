@@ -1,4 +1,4 @@
-package business.model;
+package application.model;
 
 public class NormaVigente {
 	

@@ -1,8 +1,8 @@
-package application.model;
+package application.modelold;
 
 import java.sql.*;
 
-import application.model.mysqlConnection;
+import application.modelold.mysqlConnection;
 public class AppModel {
 	
 	

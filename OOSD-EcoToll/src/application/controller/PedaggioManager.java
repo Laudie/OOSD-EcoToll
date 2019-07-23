@@ -1,7 +1,6 @@
-package business.manager;
+package application.controller;
 
-import business.model.Pedaggio;
-
+import application.model.Pedaggio;
 import ecotoll.dao.DAOFactory;
 
 public class PedaggioManager {

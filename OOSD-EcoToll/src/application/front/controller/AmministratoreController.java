@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
-import application.model.AppModel;
+import application.modelold.AppModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

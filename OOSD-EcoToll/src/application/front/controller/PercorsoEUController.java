@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import application.model.PercorsoModel;
+import application.modelold.PercorsoModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

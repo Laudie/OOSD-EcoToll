@@ -1,4 +1,4 @@
-package application.model;
+package application.modelold;
 import java.sql.*;
 public class mysqlConnection {
 	

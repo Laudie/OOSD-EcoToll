@@ -23,15 +23,9 @@ public class MySQLDAOFactory extends DAOFactory{
      */
     public static Connection createConnection() {
        	Connection conn = null;
-        try {/*
+        try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(DBURL_WWW, USER, PASS);
-            */
-        	Class.forName("com.mysql.cj.jdbc.Driver");			
-			conn=DriverManager.getConnection("jdbc:mysql://51.75.200.121:3306/EcoToll"
-					+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&"
-					+ "serverTimezone=UTC","objsw","$obj!sw$");
-        	
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -40,7 +34,33 @@ public class MySQLDAOFactory extends DAOFactory{
         return conn;
     }
     
-	public EcoTollDAO getEcoTollDAO() {
-		return new MySQLEcoTollDAOImpl();
+	public DAOAutostrada getDAOAutostrada() {
+		return new MySqlAutostrada();
 	}
+	
+	public DAOCasello getDAOCasello() {
+		return new MySqlCasello();
+	}
+	
+	public DAOLogin getDAOLogin() {
+		return new MySqlLogin();
+	}
+	
+	public DAOPedaggio getDaoPedaggio() {
+		return new MySqlPedaggio();
+	}
+	
+	public DAOSvincolo getDAOSvincolo() {
+		return new MySqlSvincolo();
+	}
+	
+	public DAOVeicolo getDAOVeicolo() {
+		return new MySqlVeicolo();
+	}
+
+	@Override
+	public DAOPedaggio getDAOPedaggio() {
+		// TODO Auto-generated method stub
+		return null;
+	}	
 }

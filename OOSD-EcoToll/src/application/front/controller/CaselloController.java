@@ -12,9 +12,9 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-import application.model.AppModel;
-import business.manager.CaselloManager;
-import business.model.Casello;
+import application.controller.CaselloManager;
+import application.model.Casello;
+import application.modelold.AppModel;
 import javafx.event.ActionEvent;
 
 public class CaselloController {

@@ -5,4 +5,4 @@
  * @author marco
  *
  */
-package business.model;
+package application.model;

@@ -7,9 +7,14 @@ public abstract class DAOFactory {
     /** Membro statico per la factory Oracle */
     public static final int ORACLE = 1;
  
-    /** Metodo statico per EcoTollDAO */
-    public abstract EcoTollDAO getEcoTollDAO();
- 
+    /** Metodi statici per EcoToll DAO */
+    public abstract DAOAutostrada getDAOAutostrada();
+    public abstract DAOCasello getDAOCasello();
+    public abstract DAOLogin getDAOLogin();
+    public abstract DAOPedaggio getDAOPedaggio();
+    public abstract DAOSvincolo getDAOSvincolo();
+    public abstract DAOVeicolo getDAOVeicolo();
+   
  
     /**
      * Metodo Factory

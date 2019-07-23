@@ -1,4 +1,4 @@
-package business.model;
+package application.model;
 
 import java.time.LocalDateTime;
 
@@ -102,17 +102,17 @@ public class Percorso {
 			return 50;			
 }
 
-	public void chekcAutostradaUnica(Casello caselloIn, Casello caselloOut) {
-		
+	public int chekcAutostradaUnica(Casello caselloIn, Casello caselloOut) {
+		int a=0;
 		if (caselloIn.getAutostrada().getIdautostrada().equals(caselloOut.getAutostrada().getIdautostrada())){
 			int distanza=abs(caselloOut.getAltezza()-caselloIn.getAltezza());
 			double tariffa=caselloOut.getAutostrada().getTariffa();
-			
+			a=distanza*(int)tariffa;
 		}else {
 					//distanza1= Svincolo(caselloIn.getAutostrada(), caselloOut.getAutostrada()).
 			
 			}
-		
+		return a;
 	}
 	
 	

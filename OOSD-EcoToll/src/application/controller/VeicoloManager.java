@@ -1,13 +1,12 @@
-package business.manager;
+package application.controller;
 
-import business.model.Veicolo;
+import application.model.Veicolo;
 import ecotoll.dao.DAOFactory;
 
 
 public class VeicoloManager {
 	
 	private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);//0 è MYSQL, 1 ORACLE
-	
 	
 	private  VeicoloManager() {}
 	
@@ -16,7 +15,7 @@ public class VeicoloManager {
 	}
 	
 	public Veicolo getVeicolo(String Targa) {
-		return DaoFactory.getEcoTollDAO().getVeicolo(Targa);
+		return DaoFactory.getDAOVeicolo().getVeicolo(Targa);
 	}
 
 }

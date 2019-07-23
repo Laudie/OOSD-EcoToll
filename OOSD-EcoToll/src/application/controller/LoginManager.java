@@ -1,6 +1,6 @@
-package business.manager;
+package application.controller;
 
-import business.model.Login;
+import application.model.Login;
 import ecotoll.dao.DAOFactory;
 
 public class LoginManager {
@@ -16,12 +16,16 @@ private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);
 	
 	// Cerca user e pwd 	
 	public Login get(String user, String pwd) {
-		return DaoFactory.getEcoTollDAO().getUserPwd(user, pwd);
+		return DaoFactory.getDAOLogin().getUserPwd(user, pwd);
 	}
 	
 	public boolean isLogin(String user1, String pwd1) {
-		if (DaoFactory.getEcoTollDAO().isLogin(user1, pwd1)) return true;
+		if (DaoFactory.getDAOLogin().isLogin(user1, pwd1)) return true;
+		else return false;		
+	}
+	
+	public boolean addLogin(Login login) {
+		if (DaoFactory.getDAOLogin().addUser(login)) return true;
 		else return false;
-		
 	}
 }

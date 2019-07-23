@@ -1,6 +1,6 @@
-package business.manager;
+package application.controller;
 
-import business.model.Autostrada;
+import application.model.Autostrada;
 import ecotoll.dao.DAOFactory;
 
 
@@ -16,7 +16,7 @@ public class AutostradaManager {
 	}
 	
 	public Autostrada getAutostrada(String CodAutostrada) {
-		return DaoFactory.getEcoTollDAO().getAutostrada(CodAutostrada);
+		return DaoFactory.getDAOAutostrada().getAutostrada(CodAutostrada);
 	}
 	
 	/*Salva l'autostrada nel DB
