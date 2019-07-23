@@ -11,7 +11,9 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import application.controller.CaselloManager;
 import application.controller.NormativaManager;
+import application.model.Casello;
 import application.modelold.AppModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,29 +30,32 @@ import javafx.stage.Stage;
 
 public class AmministratoreController implements Initializable {
 
-	@FXML private ComboBox<String> comboCasello;
+	@FXML private ComboBox<Casello> comboCasello;
 	@FXML private Label lblUser;
 	@FXML private Label lblsuccesso;
 	@FXML private Label lblNormativa;
 	@FXML private ComboBox<String> comboNormativa;
 	
-	
-	public AppModel caselloModel = new AppModel();
-	public NormativaManager normativaManager= new NormativaManager();
-	ObservableList<String> normative = FXCollections.observableArrayList("Italiana", "Europea");
-	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		try {
-			comboCasello.setItems(FXCollections.observableArrayList(fillComboCasello()));
-		} catch (SQLException e) {			
-			e.printStackTrace();
-		}
-		//prenderà la normativa sul db e la inserisce nella label
-		lblNormativa.setText("Italiana");
-		comboNormativa.setItems(normative);
+	private ObservableList<Casello> elencoCaselli = FXCollections.observableArrayList();
+	private ObservableList<String> normative = FXCollections.observableArrayList("Italiana", "Europea");
 
+	private Casello casellodaeliminare;
+	
+
+	public AmministratoreController() {
+		elencoCaselli.setAll(CaselloManager.getInstance().getAllCas());
 	}
+
+	@Override
+
+	public void initialize(URL location, ResourceBundle resources) {	
+		comboCasello.setItems(this.elencoCaselli);		
+		//prenderà la normativa sul db e la inserisce nella label
+		String normativa=NormativaManager.getInstance().getNormativa();
+		lblNormativa.setText(normativa);
+		comboNormativa.setItems(normative);
+	}
+
 
 	public void aggiungiCasello(ActionEvent event) {
 		try {
@@ -65,43 +70,16 @@ public class AmministratoreController implements Initializable {
 			}
 	}
 	
-	public void eliminaCasello(ActionEvent event) throws SQLException {		
-		String casello=comboCasello.getValue();
-		if(caselloModel.eliminaCasello(casello)) {
+	public void eliminaCasello(ActionEvent event) {
+		casellodaeliminare=comboCasello.getValue();
+		if (CaselloManager.getInstance().delete(casellodaeliminare)) {
 			lblsuccesso.setText("Casello eliminato con successo");
-			try {
-				comboCasello.setItems(FXCollections.observableArrayList(fillComboCasello()));
-			} catch (SQLException e) {			
-				e.printStackTrace();
-			}
-			 JOptionPane.showMessageDialog(null, "Casello eliminato con successo");			 
-		} else {
-		lblsuccesso.setText("Impossibile eliminare il casello");
-		 JOptionPane.showMessageDialog(null, "Impossibile eliminare il casello");			
+			elencoCaselli.setAll(CaselloManager.getInstance().getAllCas());
+		}else {
+			lblsuccesso.setText("Impossibile eliminare il casello");
 		}
 	}
-	
-	
-	public List<String> fillComboCasello() throws SQLException {		
-		PreparedStatement pst =null;
-		ResultSet rst =null;		
-		String qry="select casello from EcoToll.casello;";		
-		List<String> lista = new ArrayList<String>();
-		try {
-			pst =AppModel.connessione.prepareStatement(qry);
-			rst = pst.executeQuery();
-			while (rst.next()) {
-				lista.add(rst.getString("casello"));						
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			pst.close();
-			rst.close();
-		}
-		return lista;		
-	}
+
 	
 	public void getUserdata (String user) {	
 		lblUser.setText(user);
@@ -127,8 +105,8 @@ public class AmministratoreController implements Initializable {
 	FXMLLoader loader = new FXMLLoader();
 	Pane root=loader.load(getClass().getResource("/application/front/fxml/Percorso.fxml").openStream());
 //Dichiaro la classe PercorsoController e la istanzio facendo cast con loader per passare l'utente registrato
-	PercorsoController percorsoCtrl = (PercorsoController)loader.getController();
-	percorsoCtrl.getUserdata(lblUser.getText());
+	/*PercorsoController percorsoCtrl = (PercorsoController)loader.getController();
+	percorsoCtrl.getUserdata(lblUser.getText());*/
 	Scene scene = new Scene(root);
 	//scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 	primaryStage.setScene(scene);
@@ -138,9 +116,9 @@ public class AmministratoreController implements Initializable {
 	public void aggiornaNormativa(ActionEvent evt) {
 		//CAMBIA NORMATIVA
 		String normativa=comboNormativa.getValue();
-		if(normativa.equals(normativaManager.getNormativa())) {			 
+		if(normativa.equals(NormativaManager.getInstance().getNormativa())) {			 
 		} else {
-			normativaManager.setNormativa(normativa);
+			NormativaManager.getInstance().setNormativa(normativa);
 		lblNormativa.setText(normativa);
 		 JOptionPane.showMessageDialog(null, "Normativa Aggiornata");			
 		}

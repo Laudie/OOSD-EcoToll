@@ -16,7 +16,7 @@ public class MySqlCasello implements DAOCasello {
 	private static final String ELENCO_CASELLO= "select * from  EcoToll.casello;";
 	
 	private static final String INSERT_CASELLO="insert into EcoToll.casello (casello, altezza, idautostrada) value (?,?,?);";	
-	private static final String DELETE_CASELLO="delete from EcoToll.casello where casello=?);";
+	private static final String DELETE_CASELLO="delete from EcoToll.casello where casello=?;";
 	
 	
 	
@@ -118,6 +118,27 @@ public class MySqlCasello implements DAOCasello {
 		try {
 		pst = conn.prepareStatement(DELETE_CASELLO);
 		pst.setString(1, nome);
+		int i = pst.executeUpdate();
+		if (i==1) return true;
+		else return false;
+		}catch (SQLException e)	{
+			e.printStackTrace();
+			return false;
+		}finally {
+			 if (pst != null) try { pst.close(); } catch (SQLException ignore) {}
+			 if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+		}
+	}
+
+	@Override
+	public boolean deleteCasello(Casello casello) {
+		Connection conn=null;
+		PreparedStatement pst=null;
+				
+		conn = MySQLDAOFactory.createConnection();
+		try {
+		pst = conn.prepareStatement(DELETE_CASELLO);
+		pst.setString(1, casello.getNomecasello());
 		int i = pst.executeUpdate();
 		if (i==1) return true;
 		else return false;

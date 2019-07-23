@@ -8,10 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import application.controller.CaselloManager;
 import application.controller.PercorsoManager;
+import application.model.Casello;
 import application.model.Veicolo;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,17 +35,10 @@ public class PercorsoController implements Initializable{
 	@FXML private Label lblUser;
 	@FXML private Label lblComboDa;
 	@FXML private Label lblComboA;
-	@FXML private Label lblClasseV;
 
-	@FXML private ComboBox<String> comboDa;
-	@FXML private ComboBox<String> comboA;
-	@FXML private ComboBox<String> comboTipoV;
+	@FXML private ComboBox<Casello> comboDa;
+	@FXML private ComboBox<Casello> comboA;
 	
-	@FXML private RadioButton rbv1;
-	@FXML private RadioButton rbv2;
-	@FXML private RadioButton rbv3;
-	@FXML private RadioButton rbv4;
-	@FXML private RadioButton rbv5;
 
 	@FXML private TextField txtPedaggio;
 	@FXML private TextField txtTarga;
@@ -55,13 +51,21 @@ public class PercorsoController implements Initializable{
 	private PercorsoManager prcmgr = new PercorsoManager();
 	private Veicolo veicolo  = new Veicolo();
 	
-	
+	private ObservableList<Casello> elencoCaselli = FXCollections.observableArrayList();
 			
+	
+	public PercorsoController() {
+		elencoCaselli.setAll(CaselloManager.getInstance().getAllCas());
+	}
 	
 	
 //metodo per inizializzare i componenti
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		comboDa.setItems(this.elencoCaselli);	
+		comboA.setItems(this.elencoCaselli);	
+		
 		/*
 		try {
 			comboDa.setItems(FXCollections.observableArrayList(fillComboCasello()));
@@ -75,7 +79,7 @@ public class PercorsoController implements Initializable{
 	
 
 	public void getUserdata (String user) {	
-	lblUser.setText(user);
+	//lblUser.setText(user);
 	}
 
 	public void logOut (ActionEvent evt){
@@ -91,22 +95,6 @@ public class PercorsoController implements Initializable{
 		}
 	}
 	
-	public void pedaggioEU (ActionEvent evt){		
-		try {
-			System.out.println("Pedaggio EU fxml");
-			((Node)evt.getSource()).getScene().getWindow().hide(); 
-			Stage primaryStage = new Stage();
-			FXMLLoader loader = new FXMLLoader();
-			Pane root=loader.load(getClass().getResource("/application/front/fxml/PercorsoEU.fxml").openStream());
-			//Dichiaro la classe PercorsoController e la istanzio facendo cast con loader per passare l'utente registrato
-			PercorsoEUController percorsoEUCtrl = (PercorsoEUController)loader.getController();
-			percorsoEUCtrl.getUserdata(lblUser.getText());
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();			
-		}catch(Exception e){};		
-	}
 
 	public List<String> fillComboCasello() throws SQLException {		
 		return null;		
@@ -114,26 +102,25 @@ public class PercorsoController implements Initializable{
 	
 	public void getCombodataDa(ActionEvent event) {
 		System.out.println(comboDa.getValue());
-		String da=comboDa.getValue();		
-		getLblComboDa().setText(da);
+		Casello da=comboDa.getValue();		
+		getLblComboDa().setText(da.toString());
 	}
 	
 	public void getCombodataA(ActionEvent event) {
 		System.out.println(comboA.getValue());
-		String a=comboA.getValue();		
-		getLblComboA().setText(a);
+		Casello a=comboA.getValue();		
+		getLblComboA().setText(a.toString());
 	}
 
 	public void calcolaPedaggio() {
-		String classeV=this.lblClasseV.getText();
 		String caselloDA=this.getLblComboDa().getText();
 		String caselloA=this.getLblComboA().getText();
 		
 
 		
-		if (classeV.isEmpty()||caselloDA.isEmpty()||caselloA.isEmpty()){
+		//if (classeV.isEmpty()||caselloDA.isEmpty()||caselloA.isEmpty()){
 //			PercorsoModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Errore di compilazione", "WARNING");
-		}else{
+		//}else{
 			
 /*Verifica la normantiva scelta
 			
@@ -152,16 +139,9 @@ public class PercorsoController implements Initializable{
 				calcola pedaggio2
 				return pedaggio=ped1+ped2				
 		*/
-		}	
-	}
-	
-	public Label getLblClasseV() {
-		return lblClasseV;
+		//}	
 	}
 
-	public void setLblClasseV(Label lblClasseV) {
-		this.lblClasseV = lblClasseV;
-	}
 	
 	public Label getLblComboDa() {
 		return lblComboDa;
@@ -187,19 +167,4 @@ public class PercorsoController implements Initializable{
 		this.txtPedaggio = txtPedaggio;
 	}
 
-	
-	public void radioSelectVeicolo(ActionEvent event) {
-		String msg="";
-		if (rbv1.isSelected())
-			msg+=rbv1.getText() + "\n";
-		if (rbv2.isSelected())
-			msg+=rbv2.getText() + "\n";
-		if (rbv3.isSelected())
-			msg+=rbv3.getText() + "\n";
-		if (rbv4.isSelected())
-			msg+=rbv4.getText() + "\n";
-		if (rbv5.isSelected())
-			msg+=rbv5.getText() + "\n";		
-		lblClasseV.setText(msg);		
-	}
 }

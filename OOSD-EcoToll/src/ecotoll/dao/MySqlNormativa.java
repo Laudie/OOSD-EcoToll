@@ -42,8 +42,8 @@ public class MySqlNormativa implements DAONormativa {
 			rst=pst.executeQuery();
 			
 			if (rst.next()) {
-					System.out.println("next: " +  rst.getString(1));
-			return rst.getString(1);}
+				System.out.println(rst.getString("normativa"));
+			return rst.getString("normativa");}
 			else return "Nessuna Normativa presente";
 		}catch (SQLException e)	{
 			e.printStackTrace();

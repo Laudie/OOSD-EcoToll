@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -7,41 +8,39 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="353.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.AmministratoreController">
+<AnchorPane prefHeight="321.0" prefWidth="736.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.AmministratoreController">
    <children>
-      <Button cancelButton="true" layoutX="658.0" layoutY="23.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="74.0" text="LogOut" textFill="#d01414">
+      <Button cancelButton="true" layoutX="629.0" layoutY="39.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="74.0" text="LogOut" textFill="#d01414">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <ComboBox id="comboCasello" fx:id="comboCasello" layoutX="70.0" layoutY="119.0" onShowing="#fillComboCasello" prefHeight="31.0" prefWidth="246.0" promptText="Scegli il casello da eliminare" />
-      <Button id="Elimina" layoutX="326.0" layoutY="119.0" mnemonicParsing="false" onAction="#eliminaCasello" text="Elimina" />
-      <Button id="Aggiungi" layoutX="70.0" layoutY="215.0" mnemonicParsing="false" onAction="#aggiungiCasello" prefHeight="25.0" prefWidth="199.0" text="Aggiungi un casello">
+      <ComboBox id="comboCasello" fx:id="comboCasello" layoutX="61.0" layoutY="143.0" prefHeight="31.0" prefWidth="246.0" promptText="Scegli il casello da eliminare" />
+      <Button id="Elimina" layoutX="319.0" layoutY="143.0" mnemonicParsing="false" onAction="#eliminaCasello" text="Elimina" />
+      <Button id="Aggiungi" layoutX="61.0" layoutY="241.0" mnemonicParsing="false" onAction="#aggiungiCasello" prefHeight="25.0" prefWidth="199.0" text="Aggiungi un casello" textFill="#0d782d">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Label fx:id="lblsuccesso" layoutX="70.0" layoutY="158.0" prefHeight="26.0" prefWidth="228.0" textFill="#0facea" />
-      <Button alignment="CENTER" layoutX="599.0" layoutY="280.0" mnemonicParsing="false" onAction="#percorso" prefHeight="38.0" prefWidth="133.0" text="Calcola Pedaggio" textFill="#0d782d">
+      <Label fx:id="lblsuccesso" layoutX="61.0" layoutY="94.0" prefHeight="26.0" prefWidth="228.0" textFill="#32a720" />
+      <Button alignment="CENTER" layoutX="526.0" layoutY="241.0" mnemonicParsing="false" onAction="#percorso" prefHeight="30.0" prefWidth="133.0" text="Calcola Pedaggio" textFill="#0d782d">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <HBox layoutX="58.0" layoutY="19.0" prefHeight="38.0" prefWidth="371.0">
-         <children>
-            <Label prefHeight="37.0" prefWidth="246.0" text="Benvenuto Amministratore" textFill="#d01414">
-               <font>
-                  <Font size="20.0" />
-               </font></Label>
-            <Label fx:id="lblUser" lineSpacing="5.0" prefHeight="38.0" prefWidth="85.0" text="user" textFill="#d01414">
-               <font>
-                  <Font size="20.0" />
-               </font></Label>
-         </children>
-      </HBox>
-      <ComboBox fx:id="comboNormativa" layoutX="450.0" layoutY="119.0" prefWidth="150.0" promptText="Norrmative" />
-      <Label fx:id="lblNormativa" layoutX="450.0" layoutY="79.0" prefHeight="25.0" prefWidth="150.0" text="Normatva attuale" textFill="#1019b9">
+      <Label layoutX="70.0" layoutY="36.0" prefHeight="37.0" prefWidth="274.0" text="Benvenuto Amministratore" textFill="#32a720">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button id="Elimina" layoutX="624.0" layoutY="119.0" mnemonicParsing="false" onAction="#aggiornaNormativa" text="Aggiorna" />
+      <ComboBox fx:id="comboNormativa" layoutX="442.0" layoutY="143.0" prefWidth="150.0" promptText="Norrmative" />
+      <HBox layoutX="442.0" layoutY="88.0" prefHeight="38.0" prefWidth="266.0">
+         <children>
+            <Label maxHeight="1.7976931348623157E308" prefHeight="26.0" prefWidth="260.0" text="Normativa attuale:" />
+            <Label fx:id="lblNormativa" maxHeight="1.7976931348623157E308" prefHeight="26.0" prefWidth="260.0" text="Normatva attuale" textAlignment="CENTER" textFill="#1019b9">
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </Label>
+         </children>
+      </HBox>
+      <Button id="Elimina" layoutX="625.0" layoutY="143.0" mnemonicParsing="false" onAction="#aggiornaNormativa" text="Aggiorna" />
    </children>
 </AnchorPane>

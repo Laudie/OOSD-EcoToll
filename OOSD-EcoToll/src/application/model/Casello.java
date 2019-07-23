@@ -47,7 +47,10 @@ public class Casello {
 		autostrada = new Autostrada();
 		caselli=FXCollections.observableArrayList();
 	}
-	
+	@Override
+	public String toString() {
+		return getNomecasello() ;
+	}
 	
 // Define a getter for the property's value
 	public final int getIdcasello() {return idcasello.get();}
