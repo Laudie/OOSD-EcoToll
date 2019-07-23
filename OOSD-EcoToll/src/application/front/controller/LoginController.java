@@ -35,13 +35,12 @@ public class LoginController implements Initializable  {
 	
 	}
 	
+	
 //Metodo collegato al bottone Login del form login.fxml
 		public void Login (ActionEvent evt) throws IOException {
 			
 		System.out.println("user: " + txtUsername.getText() + "-" + txtPassword.getText());
-		if (lgnmgr.isLogin(txtUsername.getText(), txtPassword.getText())) {
-			LblConnected.setText("User o password errati");
-		}else{			
+		if (lgnmgr.isLogin(txtUsername.getText(), txtPassword.getText())) {					
 			System.out.println("VEDIAMO CHE SUCCEDE");			
 			if (lgnmgr.get(txtUsername.getText(), txtPassword.getText()).getRuolo()==1) {
 					System.out.println("Sono qui amministratore");
@@ -60,14 +59,15 @@ public class LoginController implements Initializable  {
 					((Node)evt.getSource()).getScene().getWindow().hide(); 
 					Stage primaryStage = new Stage();
 					FXMLLoader loader = new FXMLLoader();
-					Pane root=loader.load(getClass().getResource("/application/front/fxml/PercorsoEU.fxml").openStream());
+					Pane root=loader.load(getClass().getResource("/application/front/fxml/Percorso.fxml").openStream());
 					PercorsoController percorsoCtrl = (PercorsoController)loader.getController();
 					percorsoCtrl.getUserdata(txtUsername.getText());
 					Scene scene = new Scene(root);					
 					primaryStage.setScene(scene);
 					primaryStage.show();
 			}
-					
+			
+		}else{	LblConnected.setText("User o password errati");		
 		}
 	}
 		

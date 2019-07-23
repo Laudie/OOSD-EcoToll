@@ -23,7 +23,7 @@ public class MySqlLogin implements DAOLogin{
 		try {
 			pst=conn.prepareStatement(DATI_LOGIN);
 			pst.setString(1, user);
-			pst.setString(1, pwd);
+			pst.setString(2, pwd);
 			rst=pst.executeQuery();
 			while (rst.next()){
 				login.setPassword(rst.getString("password"));
@@ -51,7 +51,9 @@ public class MySqlLogin implements DAOLogin{
 			pst.setString(2, pwd);
 			rst=pst.executeQuery();
 			
-			if (rst.next()) return true;
+			if (rst.next()) {
+					System.out.println("next: " +  rst.getString(1));
+			return true;}
 			else return false;
 		}catch (SQLException e)	{
 			e.printStackTrace();

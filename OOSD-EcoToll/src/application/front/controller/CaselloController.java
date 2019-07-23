@@ -2,50 +2,67 @@ package application.front.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
 import application.controller.CaselloManager;
+import application.model.Autostrada;
 import application.model.Casello;
-import application.modelold.AppModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
-public class CaselloController {
-	@FXML
-	private TextField txtCodiceCasello;
-	@FXML
-	private TextField txtCodAutostrada;
-	@FXML
-	private TextField txtAltezza;
-	@FXML
-	private TextField txtNomeCasello;
-
+public class CaselloController implements Initializable{
+	
+	@FXML private TextField txtAltezza;
+	@FXML private TextField txtNomeCasello;
+	@FXML private ComboBox<Autostrada> comboAutostrada;
+	
 	//public AppModel aggiungiCaselloModel = new AppModel();
-	public CaselloManager aggiungiCaselloModel = new CaselloManager();
+	public CaselloManager cslmgr = new CaselloManager();
 	// Event Listener on Button.onAction
-	@FXML
+	private ObservableList<Autostrada> elencoAutostrade = FXCollections.observableArrayList();
+	private Casello casello = new Casello();
+	private Autostrada autostradascelta = new Autostrada();
+	//comboDa.setItems(FXCollections.observableArrayList(fillComboCasello()));
+	//costruttore
+	public CaselloController() {
+		elencoAutostrade.setAll(CaselloManager.getInstance().getAllAut());
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		comboAutostrada.setItems(this.elencoAutostrade);
+		
+	}
+	
+	public void getComboAutostrada(ActionEvent evt) {
+		autostradascelta=comboAutostrada.getValue();
+	}
+	
 	public void aggiungiCasello(ActionEvent event) throws SQLException {
 		
-		//boolean esiste=aggiungiCaselloModel.caselloPresente(txtNomeCasello.getText());
 		boolean esiste=false;;
 		if  (esiste) {
 			
 			 JOptionPane.showMessageDialog(null, "Impossibile aggiungere casello! Casello già presente");			
 		}else{
-			Casello c= new Casello();
-			//(txtCodiceCasello.getText(), txtNomeCasello.getText(),  txtAltezza.getText(), txtCodAutostrada.getText());
-			c.setNomecasello(txtNomeCasello.getText());
-			c.setAltezza(Integer.parseInt(txtAltezza.getText()));
-			//c.setAutostrada(txtCodAutostrada.getText());
+			casello.setNomecasello(txtNomeCasello.getText());
+			casello.setAltezza(Integer.parseInt(txtAltezza.getText()));
+			casello.setAutostrada(autostradascelta);;
 			
-			boolean aggiungi=aggiungiCaselloModel.aggiungi(c);
+			boolean aggiungi=cslmgr.aggiungi(casello);
 			
 			if (aggiungi)
 				
@@ -57,7 +74,6 @@ public class CaselloController {
 			FXMLLoader loader = new FXMLLoader();
 			Pane root=loader.load(getClass().getResource("/application/Amministratore.fxml").openStream());
 			Scene scene = new Scene(root);
-			//scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();		
 		}catch(Exception e){
@@ -81,4 +97,5 @@ public class CaselloController {
 			
 		}
 	}
+
 }

@@ -2,6 +2,7 @@ package application.controller;
 
 import java.util.List;
 
+import application.model.Autostrada;
 import application.model.Casello;
 import ecotoll.dao.DAOFactory;
 public class CaselloManager {
@@ -20,9 +21,13 @@ public class CaselloManager {
 		return DaoFactory.getDAOCasello().getCasello(id);
 	}
 		
-	// Data un'Autostrada ritorna tutti i caselli nel db	
-	public List<Casello> getAll() {
+	// ritorna tutti i caselli nel db	
+	public List<Casello> getAllCas() {
 		return DaoFactory.getDAOCasello().getAllCasello();
+	}
+	
+	public List<Autostrada> getAllAut() {
+		return DaoFactory.getDAOAutostrada().getAllAutostrada();
 	}
 		
 	// Dato un casello lo rimuove dal DB	

@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import application.modelold.PercorsoModel;
+import application.controller.PercorsoManager;
+import application.model.Veicolo;
+
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,23 +45,32 @@ public class PercorsoController implements Initializable{
 	@FXML private RadioButton rbv5;
 
 	@FXML private TextField txtPedaggio;
+	@FXML private TextField txtTarga;
 	
 	@FXML private Button btnPedaggioIT;
 	
 	@FXML private ToggleGroup classeVeicolo;
 	
 	
-	public PercorsoModel perModel = new PercorsoModel();
+	private PercorsoManager prcmgr = new PercorsoManager();
+	private Veicolo veicolo  = new Veicolo();
+	
+	
+			
+	
 	
 //metodo per inizializzare i componenti
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		/*
 		try {
 			comboDa.setItems(FXCollections.observableArrayList(fillComboCasello()));
 			comboA.setItems(FXCollections.observableArrayList(fillComboCasello()));		
 		} catch (SQLException e) {			
 			e.printStackTrace();
 		}
+		*/
+		
 	}
 	
 
@@ -74,7 +85,6 @@ public class PercorsoController implements Initializable{
 		FXMLLoader loader = new FXMLLoader();
 		Pane root=loader.load(getClass().getResource("/application/front/fxml/Login.fxml").openStream());
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();		
 	}catch(Exception e){
@@ -99,24 +109,7 @@ public class PercorsoController implements Initializable{
 	}
 
 	public List<String> fillComboCasello() throws SQLException {		
-		PreparedStatement pst =null;
-		ResultSet rst =null;		
-		String qry="select casello from EcoToll.casello;";		
-		List<String> lista = new ArrayList<String>();
-		try {
-			pst =PercorsoModel.connessione.prepareStatement(qry);
-			rst = pst.executeQuery();
-			while (rst.next()) {
-				lista.add(rst.getString("casello"));						
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			pst.close();
-			rst.close();
-		}
-		return lista;		
+		return null;		
 	}
 	
 	public void getCombodataDa(ActionEvent event) {
@@ -131,48 +124,34 @@ public class PercorsoController implements Initializable{
 		getLblComboA().setText(a);
 	}
 
-	public void radioSelectVeicolo(ActionEvent event) {
-		String msg="";
-		if (rbv1.isSelected())
-			msg+=rbv1.getText() + "\n";
-		if (rbv2.isSelected())
-			msg+=rbv2.getText() + "\n";
-		if (rbv3.isSelected())
-			msg+=rbv3.getText() + "\n";
-		if (rbv4.isSelected())
-			msg+=rbv4.getText() + "\n";
-		if (rbv5.isSelected())
-			msg+=rbv5.getText() + "\n";		
-		lblClasseV.setText(msg);		
-	}
-	
-
 	public void calcolaPedaggio() {
 		String classeV=this.lblClasseV.getText();
 		String caselloDA=this.getLblComboDa().getText();
 		String caselloA=this.getLblComboA().getText();
+		
+
+		
 		if (classeV.isEmpty()||caselloDA.isEmpty()||caselloA.isEmpty()){
-			PercorsoModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Errore di compilazione", "WARNING");
+//			PercorsoModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Errore di compilazione", "WARNING");
 		}else{
 			
+/*Verifica la normantiva scelta
 			
-		/*chiama il DB: 
+			Italiana pedaggio = distanza * tariffa
+			Europea pedaggio = distanza* tariffa* tipo *fasciaOraria
+			
 			1) se i caselli sono nella stessa autostrada
 			 	calcola la distanza e la moliplica per la tariffa autostradale
-				ritorna il pedaggio=dist*tariffa
+				ritorna il pedaggio
 				
 			2) se i caselli sono in autostrada diverse, simula la distanza minima
-				calcola la distanza (dist1) tra l'autostrada in ingresso (autIn) e lo svincolo con l'autostrada in uscita (autOut)
-				ped1=dist1*tariffa1
+				calcola la distanza (dist1) tra l'autostrada in ingresso (autIn)
+				e lo svincolo con l'autostrada in uscita (autOut)
+				e calcolca pedaggio1
 				calcola la distanza tra lo svincolo aut1 con l'autostrada in uscita (autOut)
-				ped2=dist2*tariffa2
+				calcola pedaggio2
 				return pedaggio=ped1+ped2				
 		*/
-			System.out.println("Test: " + lblClasseV.getText().substring(7, 8));
-			double totale = perModel.pedaggioTotale(caselloDA,caselloA, lblClasseV.getText().substring(7, 8));
-			
-			String txtPedaggio="il costo per andare da " + caselloDA + " a " + caselloA + " con un veicolo di " + classeV + " è di " + totale +" euro" ;		
-			this.getTxtPedaggio().setText(txtPedaggio);
 		}	
 	}
 	
@@ -208,4 +187,19 @@ public class PercorsoController implements Initializable{
 		this.txtPedaggio = txtPedaggio;
 	}
 
+	
+	public void radioSelectVeicolo(ActionEvent event) {
+		String msg="";
+		if (rbv1.isSelected())
+			msg+=rbv1.getText() + "\n";
+		if (rbv2.isSelected())
+			msg+=rbv2.getText() + "\n";
+		if (rbv3.isSelected())
+			msg+=rbv3.getText() + "\n";
+		if (rbv4.isSelected())
+			msg+=rbv4.getText() + "\n";
+		if (rbv5.isSelected())
+			msg+=rbv5.getText() + "\n";		
+		lblClasseV.setText(msg);		
+	}
 }
