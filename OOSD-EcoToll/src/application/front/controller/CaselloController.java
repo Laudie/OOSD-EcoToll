@@ -53,33 +53,29 @@ public class CaselloController implements Initializable{
 	
 	public void aggiungiCasello(ActionEvent event) throws SQLException {
 		
-		boolean esiste=false;;
-		if  (esiste) {
-			
-			 JOptionPane.showMessageDialog(null, "Impossibile aggiungere casello! Casello già presente");			
-		}else{
 			casello.setNomecasello(txtNomeCasello.getText());
 			casello.setAltezza(Integer.parseInt(txtAltezza.getText()));
 			casello.setAutostrada(autostradascelta);;
 			
 			boolean aggiungi=cslmgr.aggiungi(casello);
 			
-			if (aggiungi)
-				
+			if (aggiungi) {				
 			    JOptionPane.showMessageDialog(null, "Casello aggiunto!");
-		}
-		try {
-			((Node)event.getSource()).getScene().getWindow().hide(); 
-			Stage primaryStage = new Stage();
-			FXMLLoader loader = new FXMLLoader();
-			Pane root=loader.load(getClass().getResource("/application/Amministratore.fxml").openStream());
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
-			primaryStage.show();		
-		}catch(Exception e){
-			
-		}
+				try {
+					((Node)event.getSource()).getScene().getWindow().hide(); 
+					Stage primaryStage = new Stage();
+					FXMLLoader loader = new FXMLLoader();
+					Pane root=loader.load(getClass().getResource("/application/front/fxml/Amministratore.fxml").openStream());
+					Scene scene = new Scene(root);
+					primaryStage.setScene(scene);
+					primaryStage.show();		
+				}catch(Exception e){
+					e.printStackTrace();
+				} 
+			} else {System.out.println("ERRORE");}
 	}
+			
+
 	// Event Listener on Button.onAction
 	@FXML
 	public void annulla(ActionEvent event) {

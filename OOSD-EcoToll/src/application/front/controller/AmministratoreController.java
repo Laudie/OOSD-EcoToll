@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 
 import application.modelold.AppModel;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,8 +30,12 @@ public class AmministratoreController implements Initializable {
 	@FXML private ComboBox<String> comboCasello;
 	@FXML private Label lblUser;
 	@FXML private Label lblsuccesso;
+	@FXML private Label lblNormativa;
+	@FXML private ComboBox<String> comboNormativa;
+	
 	
 	public AppModel caselloModel = new AppModel();
+	ObservableList<String> normative = FXCollections.observableArrayList("Italiana", "Europea");
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -39,9 +44,12 @@ public class AmministratoreController implements Initializable {
 		} catch (SQLException e) {			
 			e.printStackTrace();
 		}
+		//prenderà la normativa sul db e la inserisce nella label
+		lblNormativa.setText("Italiana");
+		comboNormativa.setItems(normative);
 
 	}
-	
+
 	public void aggiungiCasello(ActionEvent event) {
 		try {
 			((Node)event.getSource()).getScene().getWindow().hide(); 
@@ -123,5 +131,11 @@ public class AmministratoreController implements Initializable {
 	//scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 	primaryStage.setScene(scene);
 	primaryStage.show();
+	}
+	
+	public void aggiornaNormativa(ActionEvent evt) {
+		//CAMBIA NORMATIVA
+		System.out.println("aggiorna la normativa");
+		
 	}
 }
