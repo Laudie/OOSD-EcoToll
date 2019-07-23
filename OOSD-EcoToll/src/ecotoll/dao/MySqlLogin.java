@@ -11,6 +11,7 @@ public class MySqlLogin implements DAOLogin{
 
 	private static final String DATI_LOGIN= "select * from utente where username=? and password=?;";
 	private static final String INSERT_LOGIN="insert into EcoToll.utente (username, password, ruolo) value (?,?,?);";
+	
 	@Override
 	
 	public Login getUserPwd(String user, String pwd) {
@@ -89,5 +90,5 @@ public class MySqlLogin implements DAOLogin{
 			}
 	
 	}
-
+	
 }

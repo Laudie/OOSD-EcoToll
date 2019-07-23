@@ -14,7 +14,7 @@ public abstract class DAOFactory {
     public abstract DAOPedaggio getDAOPedaggio();
     public abstract DAOSvincolo getDAOSvincolo();
     public abstract DAOVeicolo getDAOVeicolo();
-   
+    public abstract DAONormativa getDAONormativa();
  
     /**
      * Metodo Factory

@@ -33,6 +33,11 @@ class Bill {
 }*/
 public class Autostrada {
 
+	@Override
+	public String toString() {
+		return getIdautostrada() ;
+	}
+
 	private StringProperty idautostrada =new SimpleStringProperty();	
 	private StringProperty nomeautostrada = new SimpleStringProperty();
 	private StringProperty da = new SimpleStringProperty();

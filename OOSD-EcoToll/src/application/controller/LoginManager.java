@@ -28,4 +28,7 @@ private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);
 		if (DaoFactory.getDAOLogin().addUser(login)) return true;
 		else return false;
 	}
+	
+	
+	
 }

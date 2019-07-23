@@ -62,5 +62,10 @@ public class MySQLDAOFactory extends DAOFactory{
 	public DAOPedaggio getDAOPedaggio() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public DAONormativa getDAONormativa() {
+		return new MySqlNormativa();
 	}	
 }

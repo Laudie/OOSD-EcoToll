@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import application.controller.NormativaManager;
 import application.modelold.AppModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,6 +36,7 @@ public class AmministratoreController implements Initializable {
 	
 	
 	public AppModel caselloModel = new AppModel();
+	public NormativaManager normativaManager= new NormativaManager();
 	ObservableList<String> normative = FXCollections.observableArrayList("Italiana", "Europea");
 	
 	@Override
@@ -135,7 +137,13 @@ public class AmministratoreController implements Initializable {
 	
 	public void aggiornaNormativa(ActionEvent evt) {
 		//CAMBIA NORMATIVA
-		System.out.println("aggiorna la normativa");
+		String normativa=comboNormativa.getValue();
+		if(normativa.equals(normativaManager.getNormativa())) {			 
+		} else {
+			normativaManager.setNormativa(normativa);
+		lblNormativa.setText(normativa);
+		 JOptionPane.showMessageDialog(null, "Normativa Aggiornata");			
+		}
 		
 	}
 }
