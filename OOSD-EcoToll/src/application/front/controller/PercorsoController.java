@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.controller.CaselloManager;
+import application.controller.NormativaManager;
 import application.controller.PercorsoManager;
+import application.controller.VeicoloManager;
 import application.model.Casello;
 import application.model.Veicolo;
-
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,9 +34,7 @@ import javafx.scene.control.ToggleGroup;
 
 public class PercorsoController implements Initializable{
 	
-	@FXML private Label lblUser;
-	@FXML private Label lblComboDa;
-	@FXML private Label lblComboA;
+	@FXML private Label lblNormativa;
 
 	@FXML private ComboBox<Casello> comboDa;
 	@FXML private ComboBox<Casello> comboA;
@@ -52,7 +52,7 @@ public class PercorsoController implements Initializable{
 	private Veicolo veicolo  = new Veicolo();
 	
 	private ObservableList<Casello> elencoCaselli = FXCollections.observableArrayList();
-			
+	private String normativa=NormativaManager.getInstance().getNormativa();	
 	
 	public PercorsoController() {
 		elencoCaselli.setAll(CaselloManager.getInstance().getAllCas());
@@ -62,18 +62,9 @@ public class PercorsoController implements Initializable{
 //metodo per inizializzare i componenti
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		lblNormativa.setText("Normativa vigente: "+normativa);
 		comboDa.setItems(this.elencoCaselli);	
 		comboA.setItems(this.elencoCaselli);	
-		
-		/*
-		try {
-			comboDa.setItems(FXCollections.observableArrayList(fillComboCasello()));
-			comboA.setItems(FXCollections.observableArrayList(fillComboCasello()));		
-		} catch (SQLException e) {			
-			e.printStackTrace();
-		}
-		*/
 		
 	}
 	
@@ -100,23 +91,18 @@ public class PercorsoController implements Initializable{
 		return null;		
 	}
 	
-	public void getCombodataDa(ActionEvent event) {
-		System.out.println(comboDa.getValue());
-		Casello da=comboDa.getValue();		
-		getLblComboDa().setText(da.toString());
-	}
-	
-	public void getCombodataA(ActionEvent event) {
-		System.out.println(comboA.getValue());
-		Casello a=comboA.getValue();		
-		getLblComboA().setText(a.toString());
-	}
 
 	public void calcolaPedaggio() {
-		String caselloDA=this.getLblComboDa().getText();
-		String caselloA=this.getLblComboA().getText();
 		
+		Casello caselloDa = comboDa.getValue();
+		Casello caselloA = comboDa.getValue();
+	
+		String normativa = NormativaManager.getInstance().getNormativa();
+		
+		Veicolo veicolo= VeicoloManager.getInstance().getVeicolo(txtTarga.getText());
 
+		
+		
 		
 		//if (classeV.isEmpty()||caselloDA.isEmpty()||caselloA.isEmpty()){
 //			PercorsoModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Errore di compilazione", "WARNING");
@@ -142,26 +128,6 @@ public class PercorsoController implements Initializable{
 		//}	
 	}
 
-	
-	public Label getLblComboDa() {
-		return lblComboDa;
-	}
-
-	public void setLblComboDa(Label lblComboDa) {
-		this.lblComboDa = lblComboDa;
-	}
-
-	public Label getLblComboA() {
-		return lblComboA;
-	}
-
-	public void setLblComboA(Label lblComboA) {
-		this.lblComboA = lblComboA;
-	}
-
-	public TextField getTxtPedaggio() {
-		return txtPedaggio;
-	}
 
 	public void setTxtPedaggio(TextField txtPedaggio) {
 		this.txtPedaggio = txtPedaggio;

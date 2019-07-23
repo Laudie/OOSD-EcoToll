@@ -78,7 +78,7 @@ public class MySqlLogin implements DAOLogin{
 			pst.setString(2, login.getUsername());
 			pst.setString(3, login.getUsername());
 			pst.setString(4, login.getPassword());
-			pst.setInt(5, login.getRuolo());
+			pst.setInt(5, 2);
 			int i=pst.executeUpdate();
 			if (i==1) return true;
 			else return false;

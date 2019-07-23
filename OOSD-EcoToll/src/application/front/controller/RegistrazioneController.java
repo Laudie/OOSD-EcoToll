@@ -22,10 +22,8 @@ import javafx.stage.Stage;
 public class RegistrazioneController {
 	
 	@FXML private TextField txtNome;
-	@FXML private TextField txtCognome;
 	@FXML private TextField txtUserName;
 	@FXML private TextField txtPassword;
-	@FXML private TextField txtRuolo;	
 	
 	@FXML private Button btnRegistrati;
 	@FXML private Button btnAnnulla;	
@@ -36,7 +34,6 @@ public class RegistrazioneController {
 		
 		login.setPassword(txtPassword.getText());
 		login.setUsername(txtUserName.getText());
-		login.setRuolo(Integer.parseInt(txtRuolo.getText()));
 		
 		if (LoginManager.getInstance().addLogin(login)) {
 			JOptionPane.showMessageDialog(null, "Benvenuto " + txtUserName.getText() +"! Registrazione effettuata");
