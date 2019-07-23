@@ -29,23 +29,27 @@ public class RegistrazioneController {
 	
 	@FXML private Button btnRegistrati;
 	@FXML private Button btnAnnulla;	
-	@FXML private Label lblStatus;
 	
-	private LoginManager lgnmgr = new LoginManager();
 	private Login login = new Login();
 	
-	public void registrazioneUtente(ActionEvent event) {
+	public void registrazioneUtente(ActionEvent event) throws IOException {
 		
 		login.setPassword(txtPassword.getText());
 		login.setUsername(txtUserName.getText());
 		login.setRuolo(Integer.parseInt(txtRuolo.getText()));
 		
-		if (lgnmgr.addLogin(login)) {
-			lblStatus.setText("Utente aggiunto");
-	// JOptionPane.showMessageDialog(null, "Benvenuto " + txtUserName.getText() +"! Registrazione effettuata");
+		if (LoginManager.getInstance().addLogin(login)) {
+			JOptionPane.showMessageDialog(null, "Benvenuto " + txtUserName.getText() +"! Registrazione effettuata");
 		}else {
-			lblStatus.setText("ERRORE!");
-			}			
+			JOptionPane.showMessageDialog(null, "Ops! Qualcosa è andato storto!");
+			}
+		((Node)event.getSource()).getScene().getWindow().hide(); 
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root=loader.load(getClass().getResource("/application/front/fxml/Login.fxml").openStream());
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.show();	
 	}	
 
 	public void annulla (ActionEvent evt) throws IOException{

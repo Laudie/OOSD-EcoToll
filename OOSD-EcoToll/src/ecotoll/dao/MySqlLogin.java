@@ -10,7 +10,7 @@ import application.model.Login;
 public class MySqlLogin implements DAOLogin{
 
 	private static final String DATI_LOGIN= "select * from utente where username=? and password=?;";
-	private static final String INSERT_LOGIN="insert into EcoToll.utente (username, password, ruolo) value (?,?,?);";
+	private static final String INSERT_LOGIN="insert into EcoToll.utente (username,nome,cognome, password, ruolo) value (?,?,?,?,?);";
 	
 	@Override
 	
@@ -75,8 +75,10 @@ public class MySqlLogin implements DAOLogin{
 		try {
 			pst=conn.prepareStatement(INSERT_LOGIN);
 			pst.setString(1, login.getUsername());
-			pst.setString(2, login.getPassword());
-			pst.setInt(3, login.getRuolo());
+			pst.setString(2, login.getUsername());
+			pst.setString(3, login.getUsername());
+			pst.setString(4, login.getPassword());
+			pst.setInt(5, login.getRuolo());
 			int i=pst.executeUpdate();
 			if (i==1) return true;
 			else return false;

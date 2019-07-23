@@ -71,9 +71,8 @@ public class LoginController implements Initializable  {
 		}
 	}
 		
- 		public void Registrazione(ActionEvent evt) 
+ 		public void Registrazione(ActionEvent evt) throws IOException 
 	    {			
-			try {
 				((Node)evt.getSource()).getScene().getWindow().hide(); 
 				Stage primaryStage = new Stage();
 				FXMLLoader loader = new FXMLLoader();
@@ -81,8 +80,6 @@ public class LoginController implements Initializable  {
 				Scene scene = new Scene(root);				
 				primaryStage.setScene(scene);
 				primaryStage.show();		
-			}catch(Exception e){
-				}
 		}
  		
 }
