@@ -27,8 +27,8 @@
       </Label>
       <TextField fx:id="txtPedaggio" layoutX="64.0" layoutY="279.0" prefHeight="63.0" prefWidth="674.0" promptText="Il pedaggio verrà calcolato qui" />
       <Separator layoutX="55.0" layoutY="230.0" prefHeight="7.0" prefWidth="901.0" />
-      <ComboBox fx:id="comboDa" layoutX="70.0" layoutY="154.0" prefHeight="25.0" prefWidth="250.0" promptText="Da" />
-      <ComboBox fx:id="comboA" layoutX="365.0" layoutY="154.0" prefHeight="25.0" prefWidth="250.0" promptText="A" />
+      <ComboBox fx:id="comboDa" layoutX="70.0" layoutY="154.0" onAction="#getComboDa" prefHeight="25.0" prefWidth="250.0" promptText="Da" />
+      <ComboBox fx:id="comboA" layoutX="365.0" layoutY="154.0" onAction="#getComboA" prefHeight="25.0" prefWidth="250.0" promptText="A" />
       <Button cancelButton="true" layoutX="854.0" layoutY="32.0" mnemonicParsing="false" onAction="#logOut" prefHeight="36.0" prefWidth="74.0" text="LogOut" />
       <Button fx:id="btnPedaggioIT" layoutX="792.0" layoutY="292.0" mnemonicParsing="false" onAction="#calcolaPedaggio" prefHeight="37.0" prefWidth="136.0" text="Calcola" textFill="#32a720">
          <font>

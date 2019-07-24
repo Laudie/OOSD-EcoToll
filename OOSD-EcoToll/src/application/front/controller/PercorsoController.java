@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import application.controller.AutostradaManager;
 import application.controller.CaselloManager;
 import application.controller.NormativaManager;
 import application.controller.PercorsoManager;
@@ -50,9 +51,13 @@ public class PercorsoController implements Initializable{
 	
 	private PercorsoManager prcmgr = new PercorsoManager();
 	private Veicolo veicolo  = new Veicolo();
-	
+	private Casello caselloDa;
+	private Casello caselloA;
 	private ObservableList<Casello> elencoCaselli = FXCollections.observableArrayList();
 	private String normativa=NormativaManager.getInstance().getNormativa();	
+	
+	int c1;
+	int c2;
 	
 	public PercorsoController() {
 		elencoCaselli.setAll(CaselloManager.getInstance().getAllCas());
@@ -92,15 +97,29 @@ public class PercorsoController implements Initializable{
 	}
 	
 */
+	
+	public void getComboDa(ActionEvent evt) {
+		caselloDa=comboDa.getValue();
+		c2=comboDa.getValue().getAltezza();
+		System.out.println("dento combo DA:"  + c2);
+	}
+	
+	public void getComboA(ActionEvent evt) {
+		caselloA=comboA.getValue();
+		c1=comboA.getValue().getAltezza();
+		System.out.println("dento combo A:"  + c1);
+		System.out.println("tariffa comboA:" + caselloA.getNomecasello());
+		}
+	
 	public void calcolaPedaggio() {
 		
-		Casello caselloDa = comboDa.getValue();
-		Casello caselloA = comboDa.getValue();
-	
-		String normativa = NormativaManager.getInstance().getNormativa();
+		 String normativa = NormativaManager.getInstance().getNormativa();
 		
-		Veicolo veicolo= VeicoloManager.getInstance().getVeicolo(txtTarga.getText());
-
+		//Da ERRORE!
+		 //Veicolo veicolo= VeicoloManager.getInstance().getVeicolo(txtTarga.getText());
+		
+		int distanza=Math.abs(caselloDa.getAltezza()-caselloA.getAltezza());
+		System.out.println("Distanza: " + distanza + "classe v" + veicolo.getIdclasse());
 		
 		
 		

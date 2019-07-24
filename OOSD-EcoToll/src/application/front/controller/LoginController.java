@@ -60,8 +60,8 @@ public class LoginController implements Initializable  {
 					Stage primaryStage = new Stage();
 					FXMLLoader loader = new FXMLLoader();
 					Pane root=loader.load(getClass().getResource("/application/front/fxml/Percorso.fxml").openStream());
-					PercorsoController percorsoCtrl = (PercorsoController)loader.getController();
-					percorsoCtrl.getUserdata(txtUsername.getText());
+					//PercorsoController percorsoCtrl = (PercorsoController)loader.getController();
+					//percorsoCtrl.getUserdata(txtUsername.getText());
 					Scene scene = new Scene(root);					
 					primaryStage.setScene(scene);
 					primaryStage.show();
