@@ -33,7 +33,7 @@ public class MySqlAutostrada implements DAOAutostrada{
 				autostrada.setDa(rst.getString(3));
 				autostrada.setA(rst.getString(4));
 				autostrada.setLunghezza(rst.getInt(5));
-				autostrada.setTariffa(rst.getDouble(6));				
+				autostrada.setTariffa(rst.getDouble(6));		
 			}
 		}catch (SQLException e)	{
 			e.printStackTrace();

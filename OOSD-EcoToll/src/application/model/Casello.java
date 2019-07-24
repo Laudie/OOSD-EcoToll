@@ -37,6 +37,7 @@ public class Casello {
 	private IntegerProperty idcasello =new SimpleIntegerProperty();	
 	private IntegerProperty altezza = new SimpleIntegerProperty();
 	private StringProperty nomecasello = new SimpleStringProperty();
+	private StringProperty idAutostrada = new SimpleStringProperty();
 	private Autostrada autostrada;
 	private final ObservableList<Casello> caselli;
 	
@@ -44,6 +45,7 @@ public class Casello {
 		idcasello=new SimpleIntegerProperty();
 		altezza=new SimpleIntegerProperty();
 		nomecasello=new SimpleStringProperty();
+		idAutostrada=new SimpleStringProperty();
 		autostrada = new Autostrada();
 		caselli=FXCollections.observableArrayList();
 	}
@@ -57,16 +59,19 @@ public class Casello {
 	public final int getIdcasello() {return idcasello.get();}
 	public final int getAltezza() {return altezza.get();}
 	public final String getNomecasello() {return nomecasello.get();}
+	public final String getIdAutostrada() {return idAutostrada.get();}
 
 // Define a setter for the property's value
 	public final void setIdcasello(int value) {idcasello.set(value);}
 	public final void setAltezza(int value) {altezza.set(value);}
 	public final void setNomecasello(String value) {nomecasello.set(value);}
+	public final void setIdAutostrada(String value) {idAutostrada.set(value);}
 	
 // Define a getter for the property itself
     public IntegerProperty idcaselloProperty() {return idcasello;}
     public IntegerProperty altezzaProperty() {return altezza;}
     public StringProperty nomecaselloProperty() {return nomecasello;}
+    public StringProperty idautostradaProperty() {return idAutostrada;}
  	
 	public Autostrada getAutostrada() {
 		return this.autostrada;

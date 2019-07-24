@@ -53,6 +53,7 @@ public class Autostrada {
 		da=new SimpleStringProperty();
 		a=new SimpleStringProperty();
 		lunghezza =new SimpleIntegerProperty();
+		tariffa =new SimpleDoubleProperty();
 		
 		autostrade=FXCollections.observableArrayList();
 	}

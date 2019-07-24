@@ -1,18 +1,12 @@
 package application.front.controller;
 
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import application.controller.AutostradaManager;
 import application.controller.CaselloManager;
 import application.controller.NormativaManager;
 import application.controller.PercorsoManager;
-import application.controller.VeicoloManager;
+import application.model.Autostrada;
 import application.model.Casello;
 import application.model.Veicolo;
 import javafx.beans.value.ObservableStringValue;
@@ -50,15 +44,16 @@ public class PercorsoController implements Initializable{
 	
 	
 	private PercorsoManager prcmgr = new PercorsoManager();
-	private VeicoloManager vclmgr = new VeicoloManager();
-	
+	//private VeicoloManager vclmgr = new VeicoloManager();
+	private NormativaManager nrmmgr = new NormativaManager();	
 	
 	private Veicolo veicolo  = new Veicolo();
 	private Casello caselloDa;
 	private Casello caselloA;
+	private Autostrada a;
 	private ObservableList<Casello> elencoCaselli = FXCollections.observableArrayList();
 	
-	private String normativa=NormativaManager.getInstance().getNormativa();	
+	
 	
 	int c1;
 	int c2;
@@ -71,7 +66,7 @@ public class PercorsoController implements Initializable{
 //metodo per inizializzare i componenti
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		lblNormativa.setText("Normativa vigente: "+normativa);
+		lblNormativa.setText("Normativa vigente: "+ nrmmgr.getNormativa());
 		comboDa.setItems(this.elencoCaselli);	
 		comboA.setItems(this.elencoCaselli);	
 		
@@ -113,6 +108,10 @@ public class PercorsoController implements Initializable{
 		c1=comboA.getValue().getAltezza();
 		System.out.println("dento combo A:"  + c1);
 		System.out.println("tariffa comboA:" + caselloA.getNomecasello());
+		System.out.println("IdA:" + caselloA.getIdAutostrada());
+		a=prcmgr.getAuto(caselloA.getIdAutostrada());
+		double x=a.getTariffa();
+		System.out.println("Tariffa: " + x);
 		}
 	
 	public void calcolaPedaggio() {
@@ -120,10 +119,10 @@ public class PercorsoController implements Initializable{
 		 String normativa = NormativaManager.getInstance().getNormativa();
 		
 		//Da ERRORE!
-		 veicolo=vclmgr.getVeicolo(txtTarga.getText());
+		 veicolo=prcmgr.getVeicolo(txtTarga.getText());
 		
 		int distanza=Math.abs(caselloDa.getAltezza()-caselloA.getAltezza());
-		System.out.println("Distanza: " + distanza + "classe v" + veicolo.getIdclasse());
+		System.out.println("Distanza: " + distanza + "classe: " + veicolo.getIdclasse() + "Tipo: " + veicolo.getIdtipo());
 		
 		
 		

@@ -37,6 +37,7 @@ public class MySqlCasello implements DAOCasello {
 				casello.setIdcasello(rst.getInt("idcasello"));
 				casello.setNomecasello(rst.getString("casello"));
 				casello.setAltezza(rst.getInt("altezza"));
+				casello.setIdAutostrada(rst.getString("idautostrada"));
 				//aggiunge il casello nella lista
 				caselli.add(casello);
 			}
