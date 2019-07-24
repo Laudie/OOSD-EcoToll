@@ -1,8 +1,6 @@
 package application.controller;
 
-//import java.sql.Connection;
-
-import ecotoll.dao.DAOFactory;
+import application.dao.DAOFactory;
 
 public class NormativaManager {
 	

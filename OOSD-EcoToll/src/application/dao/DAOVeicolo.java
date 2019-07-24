@@ -1,4 +1,4 @@
-package ecotoll.dao;
+package application.dao;
 
 import application.model.Veicolo;
 

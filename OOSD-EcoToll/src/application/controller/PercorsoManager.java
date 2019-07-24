@@ -1,8 +1,8 @@
 package application.controller;
 
+import application.dao.DAOFactory;
+import application.dao.MySqlPedaggio;
 import application.model.Percorso;
-import ecotoll.dao.DAOFactory;
-import ecotoll.dao.MySqlPedaggio;
 
 public class PercorsoManager {
 private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);//0 è MYSQL, 1 ORACLE

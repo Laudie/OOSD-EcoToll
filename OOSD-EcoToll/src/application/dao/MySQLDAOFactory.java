@@ -1,4 +1,4 @@
-package ecotoll.dao;
+package application.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,7 +25,7 @@ public class MySQLDAOFactory extends DAOFactory{
        	Connection conn = null;
         try {
             Class.forName(DRIVER);
-            conn = DriverManager.getConnection(DBURL_WWW, USER, PASS);
+            conn = DriverManager.getConnection(DBURL_SSH, USER, PASS);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

@@ -1,4 +1,4 @@
-package ecotoll.dao;
+package application.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,8 +1,8 @@
 package application.controller;
 
+import application.dao.DAOFactory;
 import application.model.Autostrada;
 import application.model.Svincolo;
-import ecotoll.dao.DAOFactory;
 
 
 public class SvincoloManager {

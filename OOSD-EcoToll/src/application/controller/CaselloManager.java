@@ -3,9 +3,9 @@ package application.controller;
 //import java.sql.Connection;
 import java.util.List;
 
+import application.dao.DAOFactory;
 import application.model.Autostrada;
 import application.model.Casello;
-import ecotoll.dao.DAOFactory;
 public class CaselloManager {
 	
 	private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);//0 è MYSQL, 1 ORACLE

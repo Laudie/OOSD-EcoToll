@@ -47,6 +47,7 @@ public class Casello {
 		autostrada = new Autostrada();
 		caselli=FXCollections.observableArrayList();
 	}
+	
 	@Override
 	public String toString() {
 		return getNomecasello() ;

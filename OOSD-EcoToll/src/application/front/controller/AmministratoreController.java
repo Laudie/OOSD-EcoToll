@@ -41,7 +41,6 @@ public class AmministratoreController implements Initializable {
 	}
 
 	@Override
-
 	public void initialize(URL location, ResourceBundle resources) {	
 		comboCasello.setItems(this.elencoCaselli);		
 		//prenderà la normativa sul db e la inserisce nella label

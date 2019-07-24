@@ -1,7 +1,7 @@
 package application.controller;
 
+import application.dao.DAOFactory;
 import application.model.Autostrada;
-import ecotoll.dao.DAOFactory;
 
 
 public class AutostradaManager {

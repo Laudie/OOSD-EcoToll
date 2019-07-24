@@ -50,10 +50,14 @@ public class PercorsoController implements Initializable{
 	
 	
 	private PercorsoManager prcmgr = new PercorsoManager();
+	private VeicoloManager vclmgr = new VeicoloManager();
+	
+	
 	private Veicolo veicolo  = new Veicolo();
 	private Casello caselloDa;
 	private Casello caselloA;
 	private ObservableList<Casello> elencoCaselli = FXCollections.observableArrayList();
+	
 	private String normativa=NormativaManager.getInstance().getNormativa();	
 	
 	int c1;
@@ -116,7 +120,7 @@ public class PercorsoController implements Initializable{
 		 String normativa = NormativaManager.getInstance().getNormativa();
 		
 		//Da ERRORE!
-		 //Veicolo veicolo= VeicoloManager.getInstance().getVeicolo(txtTarga.getText());
+		 veicolo=vclmgr.getVeicolo(txtTarga.getText());
 		
 		int distanza=Math.abs(caselloDa.getAltezza()-caselloA.getAltezza());
 		System.out.println("Distanza: " + distanza + "classe v" + veicolo.getIdclasse());

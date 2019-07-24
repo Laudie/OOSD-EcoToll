@@ -1,4 +1,4 @@
-package ecotoll.dao;
+package application.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,9 +24,9 @@ public class MySqlVeicolo implements DAOVeicolo{
 			pst.setString(1, targa);
 			rst=pst.executeQuery();
 			while (rst.next()){
-				veicolo.setTarga(rst.getString(1));
-				veicolo.setIdclasse(rst.getInt(2));
-				veicolo.setIdtipo(rst.getInt(3));		
+				veicolo.setTarga(rst.getString("targa"));
+				veicolo.setIdclasse(rst.getInt("idclasse"));
+				veicolo.setIdtipo(rst.getInt("idtipo"));		
 			}
 		}catch (SQLException e)	{
 				e.printStackTrace();

@@ -1,4 +1,4 @@
-package ecotoll.dao;
+package application.dao;
 
 public class MySqlPedaggio implements DAOPedaggio {
 
