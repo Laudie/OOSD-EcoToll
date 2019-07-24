@@ -25,8 +25,8 @@ public class MySqlVeicolo implements DAOVeicolo{
 			rst=pst.executeQuery();
 			while (rst.next()){
 				veicolo.setTarga(rst.getString("targa"));
-				veicolo.setIdclasse(rst.getInt("idclasse"));
-				veicolo.setIdtipo(rst.getInt("idtipo"));		
+				veicolo.setIdclasseIT(rst.getInt("idclasseIT"));
+				veicolo.setIdclasseEU(rst.getInt("idclasseEU"));		
 			}
 		}catch (SQLException e)	{
 				e.printStackTrace();

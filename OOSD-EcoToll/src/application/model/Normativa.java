@@ -1,18 +1,12 @@
 package application.model;
 
-public class Veicolo {
+public class Normativa {
 
-
-	private String targa;
+	private String norma;
+	private int idnorma;
 	private int idclasseIT;
 	private int idclasseEU;
 	
-	public String getTarga() {
-		return targa;
-	}
-	public void setTarga(String targa) {
-		this.targa = targa;
-	}
 	public int getIdclasseIT() {
 		return idclasseIT;
 	}
@@ -25,5 +19,17 @@ public class Veicolo {
 	public void setIdclasseEU(int idclasseEU) {
 		this.idclasseEU = idclasseEU;
 	}
-	
+	public String getNorma() {
+		return norma;
+	}
+	public void setNorma(String norma) {
+		this.norma = norma;
+	}
+	public int getIdnorma() {
+		return idnorma;
+	}
+	public void setIdnorma(int idnorma) {
+		this.idnorma = idnorma;
+	}
+
 }

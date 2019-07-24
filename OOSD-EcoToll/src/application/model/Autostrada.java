@@ -33,11 +33,7 @@ class Bill {
 }*/
 public class Autostrada {
 
-	@Override
-	public String toString() {
-		return getIdautostrada() ;
-	}
-
+	
 	private StringProperty idautostrada =new SimpleStringProperty();	
 	private StringProperty nomeautostrada = new SimpleStringProperty();
 	private StringProperty da = new SimpleStringProperty();
@@ -93,7 +89,12 @@ public class Autostrada {
 	public ObservableList<Autostrada> autostradaObsList() {
 		return this.autostrade;
 	}
-
+	
+	@Override
+	public String toString() {
+		return getIdautostrada() ;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -140,4 +141,5 @@ public class Autostrada {
 			return false;
 		return true;
 	}
+	
 }

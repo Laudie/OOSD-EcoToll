@@ -68,6 +68,7 @@ public class Casello {
 	public final void setIdAutostrada(String value) {idAutostrada.set(value);}
 	
 // Define a getter for the property itself
+	
     public IntegerProperty idcaselloProperty() {return idcasello;}
     public IntegerProperty altezzaProperty() {return altezza;}
     public StringProperty nomecaselloProperty() {return nomecasello;}

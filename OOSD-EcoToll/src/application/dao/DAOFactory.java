@@ -12,7 +12,6 @@ public abstract class DAOFactory {
     public abstract DAOCasello getDAOCasello();
     public abstract DAOLogin getDAOLogin();
     public abstract DAOPedaggio getDAOPedaggio();
-    public abstract DAOSvincolo getDAOSvincolo();
     public abstract DAOVeicolo getDAOVeicolo();
     public abstract DAONormativa getDAONormativa();
  

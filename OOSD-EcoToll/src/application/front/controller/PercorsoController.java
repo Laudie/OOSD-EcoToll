@@ -6,10 +6,8 @@ import java.util.ResourceBundle;
 import application.controller.CaselloManager;
 import application.controller.NormativaManager;
 import application.controller.PercorsoManager;
-import application.model.Autostrada;
 import application.model.Casello;
 import application.model.Veicolo;
-import javafx.beans.value.ObservableStringValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,13 +19,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.scene.control.ToggleGroup;
 
-public class PercorsoController implements Initializable{
+public class PercorsoController extends InfoController implements Initializable{
 	
 	@FXML private Label lblNormativa;
 
@@ -40,25 +36,18 @@ public class PercorsoController implements Initializable{
 	
 	@FXML private Button btnPedaggioIT;
 	
-	@FXML private ToggleGroup classeVeicolo;
-	
-	
+		
 	private PercorsoManager prcmgr = new PercorsoManager();
-	//private VeicoloManager vclmgr = new VeicoloManager();
 	private NormativaManager nrmmgr = new NormativaManager();	
 	
-	private Veicolo veicolo  = new Veicolo();
+	private Veicolo veicolo = new Veicolo();
 	private Casello caselloDa;
 	private Casello caselloA;
-	private Autostrada a;
+	//private Autostrada a;
 	private ObservableList<Casello> elencoCaselli = FXCollections.observableArrayList();
-	
-	
-	
-	int c1;
-	int c2;
-	
+		
 	public PercorsoController() {
+		elencoCaselli.sorted();
 		elencoCaselli.setAll(CaselloManager.getInstance().getAllCas());
 	}
 	
@@ -68,15 +57,9 @@ public class PercorsoController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		lblNormativa.setText("Normativa vigente: "+ nrmmgr.getNormativa());
 		comboDa.setItems(this.elencoCaselli);	
-		comboA.setItems(this.elencoCaselli);	
-		
+		comboA.setItems(this.elencoCaselli);		
 	}
 	
-
-	public void getUserdata (String user) {	
-	//lblUser.setText(user);
-	}
-
 	public void logOut (ActionEvent evt){
 	try {
 		((Node)evt.getSource()).getScene().getWindow().hide(); 
@@ -90,39 +73,44 @@ public class PercorsoController implements Initializable{
 		}
 	}
 	
-/*
-	public List<String> fillComboCasello() throws SQLException {		
-		return null;		
-	}
-	
-*/
-	
 	public void getComboDa(ActionEvent evt) {
 		caselloDa=comboDa.getValue();
-		c2=comboDa.getValue().getAltezza();
-		System.out.println("dento combo DA:"  + c2);
+		System.out.println("Altezza Da:" + caselloDa.getAltezza());
+		System.out.println("tariffa comboDA:" + caselloDa.getNomecasello());
+		System.out.println("Autostrada IN:" + caselloDa.getIdAutostrada());
+		System.out.println("Tariffa IN: " + prcmgr.getAutostrada(caselloDa.getIdAutostrada()).getTariffa());
 	}
 	
 	public void getComboA(ActionEvent evt) {
 		caselloA=comboA.getValue();
-		c1=comboA.getValue().getAltezza();
-		System.out.println("dento combo A:"  + c1);
+		System.out.println("Altezza A:" + caselloA.getAltezza());		
 		System.out.println("tariffa comboA:" + caselloA.getNomecasello());
-		System.out.println("IdA:" + caselloA.getIdAutostrada());
-		a=prcmgr.getAuto(caselloA.getIdAutostrada());
-		double x=a.getTariffa();
-		System.out.println("Tariffa: " + x);
+		System.out.println("Autostrada OUT:" + caselloA.getIdAutostrada());		
+		System.out.println("Tariffa OUT: " + prcmgr.getAutostrada(caselloA.getIdAutostrada()).getTariffa());
 		}
+	
 	
 	public void calcolaPedaggio() {
 		
-		 String normativa = NormativaManager.getInstance().getNormativa();
-		
-		//Da ERRORE!
-		 veicolo=prcmgr.getVeicolo(txtTarga.getText());
-		
-		int distanza=Math.abs(caselloDa.getAltezza()-caselloA.getAltezza());
-		System.out.println("Distanza: " + distanza + "classe: " + veicolo.getIdclasse() + "Tipo: " + veicolo.getIdtipo());
+		if (!(prcmgr.isVeicolo(txtTarga.getText()))) {infoBox("veicolo non presente","Pedaggio","ERROR");}
+		else {
+			if (!(caselloA.getIdAutostrada().equals(caselloDa.getIdAutostrada()))) {
+				infoBox("Autostrade differenti - da implementare","Autostrada","WARNING");
+			}else {
+				veicolo=prcmgr.getVeicolo(txtTarga.getText());
+				int distanza=Math.abs(caselloDa.getAltezza()-caselloA.getAltezza());			
+				double tariffa=prcmgr.getAutostrada(caselloDa.getIdAutostrada()).getTariffa();
+					
+						if (nrmmgr.getNormativa().equals("Italiana")){
+							double pedaggio=distanza*tariffa*nrmmgr.getValoreClasse(veicolo.getIdclasseIT());
+							System.out.println("Pedaggio IT:" + pedaggio);	
+						}else {
+							double pedaggio=distanza*tariffa*nrmmgr.getValoreClasse(veicolo.getIdclasseEU());
+							System.out.println("Pedaggio EU:" + pedaggio);	
+							}			
+			}
+		}
+	}
 		
 		
 		
@@ -148,9 +136,8 @@ public class PercorsoController implements Initializable{
 				return pedaggio=ped1+ped2				
 		*/
 		//}	
-	}
-
-
+	
+	
 	public void setTxtPedaggio(TextField txtPedaggio) {
 		this.txtPedaggio = txtPedaggio;
 	}

@@ -17,5 +17,11 @@ private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);
 		return DaoFactory.getDAONormativa().setNormativa(normativa);
 	}
 	
+	public double getValoreClasse(int idclasseIT) {
+		return DaoFactory.getDAONormativa().getValoreClasse(idclasseIT);
+	}
 	
+	public double getValoreEU(int idclasseEU) {
+		return DaoFactory.getDAONormativa().getValoreEU(idclasseEU);
+	}
 }

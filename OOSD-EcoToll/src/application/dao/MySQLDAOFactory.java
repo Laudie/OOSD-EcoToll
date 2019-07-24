@@ -25,7 +25,7 @@ public class MySQLDAOFactory extends DAOFactory{
        	Connection conn = null;
         try {
             Class.forName(DRIVER);
-            conn = DriverManager.getConnection(DBURL_SSH, USER, PASS);
+            conn = DriverManager.getConnection(DBURL_WWW, USER, PASS);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -48,10 +48,6 @@ public class MySQLDAOFactory extends DAOFactory{
 	
 	public DAOPedaggio getDaoPedaggio() {
 		return new MySqlPedaggio();
-	}
-	
-	public DAOSvincolo getDAOSvincolo() {
-		return new MySqlSvincolo();
 	}
 	
 	public DAOVeicolo getDAOVeicolo() {

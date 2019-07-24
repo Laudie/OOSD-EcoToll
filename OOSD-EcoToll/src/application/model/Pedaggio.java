@@ -3,10 +3,9 @@ package application.model;
 public class Pedaggio {
 		private Casello caselloIn;
 		private Casello caselloOut;
-		private Autostrada autostradaIn;
-		private Autostrada autostradaOut;
 		private Veicolo veicolo;
-		private double pedaggio;
+		private Normativa normaVigente;
+		private Percorso percorso;
 		
 		public Casello getCaselloIn() {
 			return caselloIn;
@@ -14,35 +13,34 @@ public class Pedaggio {
 		public void setCaselloIn(Casello caselloIn) {
 			this.caselloIn = caselloIn;
 		}
+		
+		public Normativa getNormativa() {
+			return normaVigente;
+		}
+		public void setnNormativa(Normativa normaVigente) {
+			this.normaVigente = normaVigente;
+		}
+		
+		public Percorso getPercorso() {
+			return percorso;
+		}
+		public void setPercorso(Percorso percorso) {
+			this.percorso = percorso;
+		}
+		
 		public Casello getCaselloOut() {
 			return caselloOut;
 		}
+		
 		public void setCaselloOut(Casello caselloOut) {
 			this.caselloOut = caselloOut;
 		}
-		public Autostrada getAutostradaIn() {
-			return autostradaIn;
-		}
-		public void setAutostradaIn(Autostrada autostradaIn) {
-			this.autostradaIn = autostradaIn;
-		}
-		public Autostrada getAutostradaOut() {
-			return autostradaOut;
-		}
-		public void setAutostradaOut(Autostrada autostradaOut) {
-			this.autostradaOut = autostradaOut;
-		}
+		
 		public Veicolo getVeicolo() {
 			return veicolo;
 		}
 		public void setVeicolo(Veicolo veicolo) {
 			this.veicolo = veicolo;
 		}
-		public double getPedaggio() {
-			return pedaggio;
-		}
-		public void setPedaggio(double pedaggio) {
-			this.pedaggio = pedaggio;
-		}
-		
+						
 }
