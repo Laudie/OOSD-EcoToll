@@ -29,7 +29,6 @@ public class CaselloController implements Initializable{
 	@FXML private TextField txtNomeCasello;
 	@FXML private ComboBox<Autostrada> comboAutostrada;
 	
-	//public AppModel aggiungiCaselloModel = new AppModel();
 	public CaselloManager cslmgr = new CaselloManager();
 	// Event Listener on Button.onAction
 	

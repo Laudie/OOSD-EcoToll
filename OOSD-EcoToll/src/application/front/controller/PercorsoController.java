@@ -86,12 +86,12 @@ public class PercorsoController implements Initializable{
 		}
 	}
 	
-
+/*
 	public List<String> fillComboCasello() throws SQLException {		
 		return null;		
 	}
 	
-
+*/
 	public void calcolaPedaggio() {
 		
 		Casello caselloDa = comboDa.getValue();

@@ -2,11 +2,6 @@ package application.front.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -14,7 +9,6 @@ import javax.swing.JOptionPane;
 import application.controller.CaselloManager;
 import application.controller.NormativaManager;
 import application.model.Casello;
-import application.modelold.AppModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -104,12 +98,8 @@ public class AmministratoreController implements Initializable {
 	Stage primaryStage = new Stage();
 	FXMLLoader loader = new FXMLLoader();
 	Pane root=loader.load(getClass().getResource("/application/front/fxml/Percorso.fxml").openStream());
-//Dichiaro la classe PercorsoController e la istanzio facendo cast con loader per passare l'utente registrato
-	/*PercorsoController percorsoCtrl = (PercorsoController)loader.getController();
-	percorsoCtrl.getUserdata(lblUser.getText());*/
 	Scene scene = new Scene(root);
-	//scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
-	primaryStage.setScene(scene);
+		primaryStage.setScene(scene);
 	primaryStage.show();
 	}
 	
