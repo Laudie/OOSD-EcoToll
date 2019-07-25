@@ -2,7 +2,6 @@ package application.controller;
 
 import application.dao.DAOFactory;
 import application.model.Veicolo;
-import application.model.Autostrada;
 import application.model.Casello;
 import application.model.Pedaggio;
 

@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import application.controller.AutostradaManager;
 import application.controller.CaselloManager;
 import application.model.Autostrada;
 import application.model.Casello;
@@ -38,7 +39,7 @@ public class CaselloController implements Initializable{
 	
 	//costruttore
 	public CaselloController() {
-		elencoAutostrade.setAll(CaselloManager.getInstance().getAllAut());
+		elencoAutostrade.setAll(AutostradaManager.getInstance().getAllAut());
 	}
 	
 	@Override

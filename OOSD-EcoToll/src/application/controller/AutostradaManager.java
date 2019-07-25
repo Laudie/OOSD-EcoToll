@@ -1,5 +1,7 @@
 package application.controller;
 
+import java.util.List;
+
 import application.dao.DAOFactory;
 import application.model.Autostrada;
 
@@ -15,26 +17,13 @@ public class AutostradaManager {
 		return new AutostradaManager();
 	}
 	
+	public List<Autostrada> getAllAut() {
+		return DaoFactory.getDAOAutostrada().getAllAutostrada();
+	}
+		
+	
 	public Autostrada getAutostrada(String CodAutostrada) {
 		return DaoFactory.getDAOAutostrada().getAutostrada(CodAutostrada);
 	}
-	
-	/*Salva l'autostrada nel DB
-	 
-	public void store(Autostrada a) {
-			return DaoFactory.getEcoTollDAO().storeAutostrada(a);
-		}
-		*/
-	
-	/*Cancella  un' Autostrada dal DB
 
-	public void delete(Autostrada a){
-		return DaoFactory.getEcoTollDAO().deleteAutostrada(a);
-	}*/
-	
-	/* modifica la tariffa dell'autostrada
-	 
-	public void modify(float tariffa, Autostrada a) {
-		return DaoFactory.getEcoTollDAO().modifyAutostrada(tariffa,a);
-	}*/
 }

@@ -4,7 +4,6 @@ package application.controller;
 import java.util.List;
 
 import application.dao.DAOFactory;
-import application.model.Autostrada;
 import application.model.Casello;
 public class CaselloManager {
 	
@@ -24,10 +23,7 @@ public class CaselloManager {
 		return DaoFactory.getDAOCasello().getAllCasello();
 	}
 	
-	public List<Autostrada> getAllAut() {
-		return DaoFactory.getDAOAutostrada().getAllAutostrada();
-	}
-		
+
 	// Dato un casello lo rimuove dal DB	
 	public boolean delete(Casello casello) {
 		return DaoFactory.getDAOCasello().deleteCasello(casello);

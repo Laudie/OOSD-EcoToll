@@ -1,36 +1,12 @@
 package application.model;
 
-import java.util.List;
-
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-/*
- * package propertydemo;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
- 
-class Bill {
- 
-    // Define a variable to store the property
-    private DoubleProperty amountDue = new SimpleDoubleProperty();
- 
-    // Define a getter for the property's value
-    public final double getAmountDue(){return amountDue.get();}
- 
-    // Define a setter for the property's value
-    public final void setAmountDue(double value){amountDue.set(value);}
- 
-     // Define a getter for the property itself
-    public DoubleProperty amountDueProperty() {return amountDue;}
- 
-}*/
 public class Autostrada {
 
 	
@@ -40,9 +16,7 @@ public class Autostrada {
 	private StringProperty a = new SimpleStringProperty();	
 	private IntegerProperty lunghezza =new SimpleIntegerProperty();	
 	private DoubleProperty tariffa =new SimpleDoubleProperty();
-	
-	private final ObservableList<Autostrada> autostrade;
-	
+		
 	public Autostrada() {
 		idautostrada=new SimpleStringProperty();
 		nomeautostrada=new SimpleStringProperty();
@@ -51,7 +25,6 @@ public class Autostrada {
 		lunghezza =new SimpleIntegerProperty();
 		tariffa =new SimpleDoubleProperty();
 		
-		autostrade=FXCollections.observableArrayList();
 	}
 	
 	
@@ -78,18 +51,6 @@ public class Autostrada {
 	public IntegerProperty lunghezzaProperty() {return lunghezza;}
 	public DoubleProperty tariffaProperty() {return tariffa;}
 	
-	public List<Autostrada> getElencoAutostrade() {
-		return this.autostrade;
-	}
-	
-	public void setElencoAutostrade(List<Autostrada> autostrade) {
-		this.autostrade.setAll(autostrade);
-	}
-	
-	public ObservableList<Autostrada> autostradaObsList() {
-		return this.autostrade;
-	}
-	
 	@Override
 	public String toString() {
 		return getIdautostrada() ;
@@ -108,11 +69,6 @@ public class Autostrada {
 			if (other.a != null)
 				return false;
 		} else if (!a.equals(other.a))
-			return false;
-		if (autostrade == null) {
-			if (other.autostrade != null)
-				return false;
-		} else if (!autostrade.equals(other.autostrade))
 			return false;
 		if (da == null) {
 			if (other.da != null)
