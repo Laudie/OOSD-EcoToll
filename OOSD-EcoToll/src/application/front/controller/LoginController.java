@@ -39,29 +39,20 @@ public class LoginController implements Initializable  {
 //Metodo collegato al bottone Login del form login.fxml
 		public void Login (ActionEvent evt) throws IOException {
 			
-		System.out.println("user: " + txtUsername.getText() + "-" + txtPassword.getText());
 		if (lgnmgr.isLogin(txtUsername.getText(), txtPassword.getText())) {					
-			System.out.println("VEDIAMO CHE SUCCEDE");			
 			if (lgnmgr.get(txtUsername.getText(), txtPassword.getText()).getRuolo()==1) {
-					System.out.println("Sono qui amministratore");
 					((Node)evt.getSource()).getScene().getWindow().hide(); 
 					Stage primaryStage = new Stage();
 					FXMLLoader loader = new FXMLLoader();
 					Pane root=loader.load(getClass().getResource("/application/front/fxml/Amministratore.fxml").openStream());
-					/*AmministratoreController ammCtrl = (AmministratoreController)loader.getController();
-					ammCtrl.getUserdata(txtUsername.getText());*/
 					Scene scene = new Scene(root);							
 					primaryStage.setScene(scene);
 					primaryStage.show();					
 			}else{
-					System.out.println("Sono qui user");
-					//LblConnected.setText("User: " + txtUsername.getText() + " login ok!");				
 					((Node)evt.getSource()).getScene().getWindow().hide(); 
 					Stage primaryStage = new Stage();
 					FXMLLoader loader = new FXMLLoader();
 					Pane root=loader.load(getClass().getResource("/application/front/fxml/Percorso.fxml").openStream());
-					//PercorsoController percorsoCtrl = (PercorsoController)loader.getController();
-					//percorsoCtrl.getUserdata(txtUsername.getText());
 					Scene scene = new Scene(root);					
 					primaryStage.setScene(scene);
 					primaryStage.show();

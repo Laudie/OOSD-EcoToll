@@ -11,10 +11,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefWidth="1010.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.PercorsoController">
    <children>
-      <TextField fx:id="txtPedaggio" layoutX="64.0" layoutY="279.0" prefHeight="63.0" prefWidth="674.0" promptText="Il pedaggio verrà calcolato qui" />
+      <TextField fx:id="txtPedaggio" alignment="CENTER" editable="false" layoutX="64.0" layoutY="279.0" prefHeight="63.0" prefWidth="674.0" promptText="Il pedaggio verrà calcolato qui">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
       <Separator layoutX="55.0" layoutY="230.0" prefHeight="7.0" prefWidth="901.0" />
-      <ComboBox fx:id="comboDa" layoutX="70.0" layoutY="154.0" onAction="#getComboDa" prefHeight="25.0" prefWidth="250.0" promptText="Da" />
-      <ComboBox fx:id="comboA" layoutX="365.0" layoutY="154.0" onAction="#getComboA" prefHeight="25.0" prefWidth="250.0" promptText="A" />
+      <ComboBox fx:id="comboDa" layoutX="70.0" layoutY="154.0"  prefHeight="25.0" prefWidth="250.0" promptText="Da" />
+      <ComboBox fx:id="comboA" layoutX="365.0" layoutY="154.0" prefHeight="25.0" prefWidth="250.0" promptText="A" />
       <Button cancelButton="true" layoutX="854.0" layoutY="32.0" mnemonicParsing="false" onAction="#logOut" prefHeight="36.0" prefWidth="74.0" text="LogOut" />
       <Button fx:id="btnPedaggioIT" layoutX="792.0" layoutY="292.0" mnemonicParsing="false" onAction="#calcolaPedaggio" prefHeight="37.0" prefWidth="136.0" text="Calcola" textFill="#32a720">
          <font>
@@ -31,7 +34,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtTarga" layoutX="662.0" layoutY="151.0" promptText="Esempio: CF346TM">
+      <TextField fx:id="txtTarga" layoutX="662.0" layoutY="151.0" promptText="Esempio: AA111AA">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

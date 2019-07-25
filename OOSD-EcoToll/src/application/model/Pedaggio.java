@@ -7,6 +7,18 @@ public class Pedaggio {
 		private String normaVigente;
 		private double pedaggio;
 		
+		
+	
+
+		public Pedaggio(String caselloIn, String caselloOut, String targaveicolo, String normaVigente,
+				double pedaggio) {
+			super();
+			this.caselloIn = caselloIn;
+			this.caselloOut = caselloOut;
+			this.targaveicolo = targaveicolo;
+			this.normaVigente = normaVigente;
+			this.pedaggio = pedaggio;
+		}
 		public String getCaselloIn() {
 			return caselloIn;
 		}

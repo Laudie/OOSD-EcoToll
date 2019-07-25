@@ -13,7 +13,7 @@ import application.model.Autostrada;
 public class MySqlAutostrada implements DAOAutostrada{
 
 	private static final String DATI_AUTOSTRADA= "select * from autostrada where idautostrada=?;";
-	private static final String ELENCO_AUTOSTRADA= "select * from autostrada;";
+	private static final String ELENCO_AUTOSTRADA= "select * from autostrada order by idautostrada;";
 	
 	@Override
 	public Autostrada getAutostrada(String codAutostrada) {

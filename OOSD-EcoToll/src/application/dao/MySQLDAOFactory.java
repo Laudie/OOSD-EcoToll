@@ -10,7 +10,7 @@ public class MySQLDAOFactory extends DAOFactory{
     public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     /** L'url al database */
     public static final String DBURL_SSH = "jdbc:mysql://127.0.0.1:3306/EcoToll?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    public static final String DBURL_WWW = "jdbc:mysql://51.75.200.121:3306/EcoToll?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    public static final String DBURL_WWW = "jdbc:mysql://51.75.200.121:3306/EcoToll?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
     /** Lo username per le operazioni sul DB  */
     public static final String USER = "objsw";
     /** La password per le operazioni sul DB */
@@ -46,7 +46,7 @@ public class MySQLDAOFactory extends DAOFactory{
 		return new MySqlLogin();
 	}
 	
-	public DAOPedaggio getDaoPedaggio() {
+	public DAOPedaggio getDAOPedaggio() {
 		return new MySqlPedaggio();
 	}
 	
@@ -54,13 +54,6 @@ public class MySQLDAOFactory extends DAOFactory{
 		return new MySqlVeicolo();
 	}
 
-	@Override
-	public DAOPedaggio getDAOPedaggio() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public DAONormativa getDAONormativa() {
 		return new MySqlNormativa();
 	}	
