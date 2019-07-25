@@ -3,13 +3,19 @@ package application.front.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import application.controller.CaselloManager;
+import application.controller.LoginManager;
 import application.controller.NormativaManager;
 import application.controller.PedaggioManager;
 import application.controller.PercorsoManager;
+
 import application.model.Casello;
+import application.model.Login;
 import application.model.Pedaggio;
 import application.model.Veicolo;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,11 +47,13 @@ public class PercorsoController extends InfoController implements Initializable{
 		
 	private PercorsoManager prcmgr = new PercorsoManager();
 	private NormativaManager nrmmgr = new NormativaManager();	
-	private PedaggioManager pdgmgr = new PedaggioManager();	
+//	private PedaggioManager pdgmgr = new PedaggioManager();	
 	
 	private Casello caselloDa;
 	private Casello caselloA;
+	
 	private Pedaggio pedaggio=new Pedaggio();
+	
 	private ObservableList<Casello> elencoCaselli = FXCollections.observableArrayList();
 		
 	public PercorsoController() {
@@ -98,14 +106,14 @@ public class PercorsoController extends InfoController implements Initializable{
 	public void calcolaPedaggio() {
 		Veicolo veicolo;
 		double costo;
+		System.out.println("txtTarga.getText(): " + txtTarga.getText());
+		System.out.println("txtTarga.getText() boolean: " + txtTarga.getText().isEmpty());
 		if (!(prcmgr.isVeicolo(txtTarga.getText()))) {infoBox("veicolo non presente","Pedaggio","ERROR");}
 		else {
-			/*
-			  if ( (caselloA.equals(caselloDa)) || ! (caselloA.getAutostrada().equals(caselloDa.getAutostrada())) ){
-			 
-				infoBox("Autostrade differenti - da implementare","Autostrada","WARNING");
-			}else {
-			*/
+			
+			  if (! (caselloA.getIdAutostrada().equals(caselloA.getIdAutostrada()) ) ) {			 
+				infoBox("Autostrade differenti - da implementare","Autostrada","WARNING");				
+			}else {			
 				veicolo=prcmgr.getVeicolo(txtTarga.getText());
 				
 				double tariffa=prcmgr.getAutostrada(caselloDa.getIdAutostrada()).getTariffa();
@@ -118,20 +126,61 @@ public class PercorsoController extends InfoController implements Initializable{
 							costo=distanza(caselloDa, caselloA)*tariffa*moltEU;
 							System.out.println("Pedaggio EU:" + costo);
 							}
+						
 				pedaggio.setCaselloIn(caselloDa.getNomecasello());
 				pedaggio.setCaselloOut(caselloA.getNomecasello());
 				pedaggio.setNormaVigente(nrmmgr.getNormativa());
 				pedaggio.setTargaveicolo(veicolo.getTarga());
 				pedaggio.setPedaggio(costo);			
 				
-				System.out.println("SALVA IL PEDAGGIO!!!");
 				
-				if (pdgmgr.addPedaggio(pedaggio)){
+				System.out.println("SALVA IL PEDAGGIO!!!");
+				System.out.println("SALVA: " + pedaggio.getTargaveicolo());
+				System.out.println("SALVA: " + pedaggio.getCaselloIn());
+				System.out.println("SALVA: " + pedaggio.getCaselloOut());
+				System.out.println("SALVA: " + pedaggio.getNormaVigente());
+				System.out.println("SALVA: " + pedaggio.getPedaggio());
+				
+				String targa=pedaggio.getTargaveicolo();
+				String da=pedaggio.getCaselloIn();
+				String a=pedaggio.getCaselloOut();
+				String n=pedaggio.getNormaVigente();
+				double t=pedaggio.getPedaggio();
+				
+				//salvaPedaggio(pedaggio);
+				PedaggioManager.getInstance().addPedaggio3();
+				
+				/*
+				if (PedaggioManager.getInstance().addP2(targa, da, a, t, n)) {
 					infoBox("Pedaggio salvato","Pedaggio","INFORMATION");
 				}else {infoBox("Pedaggio salvato","Pedaggio","ERROR");}
+				*/
+				
+				/*
+				 if (PedaggioManager.getInstance().addPedaggio(pedaggio)){
+					infoBox("Pedaggio salvato","Pedaggio","INFORMATION");
+				}else {infoBox("Pedaggio salvato","Pedaggio","ERROR");}
+				*/
 			}
-		//}
+		}
 	}
 
-
+	public boolean salvaPedaggio(Pedaggio p) {
+		if (PedaggioManager.getInstance().addPedaggio(pedaggio)){
+			return true;
+		}else {return false;}
+	}
+	
+	
+	private Login login = new Login();
+	public void test () {
+		login.setPassword("password");
+		login.setUsername("txtUserName");
+		
+		if (LoginManager.getInstance().addLogin(login)) {
+			JOptionPane.showMessageDialog(null, "Benvenuto Registrazione effettuata");
+		}else {
+			JOptionPane.showMessageDialog(null, "Ops! Qualcosa è andato storto!");
+			}
+	}
 }

@@ -2,7 +2,7 @@ package application.controller;
 
 import application.dao.DAOFactory;
 import application.model.Veicolo;
-import application.model.Autostrada;;
+import application.model.Autostrada;
 
 public class PercorsoManager {
 private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);//0 è MYSQL, 1 ORACLE
@@ -11,7 +11,7 @@ private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);//0 è MYSQL, 1 ORACL
 	public  PercorsoManager() {}
 	
 	/*
-	 Per usare pattern SINGLETON
+	// Per usare pattern SINGLETON
 	 public static PercorsoManager getInstance() {
 		return new PercorsoManager();
 	}*/
@@ -20,12 +20,12 @@ private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);//0 è MYSQL, 1 ORACL
 		return DaoFactory.getDAOAutostrada().getAutostrada(idAuto);
 	}
 	
-	public Veicolo getVeicolo(String Targa) {
-		return DaoFactory.getDAOVeicolo().getVeicolo(Targa);
+	public Veicolo getVeicolo(String targa) {
+		return DaoFactory.getDAOVeicolo().getVeicolo(targa);
 	}
 	
-	public boolean isVeicolo(String Targa) {
-		return DaoFactory.getDAOVeicolo().getVeicolo(Targa) != null;
+	public boolean isVeicolo(String targa) {
+		return DaoFactory.getDAOVeicolo().isVeicolo(targa) ;
 	}
 
 }

@@ -2,7 +2,6 @@ package application.controller;
 
 import application.dao.DAOFactory;
 import application.model.Login;
-
 public class LoginManager {
 	
 private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);
@@ -29,6 +28,6 @@ private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);
 		else return false;
 	}
 	
-	
+
 	
 }

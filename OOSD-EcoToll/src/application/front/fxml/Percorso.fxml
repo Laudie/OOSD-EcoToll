@@ -11,20 +11,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefWidth="1010.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.PercorsoController">
    <children>
-      <Label fx:id="lblClasseV" layoutX="71.0" layoutY="302.0" textFill="#2dda16">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <Label fx:id="lblComboDa" layoutX="240.0" layoutY="300.0" prefHeight="20.0" prefWidth="180.0" textFill="#2dda16">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblComboA" layoutX="453.0" layoutY="300.0" prefHeight="20.0" prefWidth="180.0" textFill="#2dda16">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
       <TextField fx:id="txtPedaggio" layoutX="64.0" layoutY="279.0" prefHeight="63.0" prefWidth="674.0" promptText="Il pedaggio verrà calcolato qui" />
       <Separator layoutX="55.0" layoutY="230.0" prefHeight="7.0" prefWidth="901.0" />
       <ComboBox fx:id="comboDa" layoutX="70.0" layoutY="154.0" onAction="#getComboDa" prefHeight="25.0" prefWidth="250.0" promptText="Da" />

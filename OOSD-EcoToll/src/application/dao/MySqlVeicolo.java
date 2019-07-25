@@ -37,5 +37,27 @@ public class MySqlVeicolo implements DAOVeicolo{
 				}
 		return veicolo;
 	}
-
+	
+	public boolean isVeicolo(String targa) {
+		Connection conn=null;
+		PreparedStatement pst=null;
+		ResultSet rst=null;		
+		conn = MySQLDAOFactory.createConnection();
+		try {
+			pst=conn.prepareStatement(DATI_VEICOLO);
+			pst.setString(1, targa);
+			rst=pst.executeQuery();
+			if (rst.next()) {
+				//System.out.println("next: " +  rst.getString(1));
+				return true;}
+			else return false;
+		}catch (SQLException e)	{
+				e.printStackTrace();
+				return false;
+		}finally {
+			 if (rst != null) try { rst.close(); } catch (SQLException ignore) {}
+			 if (pst != null) try { pst.close(); } catch (SQLException ignore) {}
+			 if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+				}
+	}
 }

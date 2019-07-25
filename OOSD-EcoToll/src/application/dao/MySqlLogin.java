@@ -53,7 +53,7 @@ public class MySqlLogin implements DAOLogin{
 			rst=pst.executeQuery();
 			
 			if (rst.next()) {
-					System.out.println("next: " +  rst.getString(1));
+					//System.out.println("next: " +  rst.getString(1));
 			return true;}
 			else return false;
 		}catch (SQLException e)	{

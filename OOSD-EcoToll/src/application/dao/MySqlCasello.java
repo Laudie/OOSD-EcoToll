@@ -13,7 +13,7 @@ public class MySqlCasello implements DAOCasello {
 
 	//private static final String DATI_CASELLO_ID = "select * from  EcoToll.casello where idcasello=?;";
 	private static final String DATI_CASELLO_NOME = "select * from  EcoToll.casello where casello=?;";
-	private static final String ELENCO_CASELLO= "select * from  EcoToll.casello;";
+	private static final String ELENCO_CASELLO= "select * from  EcoToll.casello order by casello;";
 	
 	private static final String INSERT_CASELLO="insert into EcoToll.casello (casello, altezza, idautostrada) value (?,?,?);";	
 	private static final String DELETE_CASELLO="delete from EcoToll.casello where casello=?;";

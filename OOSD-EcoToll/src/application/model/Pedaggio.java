@@ -6,6 +6,7 @@ public class Pedaggio {
 		private String targaveicolo;
 		private String normaVigente;
 		private double pedaggio;
+		
 		public String getCaselloIn() {
 			return caselloIn;
 		}
