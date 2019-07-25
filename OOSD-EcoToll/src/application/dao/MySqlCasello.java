@@ -54,37 +54,6 @@ public class MySqlCasello implements DAOCasello {
 		return null;
 	}
 
-	@Override
-	public Casello getCasello(String nome) {
-		
-		Casello casello=new Casello();
-		
-		Connection conn=null;
-		PreparedStatement pst=null;
-		ResultSet rst=null;
-		
-		conn = MySQLDAOFactory.createConnection();
-		try {
-			pst = conn.prepareStatement(DATI_CASELLO_NOME);
-			pst.setString(1, nome);
-			rst = pst.executeQuery();
-			while (rst.next()) {
-				casello.setIdcasello(rst.getInt("idcasello"));
-				casello.setNomecasello(rst.getString("casello"));
-				casello.setAltezza(rst.getInt("altezza"));
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			 if (rst != null) try { rst.close(); } catch (SQLException ignore) {}
-			 if (pst != null) try { pst.close(); } catch (SQLException ignore) {}
-			 if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
-		}
-		
-		return casello;
-	}
 
 	@Override
 	public boolean addCasello(Casello casello) {
@@ -109,28 +78,6 @@ public class MySqlCasello implements DAOCasello {
 				}
 	}
 	
-
-	@Override
-	public boolean deleteCasello(String nome) {
-		Connection conn=null;
-		PreparedStatement pst=null;
-				
-		conn = MySQLDAOFactory.createConnection();
-		try {
-		pst = conn.prepareStatement(DELETE_CASELLO);
-		pst.setString(1, nome);
-		int i = pst.executeUpdate();
-		if (i==1) return true;
-		else return false;
-		}catch (SQLException e)	{
-			e.printStackTrace();
-			return false;
-		}finally {
-			 if (pst != null) try { pst.close(); } catch (SQLException ignore) {}
-			 if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
-		}
-	}
-
 	@Override
 	public boolean deleteCasello(Casello casello) {
 		Connection conn=null;

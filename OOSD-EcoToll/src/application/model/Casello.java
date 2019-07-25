@@ -1,36 +1,13 @@
 package application.model;
 
-import java.util.List;
 
 import application.model.Autostrada;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
-/*
- * package propertydemo;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
- 
-class Bill {
- 
-    // Define a variable to store the property
-    private DoubleProperty amountDue = new SimpleDoubleProperty();
- 
-    // Define a getter for the property's value
-    public final double getAmountDue(){return amountDue.get();}
- 
-    // Define a setter for the property's value
-    public final void setAmountDue(double value){amountDue.set(value);}
- 
-     // Define a getter for the property itself
-    public DoubleProperty amountDueProperty() {return amountDue;}
- 
-}*/
 
 public class Casello {
 	
@@ -39,7 +16,6 @@ public class Casello {
 	private StringProperty nomecasello = new SimpleStringProperty();
 	private StringProperty idAutostrada = new SimpleStringProperty();
 	private Autostrada autostrada;
-	private final ObservableList<Casello> caselli;
 	
 	public Casello() {
 		idcasello=new SimpleIntegerProperty();
@@ -47,7 +23,6 @@ public class Casello {
 		nomecasello=new SimpleStringProperty();
 		idAutostrada=new SimpleStringProperty();
 		autostrada = new Autostrada();
-		caselli=FXCollections.observableArrayList();
 	}
 	
 	@Override
@@ -82,18 +57,6 @@ public class Casello {
 		this.autostrada = autostrada;
 	}	
     
-    public List<Casello> getElencoCaselli() {
-		return this.caselli;
-	}
-	
-	public void setElencoCaselli(List<Casello> caselli) {
-		this.caselli.setAll(caselli);
-	}
-	
-	public ObservableList<Casello> caselliObsList() {
-		return this.caselli;
-	}
-	
 	
 	@Override
 	public boolean equals(Object obj) {
