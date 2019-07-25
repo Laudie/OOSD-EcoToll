@@ -10,9 +10,11 @@ private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);//0 è MYSQL, 1 ORACL
 	
 	public  PercorsoManager() {}
 	
-	public static PercorsoManager getInstance() {
+	/*
+	 Per usare pattern SINGLETON
+	 public static PercorsoManager getInstance() {
 		return new PercorsoManager();
-	}
+	}*/
 	
 	public Autostrada getAutostrada(String idAuto) {
 		return DaoFactory.getDAOAutostrada().getAutostrada(idAuto);
@@ -26,8 +28,4 @@ private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);//0 è MYSQL, 1 ORACL
 		return DaoFactory.getDAOVeicolo().getVeicolo(Targa) != null;
 	}
 
-/*	public void storePedaggio(Pedaggio p) {
-		DaoFactory.getEcoTollDAO().setPedaggio(p.getCaselloIn().getNomecasello(), p.getCaselloOut().getNomecasello(), p.getVeicolo().getTarga());
-	}
-*/
 }

@@ -5,8 +5,10 @@ import java.util.ResourceBundle;
 
 import application.controller.CaselloManager;
 import application.controller.NormativaManager;
+import application.controller.PedaggioManager;
 import application.controller.PercorsoManager;
 import application.model.Casello;
+import application.model.Pedaggio;
 import application.model.Veicolo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,11 +41,11 @@ public class PercorsoController extends InfoController implements Initializable{
 		
 	private PercorsoManager prcmgr = new PercorsoManager();
 	private NormativaManager nrmmgr = new NormativaManager();	
+	private PedaggioManager pdgmgr = new PedaggioManager();	
 	
-	private Veicolo veicolo = new Veicolo();
 	private Casello caselloDa;
 	private Casello caselloA;
-	//private Autostrada a;
+	private Pedaggio pedaggio=new Pedaggio();
 	private ObservableList<Casello> elencoCaselli = FXCollections.observableArrayList();
 		
 	public PercorsoController() {
@@ -89,57 +91,47 @@ public class PercorsoController extends InfoController implements Initializable{
 		System.out.println("Tariffa OUT: " + prcmgr.getAutostrada(caselloA.getIdAutostrada()).getTariffa());
 		}
 	
+	public int distanza(Casello cIn, Casello cOut) {
+		return Math.abs(cIn.getAltezza()-cOut.getAltezza());
+	}
 	
 	public void calcolaPedaggio() {
-		
+		Veicolo veicolo;
+		double costo;
 		if (!(prcmgr.isVeicolo(txtTarga.getText()))) {infoBox("veicolo non presente","Pedaggio","ERROR");}
 		else {
-			if (!(caselloA.getIdAutostrada().equals(caselloDa.getIdAutostrada()))) {
+			/*
+			  if ( (caselloA.equals(caselloDa)) || ! (caselloA.getAutostrada().equals(caselloDa.getAutostrada())) ){
+			 
 				infoBox("Autostrade differenti - da implementare","Autostrada","WARNING");
 			}else {
+			*/
 				veicolo=prcmgr.getVeicolo(txtTarga.getText());
-				int distanza=Math.abs(caselloDa.getAltezza()-caselloA.getAltezza());			
-				double tariffa=prcmgr.getAutostrada(caselloDa.getIdAutostrada()).getTariffa();
-					
-						if (nrmmgr.getNormativa().equals("Italiana")){
-							double pedaggio=distanza*tariffa*nrmmgr.getValoreClasse(veicolo.getIdclasseIT());
-							System.out.println("Pedaggio IT:" + pedaggio);	
-						}else {
-							double pedaggio=distanza*tariffa*nrmmgr.getValoreClasse(veicolo.getIdclasseEU());
-							System.out.println("Pedaggio EU:" + pedaggio);	
-							}			
-			}
-		}
-	}
-		
-		
-		
-		//if (classeV.isEmpty()||caselloDA.isEmpty()||caselloA.isEmpty()){
-//			PercorsoModel.infoBox("Devono essere scelti tutti i valori","OOSD - Laura Fabio Marco", "Errore di compilazione", "WARNING");
-		//}else{
-			
-/*Verifica la normantiva scelta
-			
-			Italiana pedaggio = distanza * tariffa
-			Europea pedaggio = distanza* tariffa* tipo *fasciaOraria
-			
-			1) se i caselli sono nella stessa autostrada
-			 	calcola la distanza e la moliplica per la tariffa autostradale
-				ritorna il pedaggio
 				
-			2) se i caselli sono in autostrada diverse, simula la distanza minima
-				calcola la distanza (dist1) tra l'autostrada in ingresso (autIn)
-				e lo svincolo con l'autostrada in uscita (autOut)
-				e calcolca pedaggio1
-				calcola la distanza tra lo svincolo aut1 con l'autostrada in uscita (autOut)
-				calcola pedaggio2
-				return pedaggio=ped1+ped2				
-		*/
-		//}	
-	
-	
-	public void setTxtPedaggio(TextField txtPedaggio) {
-		this.txtPedaggio = txtPedaggio;
+				double tariffa=prcmgr.getAutostrada(caselloDa.getIdAutostrada()).getTariffa();
+				double moltIT=nrmmgr.getValoreClasse(veicolo.getIdclasseIT());
+				double moltEU=nrmmgr.getValoreClasse(veicolo.getIdclasseIT());
+						if (nrmmgr.getNormativa().equals("Italiana")){							
+							costo=distanza(caselloDa, caselloA)*tariffa*moltIT;
+							System.out.println("Pedaggio IT:" + costo);	
+						}else {
+							costo=distanza(caselloDa, caselloA)*tariffa*moltEU;
+							System.out.println("Pedaggio EU:" + costo);
+							}
+				pedaggio.setCaselloIn(caselloDa.getNomecasello());
+				pedaggio.setCaselloOut(caselloA.getNomecasello());
+				pedaggio.setNormaVigente(nrmmgr.getNormativa());
+				pedaggio.setTargaveicolo(veicolo.getTarga());
+				pedaggio.setPedaggio(costo);			
+				
+				System.out.println("SALVA IL PEDAGGIO!!!");
+				
+				if (pdgmgr.addPedaggio(pedaggio)){
+					infoBox("Pedaggio salvato","Pedaggio","INFORMATION");
+				}else {infoBox("Pedaggio salvato","Pedaggio","ERROR");}
+			}
+		//}
 	}
+
 
 }
