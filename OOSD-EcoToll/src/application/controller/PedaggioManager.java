@@ -2,10 +2,12 @@ package application.controller;
 
 import application.dao.DAOFactory;
 import application.model.Pedaggio;
+/**
+ * Implementa le logiche del Pedaggio 
+ */
 
 public class PedaggioManager {
 	private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);//0 è MYSQL, 1 ORACLE
-	
 	
 	public PedaggioManager() {}
 	

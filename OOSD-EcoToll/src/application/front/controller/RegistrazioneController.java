@@ -18,8 +18,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * controller del file fxml registrazione
+ */
+
 public class RegistrazioneController {
-	
+
 	@FXML private TextField txtNome;
 	@FXML private TextField txtUserName;
 	@FXML private TextField txtPassword;

@@ -2,10 +2,12 @@ package application.controller;
 
 import application.dao.DAOFactory;
 import application.model.Veicolo;
-import application.model.Autostrada;
 import application.model.Casello;
 import application.model.Pedaggio;
-
+/**
+ * Logiche per per il calcolo del percorso tra caselli
+ *
+ */
 public class PercorsoManager {
 private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);//0 è MYSQL, 1 ORACLE
 	
@@ -31,17 +33,14 @@ private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);//0 è MYSQL, 1 ORACL
 		
 		 if (!(this.isVeicolo(targa))) {result="WARNING: Veicolo non presente nel DB ";
 		 								return result;}
-		 else {
-			 if (! (caselloA.getIdAutostrada().equals(caselloA.getIdAutostrada()) ) ) {		
-					result="WARNING: Autostrade differenti - da implementare ";
+		 else { 
+			 if (!(caselloA.getIdAutostrada().equals(caselloDa.getIdAutostrada()))) {	
+				 	result="WARNING: Autostrade differenti - da implementare ";
 					return result;
 				}else {			
 					veicolo = this.getVeicolo(targa);
 				}
-			 
-			 
-		
-					double tariffa=AutostradaManager.getInstance().getAutostrada(caselloDa.getIdAutostrada()).getTariffa();
+			 		double tariffa=AutostradaManager.getInstance().getAutostrada(caselloDa.getIdAutostrada()).getTariffa();
 					double moltIT=normativaManager.getValoreClasse(veicolo.getIdclasseIT());
 					double moltEU=normativaManager.getValoreClasse(veicolo.getIdclasseEU());
 							if (normativaManager.getNormativa().equals("Italiana")){	
@@ -56,7 +55,7 @@ private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);//0 è MYSQL, 1 ORACL
 					
 					//salvaPedaggio per lo storico;
 					if(PedaggioManager.getInstance().addPedaggio(pedaggio)) {
-						result="Il pedaggio secondo la normativa "+ pedaggio.getNormaVigente()+" è di €"+pedaggio.getPedaggio();
+						result="Il pedaggio secondo la normativa "+ pedaggio.getNormaVigente()+" è di € "+pedaggio.getPedaggio();
 						return result;
 					};
 

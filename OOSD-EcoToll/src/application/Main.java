@@ -6,7 +6,11 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-
+/**
+ * Progetto EcoTool per l'easame di Object Oriented Software
+ * @author Laura Fabio Marco
+ * 
+ */
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {

@@ -18,11 +18,13 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
-
+/**
+ * controller del file fxml Login
+ *
+ */
 //Codice per la parte Controller della classe Login
 public class LoginController implements Initializable  {
 	
-	// Label Status usata per verificare lo stato della connessione nel form Login  (fx id=LblConnected)	
 	@FXML private Label LblConnected;
 	@FXML private TextField txtUsername;	
 	@FXML private TextField txtPassword;
@@ -35,9 +37,13 @@ public class LoginController implements Initializable  {
 	
 	}
 	
-	
-//Metodo collegato al bottone Login del form login.fxml
-		public void Login (ActionEvent evt) throws IOException {
+/**
+ * Verifica username e password ed il ruolo
+ * se admin apre l'interfaccia amministratore fxml altrimenti Percorso.fxml 
+ * @param evt action event
+ * @throws IOException errore sull'IO 
+ */
+	public void Login (ActionEvent evt) throws IOException {
 			
 		if (lgnmgr.isLogin(txtUsername.getText(), txtPassword.getText())) {					
 			if (lgnmgr.get(txtUsername.getText(), txtPassword.getText()).getRuolo()==1) {

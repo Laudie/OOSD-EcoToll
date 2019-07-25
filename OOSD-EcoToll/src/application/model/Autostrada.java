@@ -11,7 +11,8 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 /*
- * package propertydemo;
+ * from oracle docs -Using JavaFX Properties and Binding
+ * package propertydemo; 
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -31,6 +32,7 @@ class Bill {
     public DoubleProperty amountDueProperty() {return amountDue;}
  
 }*/
+
 public class Autostrada {
 
 	

@@ -21,7 +21,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
+/**
+ * controller del file fxml amministratore
+ *
+ */
 public class AmministratoreController implements Initializable {
 
 	@FXML private ComboBox<Casello> comboCasello;

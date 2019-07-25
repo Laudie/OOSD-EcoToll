@@ -21,7 +21,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
+/**
+ * controller del file fxml Percorso
+ *
+ */
 public class PercorsoController implements Initializable{
 	
 	@FXML private Label lblNormativa;
@@ -45,8 +48,7 @@ public class PercorsoController implements Initializable{
 		elencoCaselli.setAll(CaselloManager.getInstance().getAllCas());
 	}
 	
-	
-//metodo per inizializzare i componenti
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		lblNormativa.setText("Normativa vigente: "+ nrmmgr.getNormativa());
@@ -67,9 +69,16 @@ public class PercorsoController implements Initializable{
 		}
 	}
 
+	/**
+	 * Scelti i caselli di ingresso e uscita calcola il pedaggio
+	 */
 	
 	public void calcolaPedaggio() {
 		
+		if (comboDa.getValue()==null || comboDa.getValue()==null ) {
+			txtPedaggio.setText("WARING! - Selezionare i caselli");}
+		else {
 		txtPedaggio.setText(PercorsoManager.getInstance().calcolaPedaggio(txtTarga.getText(),comboDa.getValue(),comboA.getValue()));
+		}
 	}
 }

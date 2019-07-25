@@ -16,13 +16,18 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import application.controller.AutostradaManager;
 import application.controller.CaselloManager;
 import application.model.Autostrada;
 import application.model.Casello;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-
+/**
+ * controller del file fxml casello
+ * @author fabio laura marco
+ *
+ */
 public class CaselloController implements Initializable{
 	
 	@FXML private TextField txtAltezza;
@@ -30,15 +35,14 @@ public class CaselloController implements Initializable{
 	@FXML private ComboBox<Autostrada> comboAutostrada;
 	
 	public CaselloManager cslmgr = new CaselloManager();
-	// Event Listener on Button.onAction
-	
+		
 	private ObservableList<Autostrada> elencoAutostrade = FXCollections.observableArrayList();
 	private Casello casello = new Casello();
 	private Autostrada autostradascelta = new Autostrada();
 	
 	//costruttore
 	public CaselloController() {
-		elencoAutostrade.setAll(CaselloManager.getInstance().getAllAut());
+		elencoAutostrade.setAll(AutostradaManager.getInstance().getAllAut());
 	}
 	
 	@Override

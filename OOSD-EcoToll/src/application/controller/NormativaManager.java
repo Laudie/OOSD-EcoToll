@@ -1,9 +1,11 @@
 package application.controller;
 
 import application.dao.DAOFactory;
-
+/**
+ * implementa le logiche della normativa
+ */
 public class NormativaManager {
-	
+
 private DAOFactory DaoFactory = DAOFactory.getDAOFactory(0);
 
 	public static NormativaManager getInstance() {
