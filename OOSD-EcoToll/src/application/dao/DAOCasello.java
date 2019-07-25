@@ -12,14 +12,9 @@ public interface DAOCasello {
 	/** Recupera un oggetto Casello esistente a partire dall'id. */
 	public Casello getCasello(int id);
 	
-	/** Recupera un oggetto Casello esistente a partire dall'id. */
-	public Casello getCasello(String id);
-	
+
 	/** Crea un oggetto Casello */
 	public boolean addCasello(Casello casello);
-		
-	/** Cancella un casello esistente per valore. */
-	public boolean deleteCasello(String nome);
 	
 	/** Cancella un casello esistente. */
 	public boolean deleteCasello(Casello casello );
