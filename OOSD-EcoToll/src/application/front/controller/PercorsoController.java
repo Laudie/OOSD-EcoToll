@@ -75,8 +75,8 @@ public class PercorsoController implements Initializable{
 	
 	public void calcolaPedaggio() {
 		
-		if (comboDa.getValue()==null || comboDa.getValue()==null ) {
-			txtPedaggio.setText("WARING! - Selezionare i caselli");}
+		if ((comboDa.getValue()==null) || (comboA.getValue()==null) ) {
+			txtPedaggio.setText("WARNING! - Selezionare i caselli");}
 		else {
 		txtPedaggio.setText(PercorsoManager.getInstance().calcolaPedaggio(txtTarga.getText(),comboDa.getValue(),comboA.getValue()));
 		}

@@ -5,6 +5,9 @@ package application.controller;
  */
 
 import java.util.List;
+/**
+ * Implementa le logiche del casello
+ */
 
 import application.dao.DAOFactory;
 import application.model.Casello;
